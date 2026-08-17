@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #214d90;
+  --navy-mid: #2e65b8;
+  --navy-dark: #153361;
+  --orange: #f07030;
+  --orange-hover: #d95f22;
+  --cream: #faf9f7;
+  --gray-mid: #8a8f9a;
+  --gray-light: #e8eaf0;
+  --white: #ffffff;
+
+  /* publication type badge colors */
+  --badge-brief: #3b82f6;
+  --badge-paper: #22c55e;
+  --badge-report: #a855f7;
+  --badge-proceedings: #ef4444;
+
+  /* program accent colors */
+  --ypl-color: #214d90;
+  --chill-color: #16a34a;
+  --labs-color: #ea580c;
+  --voices-color: #2563eb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--navy);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Interactive Hover Button (components/ui/InteractiveHoverButton.tsx)    */
+/* ---------------------------------------------------------------------- */
+.ihb-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.ihb {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 999px;
+  border: 1.5px solid var(--ihb-border);
+  padding: 12px 26px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--ihb-idle-text);
+  background: transparent;
+  transition: border-color 0.3s ease;
+}
+
+.ihb__dot {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--ihb-fill);
+  transform: translateY(-50%);
+  transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.ihb__label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transform: translateX(2px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.ihb__reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: var(--ihb-reveal-text);
+  opacity: 0;
+  transform: translateX(18px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.ihb-link:hover .ihb,
+.ihb-link:focus-visible .ihb {
+  border-color: transparent;
+}
+
+.ihb-link:hover .ihb__dot,
+.ihb-link:focus-visible .ihb__dot {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(0);
+  border-radius: 999px;
+}
+
+.ihb-link:hover .ihb__label,
+.ihb-link:focus-visible .ihb__label {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+.ihb-link:hover .ihb__reveal,
+.ihb-link:focus-visible .ihb__reveal {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Program cards — lighter, professional accent treatment                */
+/* ---------------------------------------------------------------------- */
+.program-card,
+.program-tile {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(13, 30, 61, 0.12);
+}
+
+.program-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(13, 30, 61, 0.22);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Back to top button                                                     */
+/* ---------------------------------------------------------------------- */
+.back-to-top__ring {
+  transition: transform 0.2s ease;
+}
+
+.back-to-top-btn:hover .back-to-top__ring {
+  transform: scale(1.08);
+}
+
+.back-to-top-btn:active .back-to-top__ring {
+  transform: scale(0.94);
+}

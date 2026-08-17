@@ -1,0 +1,88 @@
+import type { YplParticipant } from "@/lib/types/program";
+
+// Real 2021 Young Policy Leaders cohort — 9 Libyan fellows, sourced from
+// napipolicy.org/young-policy-leaders. Photos and papers are hosted on the
+// original site since we don't have local copies of the source assets.
+export const yplCohort2021: YplParticipant[] = [
+  {
+    id: "aisha-elrayani",
+    name: "Aisha Elrayani",
+    bio: "Community health officer and technical supervisor with the International Rescue Committee in Misrata. Holds a Bachelors in Pharmaceutical Sciences from the University of Misrata.",
+    policyIssue: "Addressing Non-Communicable Diseases in Libya through Improved Training and Cooperation",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Aisha-ELRAYANI-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/03/NAPI-Jan-2021-Policy-Briefing-Paper-Aisha-Elrayani.pdf",
+  },
+  {
+    id: "mohamed-hmouma",
+    name: "Mohamed Hmouma",
+    bio: "Program Manager with Almotawaset Organization for Migration and Relief, and co-founder of Innovative Club. Holds a Masters in International Relations & Public Policy from Howard University.",
+    policyIssue: "Irregular Migration in Libya: Improving the Condition of Migrants in Detention Centers",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Mohamed-HMOUMA-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Mohamed-Hmouma.pdf",
+  },
+  {
+    id: "bushra-alhodiri",
+    name: "Bushra Alhodiri",
+    bio: "President and Operating Manager of Fezzan Libya Organization, an NGO in Sebha focused on youth-led reporting and community-based peace building. Masters student in Sustainable Development at the University of Sussex.",
+    policyIssue: "Containing the Role of Tribes and Non-State Actors in Southern Libya",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Bushra-ALHODIRI-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Bushra.pdf",
+  },
+  {
+    id: "nouran-elarbi",
+    name: "Nouran Elarbi",
+    bio: "Community Development Manager at Tatweer Research and a Master Facilitator for the Young Mediterranean Voices project in Libya. Holds a Bachelors in Electrical Engineering from Eastern Mediterranean University.",
+    policyIssue: "Developing Libya's Private Sector through Improved School Education",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Nouran-ELARBI-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Nouran-Elarbi.pdf",
+  },
+  {
+    id: "hamdi-beledey",
+    name: "Hamdi Ahmed Beledey",
+    bio: "Civil engineer, analyst, web designer, and civil society activist. Chairman of the Board of the Nazal Club for Dialogue and Debate in Derna, Libya.",
+    policyIssue: "Dialogue and Debate Clubs: a Means for the Youth to Promote Social Cohesion",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Hamdy-BELEDY-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Hamdi-Beledey.pdf",
+  },
+  {
+    id: "reem-furjani",
+    name: "Reem Furjani",
+    bio: "Cultural activist and researcher focused on critical heritage studies and cultural democracy. Founder and director of Scene, a non-profit protecting cultural heritage in Tripoli. Holds an honors Masters in Architecture from Cardiff University.",
+    policyIssue: "Promoting Social Reconciliation through Participatory Cultural Production in the Old City of Tripoli",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Reem-FURJANI-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Reem-Furjani-1.pdf",
+  },
+  {
+    id: "malak-altaeb",
+    name: "Malak Altaeb",
+    bio: "UNDP fellow, writer, and researcher. Manages Libyan Wanderer and contributes to Sisterhood Magazine, Al Fusiac, RNW Media, and Climate Tracker. Holds a Masters in Environmental Policy from Sciences Po.",
+    policyIssue: "Developing Agribusiness to Empower the Local Agriculture Sector in Tripoli",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Malak-ALTAEB-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Malak-Altaeb.pdf",
+  },
+  {
+    id: "malak-edoudi",
+    name: "Malak Edoudi",
+    bio: "Livelihood assistant with the Danish Refugee Council, focused on economic recovery for individuals affected by conflict. Translator trained at the Faculty of Languages in Tripoli.",
+    policyIssue: "Support Libya's Economy by Facilitating the Regularization of Foreign Workers in Libya",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Malak-EDOUDI-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Malak-Edoudi.pdf",
+  },
+  {
+    id: "um-elkhier-solaiman",
+    name: "Um Elkhier Solaiman",
+    bio: "Health educator at the Benghazi Health Services Department. Holds a Masters in Environmental Science and Engineering from the Libyan Academy of Benghazi.",
+    policyIssue: "Health and Environmental Education of Children and Adolescents in Libya",
+    cohort: 2021,
+    photoUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Um-Elkhier-SOLIMAN-Website.jpg",
+    paperUrl: "https://napipolicy.org/wp-content/uploads/2021/01/NAPI-Jan-2021-Policy-Briefing-Paper-Um-Elkhier.pdf",
+  },
+];

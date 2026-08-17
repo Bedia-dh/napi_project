@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NAPI — Home</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0d1e3d;--navy-mid:#1a3260;--orange:#f07030;--cream:#faf9f7;--gray-mid:#8a8f9a;--white:#fff}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:var(--navy);overflow-x:hidden}
+
+/* ── NAV (dark) ── */
+nav{position:sticky;top:0;z-index:200;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:66px;box-shadow:0 2px 16px rgba(0,0,0,.2)}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:44px;display:block}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;letter-spacing:.3px}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-right{display:flex;align-items:center;gap:8px}
+.lang-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.65);padding:5px 11px;border-radius:4px;cursor:pointer;font-size:.78rem;transition:all .2s}
+.lang-btn.active,.lang-btn:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+.nav-get-involved{color:#fff;font-weight:700;text-decoration:none;font-size:.85rem;padding:9px 18px;border:1.5px solid rgba(255,255,255,.3);border-radius:6px;transition:all .2s;margin-left:6px;white-space:nowrap}
+.nav-get-involved:hover{background:#fff;color:var(--navy)}
+
+/* ── TICKER (light) ── */
+.ticker{background:var(--cream);border-bottom:1px solid #e5e8ee;display:flex;align-items:stretch;overflow:hidden}
+.ticker-scroll-wrap{flex:1;overflow:hidden;padding:9px 0}
+.ticker-inner{display:flex;gap:0;white-space:nowrap;animation:ticker-scroll 30s linear infinite}
+.ticker-inner span{color:var(--navy-mid);font-size:.78rem;font-weight:500;padding:0 40px;letter-spacing:.5px}
+.ticker-inner span::before{content:'◆  ';color:var(--orange);opacity:.7}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-search-btn{background:transparent;border:none;border-left:1px solid rgba(13,30,61,.12);color:var(--navy-mid);padding:0 20px;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;gap:7px;transition:background .2s;flex-shrink:0}
+.ticker-search-btn:hover{background:rgba(13,30,61,.06)}
+.ticker-search-btn span{font-size:.75rem;font-weight:600;letter-spacing:.5px}
+
+/* ── SEARCH OVERLAY ── */
+.search-overlay{position:fixed;inset:0;background:rgba(10,18,35,.96);z-index:600;display:none;align-items:flex-start;justify-content:center;padding-top:130px}
+.search-overlay.open{display:flex}
+.search-overlay-inner{width:640px;max-width:90vw}
+.search-overlay-inner label{display:block;font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px}
+.search-overlay-inner input{width:100%;background:transparent;border:none;border-bottom:2px solid var(--orange);color:#fff;font-size:2rem;padding:14px 0;outline:none;font-family:inherit}
+.search-overlay-inner input::placeholder{color:rgba(255,255,255,.25)}
+.search-hint{font-size:.8rem;color:rgba(255,255,255,.3);margin-top:16px}
+.search-close{position:fixed;top:24px;right:32px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);cursor:pointer;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:1.1rem}
+.search-close:hover{background:rgba(255,255,255,.15)}
+
+/* ── HERO (light, video LEFT / text RIGHT) ── */
+.hero{background:linear-gradient(140deg,#f0f5ff 0%,#e8f0fd 55%,#f5f7ff 100%);min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 80px 60px;position:relative;overflow:hidden;gap:64px}
+.hero-map-bg{position:absolute;inset:0;background:url('media/map.png') center/cover no-repeat;opacity:0.05;pointer-events:none;z-index:0}
+.hero::after{content:'';position:absolute;left:-80px;bottom:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(240,112,48,.06) 0%,transparent 65%)}
+
+/* VIDEO column (LEFT) */
+.hero-video-col{position:relative;z-index:2;display:flex;flex-direction:column;gap:22px}
+.hero-video-player{background:var(--navy);border-radius:20px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;cursor:pointer;position:relative;box-shadow:0 24px 64px rgba(13,30,61,.18),0 6px 20px rgba(13,30,61,.1);transition:transform .25s}
+.hero-video-player:hover{transform:scale(1.015)}
+.hero-video-player::before{content:'';position:absolute;inset:0;background:url('media/map.png') center/cover no-repeat;opacity:0.09}
+.play-wrap{width:80px;height:80px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.2rem;box-shadow:0 8px 28px rgba(240,112,48,.5);position:relative;z-index:1;transition:transform .25s}
+.hero-video-player:hover .play-wrap{transform:scale(1.1)}
+.video-label{position:relative;z-index:1;text-align:center;color:#fff}
+.video-label span{display:block;font-size:.92rem;font-weight:600;margin-bottom:3px}
+.video-label small{font-size:.75rem;color:rgba(255,255,255,.45)}
+.hero-video-stats{display:flex;gap:0}
+.hv-stat{flex:1;text-align:center;padding:16px 10px;border-right:1px solid #e5e8ee}
+.hv-stat:last-child{border-right:none}
+.hv-stat strong{display:block;font-size:1.6rem;font-weight:900;color:var(--navy)}
+.hv-stat span{font-size:.72rem;color:var(--gray-mid);text-transform:uppercase;letter-spacing:1px}
+.hv-stat strong em{color:var(--orange);font-style:normal}
+
+/* TEXT column (RIGHT) */
+.hero-text{position:relative;z-index:2}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(240,112,48,.1);border:1px solid rgba(240,112,48,.25);border-radius:20px;padding:6px 14px;margin-bottom:24px}
+.hero-eyebrow span{color:var(--orange);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px}
+.hero h1{font-size:3.2rem;font-weight:900;color:var(--navy);line-height:1.1;margin-bottom:22px}
+.hero h1 em{color:var(--orange);font-style:normal}
+.hero-sub{font-size:1rem;color:var(--gray-mid);line-height:1.8;max-width:460px;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.btn-primary{background:var(--orange);color:#fff;padding:14px 28px;border-radius:7px;font-weight:700;text-decoration:none;font-size:.92rem;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,112,48,.35)}
+.btn-ghost{background:transparent;color:var(--navy);padding:14px 28px;border-radius:7px;font-weight:600;text-decoration:none;font-size:.92rem;border:1.5px solid rgba(13,30,61,.2);transition:all .2s}
+.btn-ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.hero-trust{display:flex;align-items:center;gap:16px}
+.trust-avatars{display:flex}
+.trust-avatars div{width:34px;height:34px;border-radius:50%;border:2px solid rgba(13,30,61,.12);background:linear-gradient(135deg,var(--navy-mid),var(--navy));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:.75rem;margin-left:-8px}
+.trust-avatars div:first-child{margin-left:0}
+.trust-text{font-size:.78rem;color:var(--gray-mid);line-height:1.4}
+.trust-text strong{color:var(--navy)}
+
+/* ── STATS BAND (navy) ── */
+.stats-band{background:var(--navy);display:grid;grid-template-columns:repeat(4,1fr);border-bottom:3px solid var(--orange)}
+.stat-item{padding:30px 40px;text-align:center;border-right:1px solid rgba(255,255,255,.07);transition:background .2s}
+.stat-item:last-child{border-right:none}
+.stat-item:hover{background:rgba(255,255,255,.04)}
+.stat-item span{display:block;font-size:2.4rem;font-weight:900;color:#fff;line-height:1}
+.stat-item .accent{color:var(--orange)}
+.stat-item small{font-size:.78rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:6px;display:block}
+
+/* ── UPCOMING EVENTS (navy) ── */
+.events-section{padding:80px;background:var(--navy)}
+.events-section .section-eyebrow{color:rgba(255,255,255,.4)}
+.events-section .section-title{color:#fff}
+.events-section .section-sub{color:rgba(255,255,255,.5)}
+.section-eyebrow{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--orange);margin-bottom:10px}
+.section-title{font-size:2.1rem;font-weight:900;color:var(--navy);margin-bottom:8px}
+.section-sub{font-size:.92rem;color:var(--gray-mid);margin-bottom:36px}
+.events-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+.events-header a{color:var(--orange);font-size:.85rem;font-weight:600;text-decoration:none}
+.carousel-wrap{position:relative}
+.carousel{display:flex;gap:24px;overflow:hidden;scroll-behavior:smooth}
+.event-card{min-width:380px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.2);flex-shrink:0;transition:transform .2s}
+.event-card:hover{transform:translateY(-5px)}
+.event-card-top{height:200px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:flex-end;padding:18px;position:relative;overflow:hidden}
+.event-card-top::before{content:'';position:absolute;inset:0;background:url('media/map.png') center/cover no-repeat;opacity:0.1}
+.event-date-badge{position:absolute;top:16px;right:16px;background:var(--orange);color:#fff;border-radius:9px;padding:9px 14px;text-align:center;line-height:1.2;z-index:1}
+.event-date-badge .day{font-size:1.4rem;font-weight:900;display:block}
+.event-date-badge .mon{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.event-type-pill{background:rgba(255,255,255,.2);color:#fff;font-size:.7rem;font-weight:700;padding:5px 12px;border-radius:12px;letter-spacing:.5px;text-transform:uppercase;position:relative;z-index:1;backdrop-filter:blur(4px)}
+.event-card-body{padding:22px}
+.event-card-body h3{font-size:.95rem;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:12px}
+.event-meta{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.event-meta span{font-size:.78rem;color:var(--gray-mid);display:flex;align-items:center;gap:6px}
+.event-meta i{color:var(--orange);font-size:.85rem}
+.btn-register{background:var(--navy);color:#fff;border:none;padding:10px 18px;border-radius:7px;font-size:.8rem;font-weight:700;cursor:pointer;width:100%;transition:background .2s}
+.btn-register:hover{background:var(--orange)}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all .2s;color:#fff}
+.carousel-btn:hover{background:var(--orange);border-color:var(--orange)}
+.carousel-btn.left{left:-20px}
+.carousel-btn.right{right:-20px}
+
+/* ── POLICY ISSUES (cream — dark cards on light) ── */
+.focus-section{padding:80px;background:var(--cream)}
+.focus-section .section-eyebrow{color:var(--orange)}
+.focus-section .section-title{color:var(--navy)}
+.focus-section .section-sub{color:var(--gray-mid)}
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.focus-card{background:var(--navy);border-radius:12px;padding:28px;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;box-shadow:0 2px 16px rgba(13,30,61,.1)}
+.focus-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.focus-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(13,30,61,.18)}
+.focus-card:hover::before{transform:scaleX(1)}
+.focus-icon{width:48px;height:48px;border-radius:10px;background:rgba(240,112,48,.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.focus-icon i{font-size:1.5rem;color:var(--orange)}
+.focus-card h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px}
+.focus-card p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6}
+.focus-card .count{position:absolute;top:20px;right:20px;font-size:.72rem;color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);padding:3px 9px;border-radius:10px}
+
+/* ── FEATURED PUBLICATIONS (navy) ── */
+.pubs-section{padding:80px;background:var(--navy)}
+.pubs-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px}
+.pubs-header a{color:var(--orange);font-size:.85rem;font-weight:600;text-decoration:none}
+.pubs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pub-card-h{background:#fff;border-radius:12px;padding:24px;border-left:4px solid var(--orange);transition:transform .2s,box-shadow .2s;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+.pub-card-h:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.pub-type{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:8px}
+.pub-card-h h3{font-size:.92rem;font-weight:700;color:var(--navy);line-height:1.45;margin-bottom:10px}
+.pub-card-h .pub-meta{font-size:.78rem;color:var(--gray-mid);margin-bottom:14px}
+.pub-langs-h{display:flex;gap:5px;margin-bottom:14px}
+.lch{font-size:.68rem;border:1px solid #ddd;border-radius:3px;padding:2px 7px;color:var(--gray-mid)}
+.lch.avail{border-color:var(--orange);color:var(--orange)}
+.pub-card-h a{font-size:.8rem;color:var(--navy);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:5px}
+.pub-card-h a:hover{color:var(--orange)}
+
+/* ── PROGRAMS (navy) ── */
+.programs-section{padding:80px;background:var(--navy)}
+.programs-section .section-eyebrow{color:rgba(255,255,255,.4)}
+.programs-section .section-title{color:#fff}
+.programs-section .section-sub{color:rgba(255,255,255,.5)}
+.programs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:36px}
+.prog-card{background:#fff;border-radius:14px;overflow:hidden;display:grid;grid-template-columns:140px 1fr;box-shadow:0 4px 20px rgba(0,0,0,.18);transition:transform .2s}
+.prog-card:hover{transform:translateY(-3px)}
+.prog-color{display:flex;align-items:center;justify-content:center}
+.prog-color.ypl{background:linear-gradient(135deg,var(--navy),var(--navy-mid))}
+.prog-color.cc{background:linear-gradient(135deg,#1a6b3c,#236b43)}
+.prog-color.pl{background:linear-gradient(135deg,#7c2d12,#b84a1a)}
+.prog-color.yv{background:linear-gradient(135deg,#1e3a5f,#2d5a8e)}
+.prog-body{padding:24px}
+.prog-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--orange);margin-bottom:6px}
+.prog-body h3{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:8px}
+.prog-body p{font-size:.82rem;color:var(--gray-mid);line-height:1.6;margin-bottom:14px}
+.prog-body a{font-size:.8rem;color:var(--navy);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.prog-body a:hover{color:var(--orange)}
+
+/* ── GET INVOLVED (cream — navy cards on light) ── */
+.involve-section{background:var(--cream);padding:80px}
+.involve-section .section-eyebrow{color:var(--orange)}
+.involve-section .section-title{color:var(--navy);margin-bottom:10px}
+.involve-section .section-sub{color:var(--gray-mid);margin-bottom:40px}
+.involve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.inv-card{background:var(--navy);border-radius:12px;padding:30px;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 16px rgba(13,30,61,.1)}
+.inv-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(13,30,61,.18)}
+.inv-icon{width:44px;height:44px;background:rgba(240,112,48,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.inv-icon i{color:var(--orange);font-size:1.4rem}
+.inv-card h3{color:#fff;font-size:1rem;font-weight:700;margin-bottom:8px}
+.inv-card p{color:rgba(255,255,255,.5);font-size:.82rem;line-height:1.6;margin-bottom:18px}
+.inv-card a{color:var(--orange);font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+
+/* ── NEWSLETTER (white) ── */
+.nl-section{background:#fff;padding:72px 80px;display:flex;align-items:center;justify-content:space-between;gap:60px;border-top:3px solid var(--orange)}
+.nl-text h2{font-size:2rem;font-weight:900;color:var(--navy);line-height:1.2}
+.nl-text p{color:var(--gray-mid);margin-top:10px;font-size:.95rem;max-width:400px;line-height:1.6}
+.nl-form{display:flex;gap:10px;flex-shrink:0}
+.nl-form input{padding:14px 20px;border-radius:7px;border:1.5px solid #ddd;background:var(--cream);font-size:.9rem;width:280px;outline:none;color:var(--navy);transition:border-color .2s}
+.nl-form input::placeholder{color:var(--gray-mid)}
+.nl-form input:focus{border-color:var(--orange)}
+.nl-form button{background:var(--orange);color:#fff;border:none;padding:14px 26px;border-radius:7px;font-weight:800;cursor:pointer;white-space:nowrap;font-size:.9rem;transition:transform .2s,box-shadow .2s}
+.nl-form button:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(240,112,48,.4)}
+
+/* ── FOOTER (white) ── */
+footer{background:#fff;border-top:1px solid #e5e8ee;padding:56px 80px 28px}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo{display:block;margin-bottom:14px}
+.footer-brand .logo img{height:38px}
+.footer-brand p{color:var(--gray-mid);font-size:.82rem;line-height:1.65;margin-bottom:16px}
+.social-row{display:flex;gap:10px}
+.social-btn{width:34px;height:34px;border-radius:7px;background:var(--cream);border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center;color:var(--gray-mid);text-decoration:none;transition:all .2s;font-size:.9rem}
+.social-btn:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+.footer-col h4{color:var(--navy);font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.footer-col a{display:block;color:var(--gray-mid);text-decoration:none;margin-bottom:9px;font-size:.82rem;transition:color .2s}
+.footer-col a:hover{color:var(--orange)}
+.footer-bottom{border-top:1px solid #e5e8ee;padding-top:22px;display:flex;justify-content:space-between;align-items:center;color:#bbb;font-size:.8rem}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><img src="media/logo_napi.png" alt="NAPI"/></a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="research-hub.html">Research</a></li>
+    <li><a href="#">Programs</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn active" onclick="setLang('EN',this)">EN</button>
+    <button class="lang-btn" onclick="setLang('FR',this)">FR</button>
+    <button class="lang-btn" onclick="setLang('AR',this)">AR</button>
+    <a href="#" class="nav-get-involved">Get Involved</a>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-scroll-wrap">
+    <div class="ticker-inner">
+      <span>New Publication: Universal Health Coverage Gaps in the Maghreb</span>
+      <span>YPL 2024 Cohort Applications Now Open</span>
+      <span>Chill Chat Episode 12 — Live on YouTube</span>
+      <span>Regional Policy Forum — Tunis, March 2025</span>
+      <span>New Publication: Universal Health Coverage Gaps in the Maghreb</span>
+      <span>YPL 2024 Cohort Applications Now Open</span>
+      <span>Chill Chat Episode 12 — Live on YouTube</span>
+      <span>Regional Policy Forum — Tunis, March 2025</span>
+    </div>
+  </div>
+  <button class="ticker-search-btn" onclick="toggleSearch()"><i class="ti ti-search"></i><span>Search</span></button>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="toggleSearch()"><i class="ti ti-x"></i></button>
+  <div class="search-overlay-inner">
+    <label>Search NAPI</label>
+    <input type="text" id="searchInput" placeholder="Publications, events, programs…"/>
+    <p class="search-hint">Press <kbd style="background:rgba(255,255,255,.1);padding:2px 7px;border-radius:3px;font-family:monospace">Esc</kbd> to close</p>
+  </div>
+</div>
+
+<!-- HERO: video LEFT · text RIGHT -->
+<section class="hero">
+  <div class="hero-map-bg"></div>
+
+  <!-- LEFT: intro video -->
+  <div class="hero-video-col">
+    <div class="hero-video-player">
+      <div class="play-wrap"><i class="ti ti-player-play-filled"></i></div>
+      <div class="video-label">
+        <span>Watch Our Introduction</span>
+        <small>North Africa Policy Institute · 2024</small>
+      </div>
+    </div>
+    <div class="hero-video-stats">
+      <div class="hv-stat"><strong>85<em>+</em></strong><span>Publications</span></div>
+      <div class="hv-stat"><strong>200<em>+</em></strong><span>Leaders</span></div>
+      <div class="hv-stat"><strong>12</strong><span>Countries</span></div>
+      <div class="hv-stat"><strong>6</strong><span>Policy Issues</span></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: text -->
+  <div class="hero-text">
+    <div class="hero-eyebrow"><span>North Africa Policy Institute</span></div>
+    <h1>Where <em>Evidence</em><br/>Meets Youth<br/>Leadership</h1>
+    <p class="hero-sub">NAPI produces independent research and empowers a generation of young advocates to drive equitable, evidence-based policy across North Africa and the Arab world.</p>
+    <div class="hero-btns">
+      <a href="research-hub.html" class="btn-primary"><i class="ti ti-book-2"></i> Explore Research</a>
+      <a href="#" class="btn-ghost">Our Programs →</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-avatars">
+        <div><i class="ti ti-user" style="font-size:.8rem"></i></div>
+        <div><i class="ti ti-user" style="font-size:.8rem"></i></div>
+        <div><i class="ti ti-user" style="font-size:.8rem"></i></div>
+        <div><i class="ti ti-user" style="font-size:.8rem"></i></div>
+      </div>
+      <div class="trust-text"><strong>200+ young policy leaders</strong><br/>trained across 12 countries</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat-item"><span>85<span class="accent">+</span></span><small>Publications</small></div>
+  <div class="stat-item"><span>200<span class="accent">+</span></span><small>Young Leaders Trained</small></div>
+  <div class="stat-item"><span>12</span><small>Countries Reached</small></div>
+  <div class="stat-item"><span>6</span><small>Policy Issues</small></div>
+</div>
+
+<!-- UPCOMING EVENTS -->
+<section class="events-section">
+  <div class="events-header">
+    <div>
+      <div class="section-eyebrow" style="color:rgba(255,255,255,.4)">What's Coming</div>
+      <div class="section-title" style="color:#fff">Upcoming Events</div>
+      <div class="section-sub" style="color:rgba(255,255,255,.5)">Conferences, webinars, program sessions, and open dialogues</div>
+    </div>
+    <a href="#">View all events →</a>
+  </div>
+  <div class="carousel-wrap">
+    <button class="carousel-btn left" onclick="scrollCarousel(-1)"><i class="ti ti-chevron-left"></i></button>
+    <div class="carousel" id="carousel">
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-date-badge"><span class="day">15</span><span class="mon">Mar</span></div>
+          <span class="event-type-pill">Webinar</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Health Systems Resilience Post-COVID: Lessons for the Maghreb</h3>
+          <div class="event-meta">
+            <span><i class="ti ti-clock"></i> 14:00 GMT+1</span>
+            <span><i class="ti ti-map-pin"></i> Online — Zoom</span>
+            <span><i class="ti ti-users"></i> Open to All</span>
+          </div>
+          <button class="btn-register">Register Free →</button>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-date-badge"><span class="day">22</span><span class="mon">Mar</span></div>
+          <span class="event-type-pill">Workshop</span>
+        </div>
+        <div class="event-card-body">
+          <h3>YPL Policy Writing Workshop — Cohort 2024 Session 3</h3>
+          <div class="event-meta">
+            <span><i class="ti ti-clock"></i> 10:00 GMT+1</span>
+            <span><i class="ti ti-map-pin"></i> Tunis, Tunisia</span>
+            <span><i class="ti ti-lock"></i> YPL Members Only</span>
+          </div>
+          <button class="btn-register">Learn More →</button>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-date-badge"><span class="day">05</span><span class="mon">Apr</span></div>
+          <span class="event-type-pill">Conference</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Regional Policy Forum 2025: Governance & Democratic Transitions</h3>
+          <div class="event-meta">
+            <span><i class="ti ti-clock"></i> 09:00 GMT+1</span>
+            <span><i class="ti ti-map-pin"></i> Rabat, Morocco</span>
+            <span><i class="ti ti-users"></i> Registration Required</span>
+          </div>
+          <button class="btn-register">Register Now →</button>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-date-badge"><span class="day">18</span><span class="mon">Apr</span></div>
+          <span class="event-type-pill">Chill Chat</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Chill Chat Episode 13 — Climate Justice & Youth Voices</h3>
+          <div class="event-meta">
+            <span><i class="ti ti-clock"></i> 16:00 GMT+1</span>
+            <span><i class="ti ti-map-pin"></i> Online — YouTube Live</span>
+            <span><i class="ti ti-users"></i> Open to All</span>
+          </div>
+          <button class="btn-register">Set Reminder →</button>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-date-badge"><span class="day">02</span><span class="mon">May</span></div>
+          <span class="event-type-pill">Policy Lab</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Policy Lab: Youth Solutions for Education Reform in Algeria</h3>
+          <div class="event-meta">
+            <span><i class="ti ti-clock"></i> 09:00 GMT+1</span>
+            <span><i class="ti ti-map-pin"></i> Algiers, Algeria</span>
+            <span><i class="ti ti-users"></i> Open to Applicants</span>
+          </div>
+          <button class="btn-register">Apply Now →</button>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-btn right" onclick="scrollCarousel(1)"><i class="ti ti-chevron-right"></i></button>
+  </div>
+</section>
+
+<!-- POLICY ISSUES -->
+<section class="focus-section">
+  <div style="margin-bottom:36px">
+    <div class="section-eyebrow">Research Agenda</div>
+    <div class="section-title">Policy Issues</div>
+    <div class="section-sub">Six interconnected policy areas driving our research and advocacy work</div>
+  </div>
+  <div class="focus-grid">
+    <div class="focus-card"><span class="count">19 publications</span><div class="focus-icon"><i class="ti ti-heart-rate-monitor"></i></div><h3>Health</h3><p>Universal coverage gaps, maternal health, mental health access, and the intersection of social determinants in the Maghreb.</p></div>
+    <div class="focus-card"><span class="count">22 publications</span><div class="focus-icon"><i class="ti ti-building-community"></i></div><h3>Governance & Democracy</h3><p>Democratic transitions, institutional accountability, anti-corruption, and civic participation frameworks.</p></div>
+    <div class="focus-card"><span class="count">11 publications</span><div class="focus-icon"><i class="ti ti-leaf"></i></div><h3>Climate & Environment</h3><p>Climate justice, water scarcity, renewable energy policy, and environmental governance across North Africa.</p></div>
+    <div class="focus-card"><span class="count">14 publications</span><div class="focus-icon"><i class="ti ti-school"></i></div><h3>Education & Youth</h3><p>Education reform, digital literacy, youth unemployment, and pathways to civic engagement for the next generation.</p></div>
+    <div class="focus-card"><span class="count">10 publications</span><div class="focus-icon"><i class="ti ti-gender-bigender"></i></div><h3>Gender & Inclusion</h3><p>Women in politics, disability inclusion, and intersectional equity across policy domains.</p></div>
+    <div class="focus-card"><span class="count">9 publications</span><div class="focus-icon"><i class="ti ti-chart-line"></i></div><h3>Economy & Labour</h3><p>Informal economy formalization, migration economics, social protection systems, and regional trade integration.</p></div>
+  </div>
+</section>
+
+<!-- FEATURED PUBLICATIONS -->
+<section class="pubs-section">
+  <div class="pubs-header">
+    <div>
+      <div class="section-eyebrow" style="color:rgba(255,255,255,.4)">Knowledge Library</div>
+      <div class="section-title" style="color:#fff">Featured Publications</div>
+    </div>
+    <a href="research-hub.html">Browse all 85+ publications →</a>
+  </div>
+  <div class="pubs-grid">
+    <div class="pub-card-h"><div class="pub-type">Policy Brief · Health</div><h3>Universal Health Coverage Gaps in the Maghreb: A Cross-Country Analysis</h3><div class="pub-meta">Dr. Amina Belhaj &amp; Karim Mansouri · 2023</div><div class="pub-langs-h"><span class="lch avail">EN</span><span class="lch avail">FR</span><span class="lch avail">AR</span></div><a href="#">Download PDF <i class="ti ti-download"></i></a></div>
+    <div class="pub-card-h"><div class="pub-type">Research Paper · Governance</div><h3>Youth Unemployment and Political Disengagement in Post-2011 Tunisia</h3><div class="pub-meta">Fatima Zahra Alaoui · 2023</div><div class="pub-langs-h"><span class="lch avail">EN</span><span class="lch avail">FR</span><span class="lch">AR</span></div><a href="#">Download PDF <i class="ti ti-download"></i></a></div>
+    <div class="pub-card-h"><div class="pub-type">Report · Programs</div><h3>Chill Chat 2022 Impact Report: Dialogue Across Borders</h3><div class="pub-meta">NAPI Programs Team · 2022</div><div class="pub-langs-h"><span class="lch avail">EN</span><span class="lch avail">FR</span><span class="lch">AR</span></div><a href="#">Download PDF <i class="ti ti-download"></i></a></div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs-section">
+  <div class="section-eyebrow" style="color:rgba(255,255,255,.4)">Our Programs</div>
+  <div class="section-title" style="color:#fff">Flagship Initiatives</div>
+  <div class="section-sub" style="color:rgba(255,255,255,.5)">Four programs that bring research to life through youth leadership</div>
+  <div class="programs-grid">
+    <div class="prog-card"><div class="prog-color ypl"><i class="ti ti-award" style="color:rgba(255,255,255,.5);font-size:2.5rem"></i></div><div class="prog-body"><div class="prog-tag">Youth Policy Lab</div><h3>YPL — Shaping Future Policy Leaders</h3><p>A year-long fellowship pairing 25 young researchers with senior mentors to produce policy papers on North Africa's most pressing challenges.</p><a href="#">Explore YPL <i class="ti ti-arrow-right"></i></a></div></div>
+    <div class="prog-card"><div class="prog-color cc"><i class="ti ti-messages" style="color:rgba(255,255,255,.5);font-size:2.5rem"></i></div><div class="prog-body"><div class="prog-tag">Chill Chat</div><h3>Chill Chat — Conversations That Matter</h3><p>A regular online dialogue series bringing together young professionals across borders to discuss policy, identity, and social change.</p><a href="#">Explore Chill Chat <i class="ti ti-arrow-right"></i></a></div></div>
+    <div class="prog-card"><div class="prog-color pl"><i class="ti ti-flask" style="color:rgba(255,255,255,.5);font-size:2.5rem"></i></div><div class="prog-body"><div class="prog-tag">Policy Labs</div><h3>Policy Labs — From Idea to Advocacy</h3><p>Intensive co-design workshops where young advocates develop and pitch policy solutions to government stakeholders and civil society.</p><a href="#">Explore Policy Labs <i class="ti ti-arrow-right"></i></a></div></div>
+    <div class="prog-card"><div class="prog-color yv"><i class="ti ti-pencil" style="color:rgba(255,255,255,.5);font-size:2.5rem"></i></div><div class="prog-body"><div class="prog-tag">Youth Voices</div><h3>Youth Voices — Publishing Young Perspectives</h3><p>An open platform for young writers across North Africa to publish opinion pieces, field reports, and advocacy blogs on issues they care about.</p><a href="#">Explore Youth Voices <i class="ti ti-arrow-right"></i></a></div></div>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section class="involve-section">
+  <div class="section-eyebrow">Take Action</div>
+  <div class="section-title">Get Involved With NAPI</div>
+  <div class="section-sub">Whether you're a researcher, activist, donor, or curious citizen — there's a place for you here</div>
+  <div class="involve-grid">
+    <div class="inv-card"><div class="inv-icon"><i class="ti ti-user-plus"></i></div><h3>Apply to YPL</h3><p>Join our flagship fellowship program as a researcher, mentor, or partner institution. Applications for the 2024 cohort are open.</p><a href="#">Apply Now <i class="ti ti-arrow-right"></i></a></div>
+    <div class="inv-card"><div class="inv-icon"><i class="ti ti-handshake"></i></div><h3>Partner With Us</h3><p>Co-host events, co-author research, or bring Policy Labs to your organization. We collaborate with universities, NGOs, and governments.</p><a href="#">Become a Partner <i class="ti ti-arrow-right"></i></a></div>
+    <div class="inv-card"><div class="inv-icon"><i class="ti ti-heart"></i></div><h3>Support Our Work</h3><p>Fund fellowships, sponsor events, or contribute to our open-access publication model. Every contribution keeps our research independent.</p><a href="#">Donate <i class="ti ti-arrow-right"></i></a></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl-section">
+  <div class="nl-text">
+    <h2>Stay Connected.<br/>Stay Informed.</h2>
+    <p>Get new publications, event invitations, and program updates delivered directly to your inbox — in the language of your choice.</p>
+  </div>
+  <div class="nl-form">
+    <input type="email" placeholder="your@email.com"/>
+    <button>Subscribe →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="logo" href="#"><img src="media/logo_napi.png" alt="NAPI"/></a>
+      <p>North Africa Policy Institute — bridging independent research, youth empowerment, and evidence-based advocacy for a more equitable Maghreb.</p>
+      <div class="social-row">
+        <a class="social-btn" href="#"><i class="ti ti-brand-twitter"></i></a>
+        <a class="social-btn" href="#"><i class="ti ti-brand-linkedin"></i></a>
+        <a class="social-btn" href="#"><i class="ti ti-brand-youtube"></i></a>
+        <a class="social-btn" href="#"><i class="ti ti-brand-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><a href="#">Home</a><a href="about.html">About NAPI</a><a href="research-hub.html">Research Hub</a><a href="#">Programs</a><a href="#">Get Involved</a><a href="#">Contact</a></div>
+    <div class="footer-col"><h4>Programs</h4><a href="#">Youth Policy Lab</a><a href="#">Chill Chat</a><a href="#">Policy Labs</a><a href="#">Youth Voices</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="#">Publications</a><a href="#">Policy Briefs</a><a href="#">Annual Reports</a><a href="#">Press Room</a><a href="#">Newsletter Archive</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 NAPI — North Africa Policy Institute. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Use · Cookie Settings</span>
+  </div>
+</footer>
+
+<script>
+function setLang(code,btn){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function scrollCarousel(dir){const c=document.getElementById('carousel');const max=c.scrollWidth-c.clientWidth;if(dir>0&&c.scrollLeft>=max-10)c.scrollTo({left:0,behavior:'smooth'});else c.scrollBy({left:dir*404,behavior:'smooth'})}
+let ct=setInterval(()=>scrollCarousel(1),4000);
+document.getElementById('carousel').addEventListener('mouseenter',()=>clearInterval(ct));
+document.getElementById('carousel').addEventListener('mouseleave',()=>{ct=setInterval(()=>scrollCarousel(1),4000)});
+function toggleSearch(){const o=document.getElementById('searchOverlay');o.classList.toggle('open');if(o.classList.contains('open'))setTimeout(()=>document.getElementById('searchInput').focus(),50)}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('searchOverlay').classList.remove('open')});
+</script>
+</body>
+</html>

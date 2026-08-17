@@ -1,0 +1,137 @@
+/*
+ * NAPI brand theme for the Payload admin dashboard.
+ *
+ * Maps the website palette (app/(frontend)/globals.css) onto Payload's
+ * theme variables so /admin matches the site instead of the default
+ * black-and-white look:
+ *   navy #214d90 / navy-dark #153361  -> text + primary surfaces
+ *   orange #f07030 / hover #d95f22    -> primary buttons + success accents
+ *   cream #faf9f7 / gray-light #e8eaf0 -> backgrounds + borders
+ *
+ * Payload builds most of its UI from the --theme-elevation-* ramp
+ * (0 = page background ... 1000 = strongest text), so we re-tint that
+ * ramp from cream toward navy-dark rather than styling components
+ * one by one.
+ */
+
+:root {
+  --napi-navy: #214d90;
+  --napi-navy-mid: #2e65b8;
+  --napi-navy-dark: #153361;
+  --napi-orange: #f07030;
+  --napi-orange-hover: #d95f22;
+  --napi-cream: #faf9f7;
+}
+
+html[data-theme="light"] {
+  --theme-bg: #faf9f7;
+  --theme-input-bg: #ffffff;
+  --theme-text: #153361;
+
+  /* cream -> navy ramp (replaces the white -> black grayscale) */
+  --theme-elevation-0: #faf9f7;
+  --theme-elevation-25: #f4f4f2;
+  --theme-elevation-50: #edeff3;
+  --theme-elevation-100: #e8eaf0;
+  --theme-elevation-150: #dce1ea;
+  --theme-elevation-200: #cfd7e4;
+  --theme-elevation-250: #c1cbdc;
+  --theme-elevation-300: #b2bfd4;
+  --theme-elevation-350: #a2b2ca;
+  --theme-elevation-400: #92a5c1;
+  --theme-elevation-450: #8198b7;
+  --theme-elevation-500: #708aad;
+  --theme-elevation-550: #607b9f;
+  --theme-elevation-600: #526c8e;
+  --theme-elevation-650: #455d7c;
+  --theme-elevation-700: #384e6a;
+  --theme-elevation-750: #2c4059;
+  --theme-elevation-800: #214d90;
+  --theme-elevation-850: #1b4079;
+  --theme-elevation-900: #153361;
+  --theme-elevation-950: #10284d;
+  --theme-elevation-1000: #0b1d39;
+
+  /* success accent (pills, toasts, status): NAPI orange */
+  --theme-success-50: #fef3ec;
+  --theme-success-100: #fde4d4;
+  --theme-success-150: #fbd5bd;
+  --theme-success-200: #f9c6a6;
+  --theme-success-250: #f8b78f;
+  --theme-success-300: #f6a878;
+  --theme-success-350: #f49961;
+  --theme-success-400: #f38a54;
+  --theme-success-450: #f17d42;
+  --theme-success-500: #f07030;
+  --theme-success-550: #e46728;
+  --theme-success-600: #d95f22;
+  --theme-success-650: #c4551e;
+  --theme-success-700: #ae4b1b;
+  --theme-success-750: #983f17;
+  --theme-success-800: #7f3513;
+  --theme-success-850: #672a0f;
+  --theme-success-900: #4e200b;
+  --theme-success-950: #351507;
+}
+
+/* Dark mode: same idea, navy-tinted instead of pure black */
+html[data-theme="dark"] {
+  --theme-bg: #0e1c33;
+  --theme-input-bg: #16294a;
+  --theme-text: #e8eaf0;
+  --theme-elevation-0: #0e1c33;
+  --theme-elevation-50: #142544;
+  --theme-elevation-100: #1a2e53;
+  --theme-elevation-200: #214d90;
+  --theme-elevation-300: #2e65b8;
+  --theme-elevation-400: #4a77c0;
+  --theme-elevation-500: #6b8dc7;
+  --theme-elevation-600: #8ea6d3;
+  --theme-elevation-700: #aebfdf;
+  --theme-elevation-800: #cbd6ea;
+  --theme-elevation-850: #d9e1f0;
+  --theme-elevation-900: #e8eaf0;
+  --theme-elevation-950: #f2f4f8;
+  --theme-elevation-1000: #faf9f7;
+  --theme-success-500: #f07030;
+  --theme-success-600: #d95f22;
+}
+
+/* Primary action buttons (Save, Publish, Login, Create): orange like the site's CTAs */
+.btn--style-primary {
+  background: var(--napi-orange);
+  color: #ffffff;
+}
+.btn--style-primary:hover,
+.btn--style-primary:focus-visible {
+  background: var(--napi-orange-hover);
+  color: #ffffff;
+}
+
+/* Secondary buttons: navy outline */
+.btn--style-secondary {
+  color: var(--napi-navy);
+  box-shadow: inset 0 0 0 1px var(--napi-navy);
+}
+.btn--style-secondary:hover {
+  color: var(--napi-navy-dark);
+}
+
+/* Left nav: navy sidebar with light links, echoing the site navbar */
+.template-default .nav {
+  background: var(--napi-navy-dark);
+}
+.template-default .nav a,
+.template-default .nav button,
+.template-default .nav .nav__link,
+.template-default .nav .nav-group__toggle {
+  color: #e8eaf0;
+}
+.template-default .nav a:hover,
+.template-default .nav .nav__link:hover {
+  color: #ffffff;
+}
+.template-default .nav .nav__link--active,
+.template-default .nav .nav__link[aria-current="page"] {
+  color: var(--napi-orange);
+}

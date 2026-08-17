@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NAPI — About</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0d1e3d;--navy-mid:#1a3260;--orange:#f07030;--cream:#faf9f7;--gray-mid:#8a8f9a;--white:#fff}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:var(--navy)}
+
+/* NAV (dark) */
+nav{position:sticky;top:0;z-index:100;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;box-shadow:0 2px 16px rgba(0,0,0,.2)}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-logo img{height:42px;display:block}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-right{display:flex;align-items:center;gap:8px}
+.lang-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.65);padding:4px 10px;border-radius:4px;cursor:pointer;font-size:.8rem;transition:all .2s}
+.lang-btn.active,.lang-btn:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+.nav-get-involved{color:#fff;font-weight:700;text-decoration:none;font-size:.85rem;padding:9px 18px;border:1.5px solid rgba(255,255,255,.3);border-radius:6px;transition:all .2s;margin-left:6px}
+.nav-get-involved:hover{background:#fff;color:var(--navy)}
+
+/* HERO (was navy → now light) */
+.about-hero{background:linear-gradient(140deg,#f0f5ff 0%,#e8f0fd 60%,#f5f7ff 100%);color:var(--navy);padding:100px 80px 80px;position:relative;overflow:hidden}
+.about-hero::before{content:'';position:absolute;inset:0;background:url('media/map.png') center/cover no-repeat;opacity:0.05;pointer-events:none}
+.about-hero::after{content:'';position:absolute;right:-100px;top:-100px;width:500px;height:500px;border-radius:50%;background:rgba(240,112,48,.06)}
+.about-hero .tag{display:inline-block;background:var(--orange);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:2px;padding:5px 14px;border-radius:2px;margin-bottom:20px;text-transform:uppercase;position:relative;z-index:1}
+.about-hero h1{font-size:3rem;font-weight:800;line-height:1.15;max-width:640px;margin-bottom:20px;position:relative;z-index:1;color:var(--navy)}
+.about-hero p{font-size:1.1rem;color:var(--gray-mid);max-width:540px;line-height:1.7;position:relative;z-index:1}
+.hero-stat-row{display:flex;gap:48px;margin-top:48px;position:relative;z-index:1}
+.hero-stat span{display:block;font-size:2.4rem;font-weight:800;color:var(--orange)}
+.hero-stat small{font-size:.8rem;color:var(--gray-mid);text-transform:uppercase;letter-spacing:1px}
+
+/* MISSION (was cream → now navy) / VISION (was navy → now cream) */
+.mv-section{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.mv-block{padding:80px 64px}
+.mv-block.mission{background:var(--navy);color:#fff}
+.mv-block.vision{background:var(--cream);color:var(--navy)}
+.mv-icon{font-size:2.4rem;margin-bottom:16px;color:var(--orange)}
+.mv-block h2{font-size:1.8rem;font-weight:800;margin-bottom:16px}
+.mv-block.mission h2{color:#fff}
+.mv-block.vision h2{color:var(--navy)}
+.mv-block.mission p{font-size:1rem;line-height:1.75;color:rgba(255,255,255,.75)}
+.mv-block.vision p{font-size:1rem;line-height:1.75;color:#555}
+
+/* VALUES (was white → now navy; cards stay white) */
+.values-section{padding:80px;background:var(--navy)}
+.section-label{font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}
+.section-title{font-size:2rem;font-weight:800;color:#fff;margin-bottom:48px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.value-card{background:#fff;border-radius:12px;padding:32px;border-top:4px solid var(--orange);box-shadow:0 2px 12px rgba(0,0,0,.12);transition:transform .2s}
+.value-card:hover{transform:translateY(-4px)}
+.val-icon{font-size:2rem;color:var(--orange);margin-bottom:14px}
+.value-card h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.value-card p{font-size:.88rem;color:var(--gray-mid);line-height:1.65}
+
+/* STORY (was cream+navy → now navy+cream) */
+.story-section{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.story-text{padding:80px 64px;background:var(--navy)}
+.story-text .section-label{color:rgba(255,255,255,.4)}
+.story-text h2{font-size:2rem;font-weight:800;color:#fff;margin-bottom:20px}
+.story-text p{font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:16px}
+.story-stats{background:var(--cream);padding:80px 64px;display:flex;flex-direction:column;justify-content:center;gap:36px}
+.s-stat span{display:block;font-size:2.8rem;font-weight:800;color:var(--orange)}
+.s-stat small{font-size:.82rem;color:var(--gray-mid);text-transform:uppercase;letter-spacing:1px}
+.s-stat p{font-size:.88rem;color:#555;margin-top:6px;line-height:1.5}
+
+/* TEAM (was white → now navy) */
+.team-section{padding:80px;background:var(--navy)}
+.team-section .section-title{color:#fff;margin-bottom:36px}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.team-card{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.18)}
+.team-img{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#1a3260,#0d1e3d);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:3rem}
+.team-base{padding:16px;background:#fff}
+.team-base h3{font-size:.95rem;font-weight:700;color:var(--navy)}
+.team-base p{font-size:.8rem;color:var(--orange);margin-top:3px}
+.team-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,30,61,.97) 60%,rgba(13,30,61,.5));opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.team-card:hover .team-overlay{opacity:1}
+.team-overlay h3{color:#fff;font-size:.95rem;font-weight:700}
+.team-overlay .role{color:var(--orange);font-size:.8rem;margin:4px 0 10px}
+.team-overlay .bio{color:rgba(255,255,255,.75);font-size:.8rem;line-height:1.5;margin-bottom:14px}
+.team-socials{display:flex;gap:10px}
+.team-socials a{color:rgba(255,255,255,.6);font-size:1.1rem;text-decoration:none;transition:color .2s}
+.team-socials a:hover{color:var(--orange)}
+
+/* BOARD (was navy → now cream; cards navy) */
+.board-section{padding:80px;background:var(--cream)}
+.board-section .section-label{color:var(--gray-mid)}
+.board-section .section-title{color:var(--navy)}
+.board-list{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.board-card{background:var(--navy);border-radius:10px;padding:24px;box-shadow:0 2px 16px rgba(13,30,61,.1);transition:transform .2s}
+.board-card:hover{transform:translateY(-3px)}
+.board-card h3{color:#fff;font-size:.95rem;font-weight:700}
+.board-card p{color:rgba(255,255,255,.5);font-size:.8rem;margin-top:5px}
+.board-card .org{color:var(--orange);font-size:.78rem;margin-top:3px}
+
+/* CTA BAND (was navy-mid → now white/cream) */
+.cta-band{background:#fff;padding:60px 80px;display:flex;align-items:center;justify-content:space-between;border-top:3px solid var(--orange)}
+.cta-band h2{font-size:1.8rem;font-weight:800;color:var(--navy);max-width:520px}
+.cta-band a{background:var(--navy);color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;white-space:nowrap;transition:transform .2s,box-shadow .2s}
+.cta-band a:hover{transform:scale(1.04);background:var(--orange)}
+
+/* FOOTER (white) */
+footer{background:#fff;border-top:1px solid #e5e8ee;padding:48px 80px 24px}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand p{color:var(--gray-mid);font-size:.82rem;line-height:1.6}
+.footer-col h4{color:var(--navy);font-size:.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.footer-col a{display:block;color:var(--gray-mid);text-decoration:none;margin-bottom:8px;font-size:.82rem;transition:color .2s}
+.footer-col a:hover{color:var(--orange)}
+.footer-bottom{border-top:1px solid #e5e8ee;padding-top:20px;display:flex;justify-content:space-between;color:#bbb;font-size:.8rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="homepage.html"><img src="media/logo_napi.png" alt="NAPI"/></a>
+  <ul class="nav-links">
+    <li><a href="homepage.html">Home</a></li>
+    <li><a href="#" class="active">About</a></li>
+    <li><a href="research-hub.html">Research</a></li>
+    <li><a href="#">Programs</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn active">EN</button>
+    <button class="lang-btn">FR</button>
+    <button class="lang-btn">AR</button>
+    <a href="#" class="nav-get-involved">Get Involved</a>
+  </div>
+</nav>
+
+<!-- HERO (light) -->
+<section class="about-hero">
+  <div class="tag">About NAPI</div>
+  <h1>Shaping Policy Through Evidence & Youth Leadership</h1>
+  <p>The North Africa Policy Institute bridges research, advocacy, and youth engagement to build more equitable societies across the Maghreb region and beyond.</p>
+  <div class="hero-stat-row">
+    <div class="hero-stat"><span>2017</span><small>Founded</small></div>
+    <div class="hero-stat"><span>12+</span><small>Countries Reached</small></div>
+    <div class="hero-stat"><span>200+</span><small>Young Leaders</small></div>
+    <div class="hero-stat"><span>85+</span><small>Publications</small></div>
+  </div>
+</section>
+
+<!-- MISSION (navy) / VISION (cream) -->
+<section class="mv-section">
+  <div class="mv-block mission">
+    <div class="mv-icon"><i class="ti ti-target"></i></div>
+    <h2>Our Mission</h2>
+    <p>To produce rigorous, independent policy research and empower young advocates to translate evidence into meaningful change across North Africa and the broader Arab world.</p>
+  </div>
+  <div class="mv-block vision">
+    <div class="mv-icon"><i class="ti ti-eye"></i></div>
+    <h2>Our Vision</h2>
+    <p>A region where evidence-based policy, inclusive institutions, and a vibrant generation of civic leaders drive sustainable human development and regional cooperation.</p>
+  </div>
+</section>
+
+<!-- VALUES (navy bg, white cards) -->
+<section class="values-section">
+  <div class="section-label">What Drives Us</div>
+  <div class="section-title">Our Core Values</div>
+  <div class="values-grid">
+    <div class="value-card"><div class="val-icon"><i class="ti ti-chart-bar"></i></div><h3>Evidence-Based Rigor</h3><p>Every recommendation is grounded in robust data, peer-reviewed methods, and transparent analysis.</p></div>
+    <div class="value-card"><div class="val-icon"><i class="ti ti-users"></i></div><h3>Youth Empowerment</h3><p>Young people are not just beneficiaries — they are co-creators of the research and advocacy we produce.</p></div>
+    <div class="value-card"><div class="val-icon"><i class="ti ti-world"></i></div><h3>Regional Solidarity</h3><p>We believe cross-border collaboration is essential to addressing shared challenges in the Maghreb.</p></div>
+    <div class="value-card"><div class="val-icon"><i class="ti ti-shield-check"></i></div><h3>Independence</h3><p>Our analysis is free from political or donor influence — we follow the evidence wherever it leads.</p></div>
+    <div class="value-card"><div class="val-icon"><i class="ti ti-heart"></i></div><h3>Social Justice</h3><p>Equity, inclusion, and the rights of marginalized communities sit at the heart of every project we undertake.</p></div>
+    <div class="value-card"><div class="val-icon"><i class="ti ti-bulb"></i></div><h3>Innovation</h3><p>We experiment with new methods — from participatory research to digital advocacy — to maximize our impact.</p></div>
+  </div>
+</section>
+
+<!-- STORY (navy text) + STATS (cream bg) -->
+<section class="story-section">
+  <div class="story-text">
+    <div class="section-label">Our Story</div>
+    <h2>From a Conversation to a Movement</h2>
+    <p>NAPI was founded in 2017 by a small group of researchers and civil society leaders who saw a critical gap: North Africa produced world-class scholars, yet the region lacked a dedicated institution to translate that knowledge into actionable policy recommendations.</p>
+    <p>What began as informal roundtables in Tunis quickly grew into a structured institute with flagship programs, international partnerships, and a network of over 200 young policy leaders across 12 countries.</p>
+    <p>Today NAPI is recognized as one of the leading independent think tanks in the Arab world, producing research on health equity, climate, governance, and youth participation — always with young voices at the table.</p>
+  </div>
+  <div class="story-stats">
+    <div class="s-stat"><span>4</span><small>Flagship Programs</small><p>Youth Policy Lab, Chill Chat, Policy Labs, Youth Voices</p></div>
+    <div class="s-stat"><span>47</span><small>Partner Organizations</small><p>NGOs, universities, and governments across the region</p></div>
+    <div class="s-stat"><span>6</span><small>Policy Issues</small><p>Health, Climate, Governance, Education, Gender, Economy</p></div>
+  </div>
+</section>
+
+<!-- EXECUTIVE TEAM (navy bg) -->
+<section class="team-section">
+  <div class="section-title">Executive Team</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-img"><i class="ti ti-user"></i></div>
+      <div class="team-base"><h3>Dr. Amina Belhaj</h3><p>Executive Director</p></div>
+      <div class="team-overlay"><h3>Dr. Amina Belhaj</h3><div class="role">Executive Director</div><div class="bio">Public health researcher and former WHO advisor with 15 years in North African health policy. PhD from Sciences Po Paris.</div><div class="team-socials"><a href="#"><i class="ti ti-brand-linkedin"></i></a><a href="#"><i class="ti ti-brand-twitter"></i></a><a href="#"><i class="ti ti-mail"></i></a></div></div>
+    </div>
+    <div class="team-card">
+      <div class="team-img"><i class="ti ti-user"></i></div>
+      <div class="team-base"><h3>Karim Mansouri</h3><p>Director of Research</p></div>
+      <div class="team-overlay"><h3>Karim Mansouri</h3><div class="role">Director of Research</div><div class="bio">Economist specializing in labor markets and youth employment. Former researcher at the African Development Bank.</div><div class="team-socials"><a href="#"><i class="ti ti-brand-linkedin"></i></a><a href="#"><i class="ti ti-brand-twitter"></i></a><a href="#"><i class="ti ti-mail"></i></a></div></div>
+    </div>
+    <div class="team-card">
+      <div class="team-img"><i class="ti ti-user"></i></div>
+      <div class="team-base"><h3>Fatima Zahra Alaoui</h3><p>Programs Director</p></div>
+      <div class="team-overlay"><h3>Fatima Zahra Alaoui</h3><div class="role">Programs Director</div><div class="bio">Civil society expert and YPL alumna. Leads all flagship youth programs and manages our network of 200+ young advocates.</div><div class="team-socials"><a href="#"><i class="ti ti-brand-linkedin"></i></a><a href="#"><i class="ti ti-brand-twitter"></i></a><a href="#"><i class="ti ti-mail"></i></a></div></div>
+    </div>
+    <div class="team-card">
+      <div class="team-img"><i class="ti ti-user"></i></div>
+      <div class="team-base"><h3>Yassine Cherif</h3><p>Communications Lead</p></div>
+      <div class="team-overlay"><h3>Yassine Cherif</h3><div class="role">Communications Lead</div><div class="bio">Digital strategist and journalist. Previously with Al Jazeera English covering Maghreb affairs and policy advocacy.</div><div class="team-socials"><a href="#"><i class="ti ti-brand-linkedin"></i></a><a href="#"><i class="ti ti-brand-twitter"></i></a><a href="#"><i class="ti ti-mail"></i></a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOARD OF ADVISORS (cream bg — navy cards) -->
+<section class="board-section">
+  <div class="section-label" style="color:var(--gray-mid)">Board of Advisors</div>
+  <div class="section-title" style="color:var(--navy);margin-bottom:36px">Board of Advisors</div>
+  <div class="board-list">
+    <div class="board-card"><h3>Prof. Leila Slimani</h3><p>Chair, Board of Advisors</p><div class="org">University of Tunis — Political Science</div></div>
+    <div class="board-card"><h3>Dr. Hassan Ouazzani</h3><p>Board Member</p><div class="org">World Health Organization — EMRO</div></div>
+    <div class="board-card"><h3>Nadia Bencherif</h3><p>Board Member</p><div class="org">Open Society Foundations — MENA</div></div>
+    <div class="board-card"><h3>Prof. Abdelkrim Talbi</h3><p>Board Member</p><div class="org">Mohammed VI Polytechnic University</div></div>
+    <div class="board-card"><h3>Salma Bousseiri</h3><p>Board Member</p><div class="org">African Union — Youth Division</div></div>
+    <div class="board-card"><h3>Dr. Omar Azizi</h3><p>Board Member</p><div class="org">European Institute of the Mediterranean</div></div>
+  </div>
+</section>
+
+<!-- CTA BAND (white bg) -->
+<section class="cta-band">
+  <h2>Want to collaborate, partner, or support our work?</h2>
+  <a href="#">Get in Touch →</a>
+</section>
+
+<!-- FOOTER (white) -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="homepage.html" style="display:block;margin-bottom:12px"><img src="media/logo_napi.png" alt="NAPI" style="height:36px"/></a>
+      <p>North Africa Policy Institute — bridging research, advocacy, and youth leadership for a more equitable region.</p>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><a href="homepage.html">Home</a><a href="#">About</a><a href="research-hub.html">Research</a><a href="#">Programs</a><a href="#">Get Involved</a></div>
+    <div class="footer-col"><h4>Programs</h4><a href="#">Youth Policy Lab</a><a href="#">Chill Chat</a><a href="#">Policy Labs</a><a href="#">Youth Voices</a></div>
+    <div class="footer-col"><h4>Connect</h4><a href="#">Twitter / X</a><a href="#">LinkedIn</a><a href="#">YouTube</a><a href="#">Newsletter</a><a href="#">Contact</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 NAPI — North Africa Policy Institute</span>
+    <span>Privacy Policy · Terms of Use</span>
+  </div>
+</footer>
+
+</body>
+</html>
