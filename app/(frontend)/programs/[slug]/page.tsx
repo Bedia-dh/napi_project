@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { getPrograms } from "@/lib/payload/queries";
+import { ogMeta, SITE_URL } from "@/lib/seo";
 
 /**
  * Generic detail page for programs created in the CMS.
@@ -29,11 +31,40 @@ function findProgram<T extends { id: string }>(programs: T[], slug: string): T |
   return programs.find((p) => p.id === decoded || p.id === slug);
 }
 
-export async function generateMetadata({ params }: { params: Promise<Params> }) {
+/**
+ * Pre-render all known program slugs at build time.
+ * This means /programs/ypl, /programs/chill-chat etc. are generated as
+ * static HTML during `next build`, giving faster TTFB and guaranteed
+ * crawlability by search engines.
+ */
+export async function generateStaticParams(): Promise<Params[]> {
+  const { programs } = await getPrograms();
+  return programs.map((p) => ({ slug: p.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const { programs } = await getPrograms();
   const program = findProgram(programs, slug);
-  return { title: program ? `${program.name} - NAPI` : "Program - NAPI" };
+
+  if (!program) {
+    return { title: "Program Not Found" };
+  }
+
+  const title = program.name;
+  const description = program.description
+    ? `${program.description.slice(0, 155)}…`
+    : `Learn about ${program.name} — a NAPI program empowering youth across North Africa.`;
+
+  return {
+    title,
+    description,
+    ...ogMeta({
+      title,
+      description,
+      path: `/programs/${program.id}`,
+    }),
+  };
 }
 
 export default async function ProgramPage({ params }: { params: Promise<Params> }) {

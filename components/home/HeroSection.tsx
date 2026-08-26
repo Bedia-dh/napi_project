@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Play, ArrowRight, X } from "lucide-react";
 import { getYouTubeId } from "@/lib/utils/youtube";
 import { Safari } from "@/components/ui/Safari";
@@ -22,14 +23,15 @@ export default function HeroSection() {
 
   return (
     <section
+      className="hero-grid"
       style={{
         background: "linear-gradient(140deg,#f0f5ff 0%,#e8f0fd 55%,#f5f7ff 100%)",
-        padding: "72px 80px 56px",
+        padding: `72px var(--section-px) 56px`,
         position: "relative",
         overflow: "hidden",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
-        gap: "64px",
+        gap: "clamp(2rem, 5vw, 64px)",
         alignItems: "center",
       }}
     >
@@ -68,7 +70,7 @@ export default function HeroSection() {
               textTransform: "uppercase",
             }}
           >
-            Independent Think Tank · North Africa
+            Independent Think Tank &middot; North Africa
           </span>
         </div>
 
@@ -130,7 +132,6 @@ export default function HeroSection() {
               cursor: "pointer",
             }}
           >
-            {/* Layer 2 — NAPI logo, primary visual, low opacity so the map shows through */}
             <div
               style={{
                 position: "absolute",
@@ -141,20 +142,21 @@ export default function HeroSection() {
                 padding: "10%",
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/media/napi_hero_placeholder.png"
-                alt=""
+                alt="NAPI hero"
+                width={800}
+                height={500}
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "contain",
-                  opacity: 1,
                 }}
+                priority
               />
             </div>
 
-            {/* Layer 3 — play button, fully opaque on top */}
+            {/* Play button */}
             <div
               style={{
                 position: "relative",

@@ -15,7 +15,7 @@ const pathways: {
     description:
       "Co-host a Chill Chat, sponsor a Policy Lab, or embed NAPI research in your programs.",
     cta: "Become a Partner",
-    href: "/get-involved#partner",
+    href: "/contact",
   },
   {
     Icon: Heart,
@@ -23,13 +23,13 @@ const pathways: {
     description:
       "Help fund the next generation of North African policy leaders with a financial contribution.",
     cta: "Donate",
-    href: "/get-involved#donate",
+    href: "/contact",
   },
 ];
 
 export default function GetInvolvedSection() {
   return (
-    <section style={{ background: "var(--cream)", padding: "72px 80px" }}>
+    <section style={{ background: "var(--cream)", padding: `72px var(--section-px)` }}>
       <div style={{ marginBottom: "2.5rem" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
           Get Involved
@@ -39,7 +39,7 @@ export default function GetInvolvedSection() {
         </h2>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem" }}>
+      <div className="get-involved-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem" }}>
         {pathways.map(({ Icon, title, description, cta, href }) => (
           <div
             key={title}
@@ -58,7 +58,7 @@ export default function GetInvolvedSection() {
               {description}
             </p>
             <InteractiveHoverButton href={href} variant="orangeOnDark">
-              {cta} →
+              {cta} &rarr;
             </InteractiveHoverButton>
           </div>
         ))}

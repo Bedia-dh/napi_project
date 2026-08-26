@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import { Mail, MapPin, Clock } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
+import { ogMeta } from "@/lib/seo";
 
-export const metadata = {
-  title: "Contact - NAPI",
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with the NAPI team — ask about our research, propose a partnership, or find out how to get involved.",
+  ...ogMeta({
+    title: "Contact",
+    description:
+      "Get in touch with the NAPI team — ask about our research, propose a partnership, or find out how to get involved.",
+    path: "/contact",
+  }),
 };
 
 const details = [

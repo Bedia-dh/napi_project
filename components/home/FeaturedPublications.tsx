@@ -12,9 +12,6 @@ interface FeaturedPublicationsProps {
 }
 
 export default function FeaturedPublications({ publications }: FeaturedPublicationsProps) {
-  // Shows every publication passed in — the parent page fetches live from
-  // the CMS (falling back to the static dataset only if MongoDB is
-  // unreachable), so new entries added in /admin appear here automatically.
   const featured = publications;
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canLeft, setCanLeft] = useState(false);
@@ -38,7 +35,7 @@ export default function FeaturedPublications({ publications }: FeaturedPublicati
       c.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", updateArrows);
     };
-     
+
   }, [featured.length]);
 
   const scroll = (dir: number) => {
@@ -52,8 +49,8 @@ export default function FeaturedPublications({ publications }: FeaturedPublicati
   };
 
   return (
-    <section style={{ background: "var(--cream)", padding: "45px 60px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem" }}>
+    <section style={{ background: "var(--cream)", padding: `45px var(--section-px)` }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
         <div>
           <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
             Publications
@@ -64,7 +61,7 @@ export default function FeaturedPublications({ publications }: FeaturedPublicati
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <Link href="/research" style={{ color: "var(--orange)", fontWeight: 700, fontSize: "0.875rem", whiteSpace: "nowrap" }}>
-            View all →
+            View all &rarr;
           </Link>
           <div style={{ display: "flex", gap: "0.5rem" }}>
             {([-1, 1] as const).map((dir) => {
@@ -133,7 +130,7 @@ export default function FeaturedPublications({ publications }: FeaturedPublicati
               {pub.title}
             </h3>
             <p style={{ fontSize: "0.8rem", color: "var(--gray-mid)" }}>
-              {pub.authors.join(", ")} · {pub.year}
+              {pub.authors.join(", ")} &middot; {pub.year}
             </p>
             <LanguageChips available={pub.languages} />
             <a

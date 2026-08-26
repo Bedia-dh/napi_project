@@ -1,10 +1,22 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { GraduationCap, Coffee, Users, PenLine, type LucideIcon } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { getPrograms } from "@/lib/payload/queries";
+import { ogMeta } from "@/lib/seo";
 
-// Small accent icon per program — paired with a light tint of the program's
-// existing accent color instead of filling the whole card with it.
+export const metadata: Metadata = {
+  title: "Programs",
+  description:
+    "Explore NAPI's four flagship programs — Young Policy Leaders, Chill-Chat, MEI Roundtables, and Youth Voices — building the next generation of North African policy leaders.",
+  ...ogMeta({
+    title: "Programs",
+    description:
+      "Explore NAPI's four flagship programs building the next generation of North African policy leaders.",
+    path: "/programs",
+  }),
+};
+
 const PROGRAM_ICONS: Record<string, LucideIcon> = {
   ypl: GraduationCap,
   "chill-chat": Coffee,
@@ -12,7 +24,6 @@ const PROGRAM_ICONS: Record<string, LucideIcon> = {
   "youth-voices": PenLine,
 };
 
-// See app/(frontend)/page.tsx for why this is set.
 export const revalidate = 300;
 
 export default async function ProgramsPage() {

@@ -25,9 +25,6 @@ export default function EventsCarousel() {
   const [canRight, setCanRight] = useState(false);
   const [eventHighlights, setEventHighlights] = useState<EventHighlight[]>([]);
 
-  // Pulled live from the CMS (via /api/events) so adding/editing an event or
-  // planned activity in /admin shows up here without a rebuild. Falls back
-  // to the static dataset automatically if MongoDB isn't reachable yet.
   useEffect(() => {
     fetch("/api/events")
       .then((res) => res.json())
@@ -60,7 +57,7 @@ export default function EventsCarousel() {
       c.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", updateArrows);
     };
-     
+
   }, [eventHighlights.length]);
 
   const scroll = (dir: number) => {
@@ -74,8 +71,8 @@ export default function EventsCarousel() {
   };
 
   return (
-    <section style={{ background: "var(--cream)", padding: "96px 80px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem" }}>
+    <section style={{ background: "var(--cream)", padding: `96px var(--section-px)` }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
         <div>
           <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
             Events
@@ -160,7 +157,6 @@ export default function EventsCarousel() {
               minHeight: 380,
             }}
           >
-            {/* Card top strip */}
             <div
               style={{
                 height: 140,
@@ -203,7 +199,6 @@ export default function EventsCarousel() {
               </span>
             </div>
 
-            {/* Card body */}
             <div style={{ padding: "1.75rem", flex: 1, display: "flex", flexDirection: "column" }}>
               <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#000", lineHeight: 1.4, marginBottom: "0.75rem" }}>
                 {evt.title}

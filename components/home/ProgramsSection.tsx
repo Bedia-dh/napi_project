@@ -13,7 +13,7 @@ export default async function ProgramsSection() {
   const { programs } = await getPrograms();
 
   return (
-    <section style={{ background: "var(--navy-dark)", padding: "72px 80px" }}>
+    <section style={{ background: "var(--navy-dark)", padding: `72px var(--section-px)` }}>
       <div style={{ marginBottom: "2rem" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
           Our Programs
@@ -23,7 +23,7 @@ export default async function ProgramsSection() {
         </h2>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
+      <div className="programs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>
         {programs.map((prog) => {
           const Icon = PROGRAM_ICONS[prog.id] ?? Users;
           return (
@@ -41,8 +41,8 @@ export default async function ProgramsSection() {
               boxShadow: "0 2px 12px rgba(0,0,0,.2)",
             }}
           >
-            {/* Light tinted accent block with an icon, instead of a solid bright fill */}
             <div
+              className="program-tile-inner"
               style={{
                 background: `color-mix(in srgb, ${prog.color} 13%, white)`,
                 borderRight: `3px solid ${prog.color}`,
@@ -70,7 +70,6 @@ export default async function ProgramsSection() {
               </span>
             </div>
 
-            {/* Body */}
             <div style={{ padding: "1.5rem" }}>
               <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--orange)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.35rem" }}>
                 {prog.tagline}
@@ -78,7 +77,7 @@ export default async function ProgramsSection() {
               <p style={{ fontSize: "0.83rem", color: "var(--gray-mid)", lineHeight: 1.6, marginBottom: "1rem" }}>
                 {prog.description}
               </p>
-              <div style={{ display: "flex", gap: "1.5rem" }}>
+              <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
                 {prog.stats.map((s) => (
                   <div key={s.label}>
                     <strong style={{ display: "block", fontSize: "1.05rem", color: "var(--navy)", fontWeight: 800 }}>

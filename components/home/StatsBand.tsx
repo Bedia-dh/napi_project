@@ -13,6 +13,7 @@ export default function StatsBand() {
   return (
     <section style={{ background: "var(--navy-dark)" }}>
       <div
+        className="stats-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
@@ -26,7 +27,7 @@ export default function StatsBand() {
             className="stat-cell"
             style={{
               background: "var(--navy-dark)",
-              padding: "2.5rem 80px",
+              padding: `2.5rem var(--section-px)`,
               textAlign: "center",
               animationDelay: `${i * 0.12}s`,
             }}
@@ -36,7 +37,7 @@ export default function StatsBand() {
               suffix={stat.suffix}
               style={{
                 display: "block",
-                fontSize: "2.75rem",
+                fontSize: "clamp(2rem, 4vw, 2.75rem)",
                 fontWeight: 800,
                 color: "#fff",
                 lineHeight: 1,

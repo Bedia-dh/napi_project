@@ -46,7 +46,7 @@ const issues: {
 
 export default function PolicyIssuesGrid() {
   return (
-    <section style={{ background: "var(--navy-dark)", padding: "96px 80px" }}>
+    <section style={{ background: "var(--navy-dark)", padding: `96px var(--section-px)` }}>
       <div style={{ marginBottom: "3rem", maxWidth: 640 }}>
         <p
           style={{
@@ -77,6 +77,7 @@ export default function PolicyIssuesGrid() {
       </div>
 
       <div
+        className="issues-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
@@ -105,7 +106,6 @@ export default function PolicyIssuesGrid() {
               isolation: "isolate",
             }}
           >
-            {/* Top row: count + arrow */}
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
               <strong
                 style={{
@@ -140,7 +140,6 @@ export default function PolicyIssuesGrid() {
               </span>
             </div>
 
-            {/* Bottom: title + meta */}
             <div>
               <h3
                 style={{

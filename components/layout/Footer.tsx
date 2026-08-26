@@ -7,7 +7,7 @@ const footerLinks = {
     { label: "About", href: "/about" },
     { label: "Research Hub", href: "/research" },
     { label: "Programs", href: "/programs" },
-    { label: "Get Involved", href: "/get-involved" },
+    { label: "Get Involved", href: "/contact" },
   ],
   Programs: [
     { label: "Youth Policy Lab", href: "/programs/ypl" },
@@ -26,8 +26,9 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer style={{ background: "#fff", borderTop: "1px solid #e5e8ee", padding: "48px 80px 24px" }}>
+    <footer style={{ background: "#fff", borderTop: "1px solid #e5e8ee", padding: `48px var(--section-px) 24px` }}>
       <div
+        className="footer-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "1.4fr 1fr 1fr 1fr",
@@ -36,7 +37,7 @@ export default function Footer() {
         }}
       >
         {/* Brand column */}
-        <div>
+        <div className="footer-brand">
           <Link href="/" style={{ display: "block", marginBottom: 12 }}>
             <Image
               src="/media/logo_napi.png"
@@ -84,6 +85,7 @@ export default function Footer() {
       </div>
 
       <div
+        className="footer-bottom"
         style={{
           borderTop: "1px solid #e5e8ee",
           paddingTop: 20,
@@ -93,12 +95,12 @@ export default function Footer() {
           fontSize: "0.8rem",
         }}
       >
-        <span suppressHydrationWarning>© {new Date().getFullYear()} NAPI - North Africa Policy Institute</span>
+        <span suppressHydrationWarning>&copy; {new Date().getFullYear()} NAPI - North Africa Policy Institute</span>
         <span style={{ display: "flex", gap: 6 }}>
           <Link href="/privacy-policy" style={{ color: "#bbb", textDecoration: "none" }}>
             Privacy Policy
           </Link>
-          ·
+          &middot;
           <Link href="/terms-of-use" style={{ color: "#bbb", textDecoration: "none" }}>
             Terms of Use
           </Link>

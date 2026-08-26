@@ -45,7 +45,7 @@ export default function EventsList() {
   return (
     <div style={{ background: "var(--cream)", padding: "0 0 96px" }}>
       {/* Header */}
-      <div style={{ background: "var(--navy-dark)", padding: "72px 80px 56px", color: "#fff" }}>
+      <div style={{ background: "var(--navy-dark)", padding: `72px var(--section-px) 56px`, color: "#fff" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
           Events
         </p>
@@ -58,23 +58,23 @@ export default function EventsList() {
       </div>
 
       {process.env.NODE_ENV !== "production" && source === "static-fallback" && (
-        <div style={{ margin: "24px 80px 0", background: "#fff3eb", border: "1px dashed var(--orange)", borderRadius: 8, padding: "8px 14px", fontSize: "0.78rem", color: "var(--gray-mid)" }}>
+        <div style={{ margin: `24px var(--section-px) 0`, background: "#fff3eb", border: "1px dashed var(--orange)", borderRadius: 8, padding: "8px 14px", fontSize: "0.78rem", color: "var(--gray-mid)" }}>
           Dev note: serving events from the static dataset - connect DATABASE_URI to query MongoDB via Payload instead.
         </div>
       )}
 
-      <div style={{ padding: "56px 80px 0" }}>
+      <div style={{ padding: `56px var(--section-px) 0` }}>
         {/* Planned activities */}
         <section style={{ marginBottom: 56 }}>
           <h2 style={{ fontSize: "1.4rem", fontWeight: 800, color: "var(--navy)", marginBottom: 24 }}>
             Ongoing &amp; Upcoming
           </h2>
           {loading ? (
-            <p style={{ color: "var(--gray-mid)" }}>Loading…</p>
+            <p style={{ color: "var(--gray-mid)" }}>Loading&hellip;</p>
           ) : planned.length === 0 ? (
             <p style={{ color: "var(--gray-mid)" }}>Nothing currently open - check back soon.</p>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 20 }}>
+            <div className="events-planned-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 20 }}>
               {planned.map((e) => (
                 <div
                   key={e.id}
@@ -107,7 +107,7 @@ export default function EventsList() {
             Past Events
           </h2>
           {loading ? (
-            <p style={{ color: "var(--gray-mid)" }}>Loading…</p>
+            <p style={{ color: "var(--gray-mid)" }}>Loading&hellip;</p>
           ) : past.length === 0 ? (
             <p style={{ color: "var(--gray-mid)" }}>No past events recorded yet.</p>
           ) : (
@@ -123,6 +123,7 @@ export default function EventsList() {
                     display: "flex",
                     gap: 20,
                     alignItems: "flex-start",
+                    flexWrap: "wrap",
                   }}
                 >
                   <div style={{ flex: 1, minWidth: 0 }}>

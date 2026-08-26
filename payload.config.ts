@@ -4,6 +4,7 @@ import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
+import { validateEnv } from "@/lib/env";
 
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
@@ -17,6 +18,10 @@ import { ContactSubmissions } from "./collections/ContactSubmissions";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+// Validate environment variables early — throws in production if
+// PAYLOAD_SECRET or DATABASE_URI are missing, warns in development.
+validateEnv();
 
 export default buildConfig({
   admin: {
@@ -36,15 +41,12 @@ export default buildConfig({
   },
   editor: lexicalEditor(),
   collections: [Users, Media, Publications, Events, Programs, YplFellows, RoundtableSeries, TeamMembers, ContactSubmissions],
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: process.env.PAYLOAD_SECRET || "dev-only-insecure-secret-change-me",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || "",
   }),
-  // Powers automatic image resizing/thumbnails for the Media collection
-  // (see collections/Media.ts imageSizes) so editors get fast-loading
-  // previews in /admin and on the site instead of full-size originals.
   sharp,
 });
