@@ -1,16 +1,18 @@
 import type { CSSProperties } from "react";
+import type { Metadata } from "next";
+import { ogMeta } from "@/lib/seo";
 
-export const metadata = {
-  title: "Privacy Policy - NAPI",
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "How NAPI collects, uses, and protects your personal information on napipolicy.org.",
+  ...ogMeta({
+    title: "Privacy Policy",
+    description:
+      "How NAPI collects, uses, and protects your personal information on napipolicy.org.",
+    path: "/privacy-policy",
+  }),
 };
-
-// DRAFT — see the list of bracketed placeholders below before publishing.
-// This page describes only what the current codebase actually does (the
-// contact form, the newsletter signup, and the external Youth Voices Google
-// Form). It intentionally leaves blank anything that depends on a decision
-// NAPI/its counsel needs to make: legal entity details, governing law, data
-// retention periods, and which analytics/hosting vendors are finalized.
-// Search this file for "[" to find every placeholder.
 
 const sectionTitle: CSSProperties = {
   fontSize: "1.3rem",
@@ -28,17 +30,11 @@ const body: CSSProperties = {
   marginBottom: "1rem",
 };
 
-const placeholder: CSSProperties = {
-  color: "var(--orange)",
-  fontStyle: "italic",
-  fontWeight: 600,
-};
-
 export default function PrivacyPolicyPage() {
   return (
     <>
       {/* Header */}
-      <section style={{ background: "var(--navy-dark)", padding: "64px 80px 56px" }}>
+      <section style={{ background: "var(--navy-dark)", padding: "clamp(2.5rem, 5vw, 64px) var(--section-px) clamp(2rem, 4vw, 56px)" }}>
         <p
           style={{
             fontSize: "0.72rem",
@@ -64,166 +60,200 @@ export default function PrivacyPolicyPage() {
           Privacy Policy
         </h1>
         <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 620 }}>
-          Effective date: <span style={placeholder}>[effective date]</span>. This policy explains what
-          information the North Africa Policy Institute (&quot;NAPI,&quot; &quot;we,&quot; &quot;us&quot;)
-          collects through napipolicy.org, how we use it, and the choices available to you.
+          This policy explains what information the North Africa Policy Institute
+          (&quot;NAPI,&quot; &quot;we,&quot; &quot;us&quot;) collects through or in connection with
+          napipolicy.org, how we use it, and the choices available to you.
         </p>
       </section>
 
       {/* Body */}
-      <section style={{ background: "var(--cream)", padding: "64px 80px 96px" }}>
+      <section style={{ background: "var(--cream)", padding: "clamp(2.5rem, 5vw, 64px) var(--section-px) clamp(3rem, 6vw, 96px)" }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <p style={body}>
-            NAPI is <span style={placeholder}>[legal entity name and registration/jurisdiction, e.g. &quot;a nonprofit
-            association registered in [country] under registration number [number]&quot;]</span>, with a
-            registered address at <span style={placeholder}>[registered address]</span>.
+            NAPI is the North Africa Policy Institute, an independent, non-partisan and non-profit
+            organization registered in Italy, with a registered address at Via Gustavo Giovannoni, 92,
+            Rome, Italy.
           </p>
 
           <h2 style={sectionTitle}>1. Information We Collect</h2>
           <p style={body}>
-            We collect information directly from you in the following ways:
+            We collect information through the website and, where applicable, through third-party
+            services or platforms linked to the website, in the following ways:
           </p>
           <p style={body}>
-            <strong style={{ color: "var(--navy)" }}>Contact form.</strong> When you use the contact form
-            on our Contact page, we collect your name, email address, the subject category you select, and
-            the message you write. This is stored so our team can respond to you and is visible only to
-            authorized NAPI staff.
+            <strong style={{ color: "var(--navy)" }}>Contact form.</strong> When you use the Contact Us
+            form on our website, we collect the information you provide, which may include your name,
+            email address, the subject of your enquiry and the content of your message. This information
+            is stored so that our team can receive, review and respond to your enquiry.
+          </p>
+          <p style={body}>
+            Providing information through the Contact Us form is voluntary; however, if you do not
+            provide information necessary for us to respond, we may not be able to respond to your enquiry.
           </p>
           <p style={body}>
             <strong style={{ color: "var(--navy)" }}>Newsletter signup.</strong> If you subscribe to our
-            newsletter, we collect your email address in order to send you publications, policy briefs, and
-            event announcements. <span style={placeholder}>[Confirm the email service provider used to send
-            the newsletter, e.g. Mailchimp/Resend/other — that provider&apos;s own privacy practices will also
-            apply and should be named here.]</span>
+            newsletter through the website, we collect your email address in order to send you NAPI&apos;s
+            newsletter, publications, policy briefs, event announcements and other communications.
+            Providing your email address for newsletter subscription is voluntary. If you do not provide
+            it, you will not be able to subscribe to the NAPI newsletter.
           </p>
           <p style={body}>
             <strong style={{ color: "var(--navy)" }}>Youth Voices submissions.</strong> Submitting writing
-            through the &quot;Submit Your Work&quot; button takes you to an external Google Form. Any
-            information you provide there is collected by Google and by NAPI as the form&apos;s owner, and is
-            governed in part by{" "}
-            <span style={placeholder}>[link to Google&apos;s privacy policy, and confirm what NAPI does with
-            submitted drafts/personal details]</span>.
+            through the &quot;Submit Your Work&quot; button takes you to an external Google Form. The
+            information you provide is submitted through that external form and may be received and
+            processed by NAPI for the purposes of administering the Youth Voices program and reviewing
+            and, where applicable, publishing submissions. The collection and processing of information
+            through the external form may also be subject to Google&apos;s applicable privacy practices.
           </p>
           <p style={body}>
-            <strong style={{ color: "var(--navy)" }}>Automatically collected information.</strong> Like most
-            websites, our hosting provider may automatically log standard technical information when you
-            visit, such as IP address, browser type, device type, and pages viewed, for security and
-            performance purposes. <span style={placeholder}>[Confirm hosting provider(s) once finalized — see
-            the Hosting & Caching Strategy document — and whether any analytics tool, e.g. Google Analytics
-            or Plausible, is added; none is currently installed on the site.]</span>
+            <strong style={{ color: "var(--navy)" }}>Photographs, videos and other visual material.</strong>{" "}
+            NAPI may take photographs and/or make video or audio recordings during its events, activities,
+            training sessions, workshops and other activities for purposes such as documenting and
+            communicating its work, including through its website and NAPI&apos;s official social media
+            channels. Where individuals are identifiable, NAPI will provide appropriate information about
+            the intended use of such material and, where required, seek the relevant consent or rely on
+            another applicable lawful basis before publication.
+          </p>
+          <p style={body}>
+            Where photographs, videos or other visual material are submitted to NAPI by individuals or
+            participants, NAPI may use them for the purposes for which they were submitted, subject to
+            any applicable consent or other rights and permissions.
+          </p>
+          <p style={body}>
+            If you have a concern about the publication of a photograph, video or other visual material
+            on the website that identifies you, you may contact NAPI at{" "}
+            <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
+              contact@napipolicy.org
+            </a>.
+          </p>
+          <p style={body}>
+            <strong style={{ color: "var(--navy)" }}>Social media and third-party links.</strong> The
+            website may contain links to NAPI&apos;s official pages on third-party social media platforms,
+            including Facebook, Instagram and LinkedIn. Clicking on these links will take you to the
+            relevant third-party platform. NAPI does not control the privacy practices or data-processing
+            activities of these platforms, which are subject to their respective terms and privacy policies.
+          </p>
+          <p style={body}>
+            <strong style={{ color: "var(--navy)" }}>Automatically collected information.</strong> When
+            you visit the website, certain technical information may be processed automatically by the
+            website&apos;s hosting and technical infrastructure, such as your IP address, browser type,
+            device type and pages viewed, for purposes including website security, technical administration
+            and performance.
           </p>
 
           <h2 style={sectionTitle}>2. Cookies</h2>
           <p style={body}>
             The public site does not currently set any analytics, advertising, or marketing cookies. The
-            only cookies in use are strictly necessary session cookies for staff logging into the content
-            management admin panel — these are not set for ordinary visitors browsing the public pages.{" "}
-            <span style={placeholder}>[Update this section if analytics or marketing cookies are added in
-            the future, and add a cookie consent banner if required by law in the jurisdictions you serve.]</span>
+            only cookies in use are strictly necessary cookies associated with the technical operation of
+            the website, including session cookies used for staff access to the content management system
+            where applicable. These are not used to track ordinary visitors for advertising or marketing
+            purposes.
           </p>
 
           <h2 style={sectionTitle}>3. How We Use Your Information</h2>
           <p style={body}>
-            We use the information described above to: respond to inquiries submitted through the contact
-            form; send newsletter communications to subscribers who opted in; consider and provide support
-            for Youth Voices submissions; maintain the security and proper functioning of the website; and
-            comply with our legal obligations.
+            We use the information described above to: receive and respond to inquiries submitted through
+            the Contact Us form; send newsletter communications to subscribers who opted in; administer
+            and consider Youth Voices submissions where information is provided through the external form
+            linked from the website; document and communicate NAPI&apos;s activities through photographs,
+            videos and other visual material where applicable; maintain the security and proper functioning
+            of the website; and comply with our legal obligations.
           </p>
           <p style={body}>
-            We do not sell your personal information, and we do not use it for advertising.
+            We do not sell your personal information, and we do not use personal information collected
+            through the website for advertising.
           </p>
 
           <h2 style={sectionTitle}>4. Legal Basis for Processing</h2>
           <p style={body}>
-            <span style={placeholder}>
-              [If NAPI or its visitors are subject to the EU/UK GDPR or a similar law, state the legal basis
-              relied on for each type of processing above — typically consent for the newsletter, and
-              legitimate interest or consent for the contact form. This should be confirmed with legal
-              counsel based on where NAPI operates and where its visitors are located.]
-            </span>
+            NAPI processes personal information collected through the website in accordance with applicable
+            data-protection laws. The legal basis for processing depends on the nature and purpose of the
+            processing.
+          </p>
+          <p style={body}>
+            Where processing is based on consent, you may withdraw your consent at any time, without
+            affecting the lawfulness of processing carried out before withdrawal.
           </p>
 
           <h2 style={sectionTitle}>5. Sharing of Information</h2>
           <p style={body}>
-            We do not sell or rent your personal information. We may share it with:
+            We do not sell or rent your personal information. We may share personal information collected
+            through or in connection with the website with:
           </p>
           <p style={body}>
             <strong style={{ color: "var(--navy)" }}>Service providers</strong> who help us operate the
-            site, such as our hosting provider, database provider, and email delivery provider —{" "}
-            <span style={placeholder}>[list the finalized providers here, e.g. Vercel, MongoDB Atlas,
-            Cloudflare, and the email provider used for the contact form/newsletter]</span>.
+            site, such as our hosting provider, database provider, and newsletter/email delivery provider
+            and other technical service providers used to maintain, secure or operate the website.
           </p>
           <p style={body}>
-            <strong style={{ color: "var(--navy)" }}>Legal requirements,</strong> if we are required to
-            disclose information to comply with a law, regulation, or valid legal process.
+            <strong style={{ color: "var(--navy)" }}>Legal requirements,</strong> where disclosure is
+            required or permitted under applicable law, regulation, or valid legal process.
           </p>
 
           <h2 style={sectionTitle}>6. Data Retention</h2>
           <p style={body}>
-            <span style={placeholder}>
-              [State how long contact form submissions and newsletter email addresses are kept, and what
-              happens to them after that — e.g. "contact form messages are retained for [X months/years]
-              for record-keeping, after which they are deleted." This is a policy decision for NAPI to set.]
-            </span>
+            NAPI retains personal information collected through the website only for as long as necessary
+            for the purpose for which it was collected, subject to applicable legal or administrative
+            requirements.
           </p>
 
           <h2 style={sectionTitle}>7. Data Security</h2>
           <p style={body}>
-            We take reasonable technical and organizational measures to protect the information you share
-            with us. However, no method of transmission over the internet or electronic storage is
-            completely secure, and we cannot guarantee absolute security.
+            We take reasonable technical and organizational measures to protect the personal information
+            processed through the website. However, no method of transmission over the internet or
+            electronic storage is completely secure, and we cannot guarantee absolute security.
           </p>
 
           <h2 style={sectionTitle}>8. Your Rights</h2>
           <p style={body}>
-            <span style={placeholder}>
-              [Depending on where you are located, you may have rights to access, correct, delete, or
-              transfer your personal information, or to object to or restrict certain processing (for
-              example, under the EU/UK GDPR or applicable regional data protection laws). List the specific
-              rights that apply and how to exercise them, once confirmed with legal counsel.]
-            </span>{" "}
-            At minimum, you can unsubscribe from our newsletter at any time using the link in any email we
-            send, and you can request that we delete a contact form submission by emailing us at the address
-            below.
+            You have the right, in accordance with applicable law, to access personal information
+            concerning you that is processed by NAPI, to request the correction, completion, updating or
+            modification of such information where applicable, to withdraw your consent to processing
+            where processing is based on consent, and to object to the processing of your personal
+            information in accordance with applicable law. You may also have other rights provided by
+            applicable law.
+          </p>
+          <p style={body}>
+            You may unsubscribe from our newsletter at any time using the link provided in any newsletter
+            email. To exercise your rights or raise a question concerning the processing of your personal
+            information through the website, you may contact us at{" "}
+            <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
+              contact@napipolicy.org
+            </a>.
           </p>
 
           <h2 style={sectionTitle}>9. Children&apos;s Privacy</h2>
           <p style={body}>
-            Our general website is not directed at children and we do not knowingly collect personal
-            information from children under 13. Some NAPI programs (such as the Youth Policy Lab and Youth
-            Voices) are open to participants as young as 15.{" "}
-            <span style={placeholder}>
-              [If participants under 18 may submit personal information through program applications or
-              Youth Voices, confirm whether parental/guardian consent is required in the relevant
-              jurisdictions and add that process here.]
-            </span>
+            Our general website is not directed at children and we do not knowingly seek to collect
+            personal information from children through the public website. Some NAPI programs (such as
+            the Youth Policy Lab and Youth Voices) are open to participants as young as 15. Where those
+            programs involve the collection of personal information from young participants, the relevant
+            application or participation process may be subject to additional privacy information and
+            consent requirements.
           </p>
 
           <h2 style={sectionTitle}>10. International Data Transfers</h2>
           <p style={body}>
-            <span style={placeholder}>
-              [If NAPI, its hosting providers, or its audience span multiple countries, describe how
-              personal information may be transferred across borders and what safeguards apply. Depends on
-              the final hosting provider locations.]
-            </span>
+            Personal information collected through the website may be processed or stored in countries
+            other than the country in which you are located, depending on the hosting, storage, newsletter
+            and other third-party services used by NAPI. Where applicable, NAPI will take the measures
+            required by the relevant data-protection laws governing such processing or transfers.
           </p>
 
           <h2 style={sectionTitle}>11. Changes to This Policy</h2>
           <p style={body}>
-            We may update this Privacy Policy from time to time. The &quot;Effective date&quot; at the top of
-            this page will reflect the date of the latest revision. Material changes will be noted on this
-            page.
+            We may update this Privacy Policy from time to time. The &quot;Effective date&quot; at the top
+            of this page will reflect the date of the latest revision. Where appropriate, material changes
+            will be noted on this page.
           </p>
 
           <h2 style={sectionTitle}>12. Contact Us</h2>
           <p style={body}>
-            If you have questions about this Privacy Policy or want to exercise any of the rights described
-            above, contact us at{" "}
+            If you have questions about this Privacy Policy or want to exercise any of the rights available
+            to you in relation to personal information processed through the website, contact us at{" "}
             <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
               contact@napipolicy.org
-            </a>
-            . <span style={placeholder}>[Add a mailing address and, if applicable, a designated Data
-            Protection Officer contact.]</span>
+            </a>. Our registered address is Via Gustavo Giovannoni, 92, Rome, Italy.
           </p>
         </div>
       </section>
