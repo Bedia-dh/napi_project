@@ -29,6 +29,16 @@ export const RoundtableSeries: CollectionConfig = {
     beforeChange: [stripEmDash],
   },
   fields: [
+    {
+      name: "program",
+      type: "relationship",
+      relationTo: "programs",
+      label: "Program",
+      admin: {
+        position: "sidebar",
+        description: "The parent program this series belongs to (e.g. NAPI-MEI Roundtables).",
+      },
+    },
     { name: "country", type: "text", required: true, label: "Country" },
     {
       name: "period",

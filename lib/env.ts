@@ -1,31 +1,21 @@
 /**
- * Validates required environment variables at build/startup time.
- * Import this in payload.config.ts or next.config.ts so misconfiguration
- * surfaces as a clear error instead of silent runtime failures.
+ * Validates that critical environment variables are set.
+ * Called early in payload.config.ts before anything touches process.env.
+ *
+ * - Production: throws if PAYLOAD_SECRET or DATABASE_URI are missing.
+ * - Development: warns to the console so the app still starts for local work.
  */
+export function validateEnv(): void {
+  const required = ["PAYLOAD_SECRET", "DATABASE_URI"];
+  const missing = required.filter((key) => !process.env[key]);
 
-const required = ["PAYLOAD_SECRET", "DATABASE_URI"] as const;
+  if (missing.length === 0) return;
 
-export function validateEnv() {
-  const missing: string[] = [];
+  const message = `Missing environment variable(s): ${missing.join(", ")}`;
 
-  for (const key of required) {
-    if (!process.env[key]?.trim()) {
-      missing.push(key);
-    }
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(message);
   }
 
-  if (missing.length > 0 && process.env.NODE_ENV === "production") {
-    throw new Error(
-      `Missing required environment variables for production:\n  ${missing.join("\n  ")}\n\n` +
-        "Set these in your Vercel project settings or .env.local file."
-    );
-  }
-
-  if (missing.length > 0) {
-    console.warn(
-      `[env] Warning: missing env vars (${missing.join(", ")}). ` +
-        "This is fine for local dev with static fallback, but will fail in production."
-    );
-  }
+  console.warn(`⚠️  ${message} — the app may not work correctly.`);
 }

@@ -68,7 +68,12 @@ export default buildConfig({
     //   },
     // }),
   ],
-  secret: process.env.PAYLOAD_SECRET || "dev-only-insecure-secret-change-me",
+  secret: process.env.PAYLOAD_SECRET || (() => {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("PAYLOAD_SECRET must be set in production — refusing to start with the dev fallback.");
+    }
+    return "dev-only-insecure-secret-do-not-use-in-prod";
+  })(),
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },

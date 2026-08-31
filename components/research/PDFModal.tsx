@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { X, Download, FileText } from "lucide-react";
 import type { Publication } from "@/lib/types/publication";
 
@@ -15,6 +15,14 @@ export default function PDFModal({ pub, onClose }: PDFModalProps) {
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, [onClose]);
+
+  // Resolve the PDF URL: use Google Docs viewer as a wrapper so PDFs hosted
+  // on domains that block <iframe> embedding still render a preview.
+  const pdfSrc = useMemo(() => {
+    const url = pub?.pdfUrl;
+    if (!url) return null;
+    return `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
+  }, [pub?.pdfUrl]);
 
   if (!pub) return null;
 
@@ -64,22 +72,34 @@ export default function PDFModal({ pub, onClose }: PDFModalProps) {
         </div>
 
         {/* Viewer */}
-        <div
-          style={{
-            background: "#555",
-            height: 420,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#aaa",
-            flexDirection: "column",
-            gap: 10,
-          }}
-        >
-          <FileText size={48} color="#888" />
-          <span>PDF preview would load here</span>
-          <span style={{ fontSize: "0.78rem", color: "#aaa" }}>Page 1 of {pub.pages}</span>
-        </div>
+        {pdfSrc ? (
+          <iframe
+            src={pdfSrc}
+            title={`Preview of ${pub.title}`}
+            style={{
+              width: "100%",
+              height: 420,
+              border: "none",
+              background: "#555",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              background: "#555",
+              height: 420,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#aaa",
+              flexDirection: "column",
+              gap: 10,
+            }}
+          >
+            <FileText size={48} color="#888" />
+            <span>No PDF available for preview</span>
+          </div>
+        )}
 
         {/* Footer */}
         <div

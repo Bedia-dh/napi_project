@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local test artifacts
 .testers-dynamic/
+seed-local.mjs 
+seed-mock.mjs 
+seed-rest.mjs 
