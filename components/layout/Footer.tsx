@@ -40,15 +40,15 @@ export default function Footer() {
         <div className="footer-brand">
           <Link href="/" style={{ display: "block", marginBottom: 12 }}>
             <Image
-              src="/media/logo_napi.png"
+              src="/media/napi.png"
               alt="NAPI"
-              width={120}
-              height={36}
-              style={{ objectFit: "contain", height: "auto", width: "auto", maxHeight: 36 }}
+              width={130}
+              height={40}
+              style={{ objectFit: "contain", height: "auto", width: "auto"}}
             />
           </Link>
           <p style={{ color: "var(--gray-mid)", fontSize: "0.82rem", lineHeight: 1.6 }}>
-            North Africa Policy Institute - bridging research, advocacy, and youth leadership for a more equitable region.
+            Bridging research, advocacy, and youth leadership for a more equitable region.
           </p>
         </div>
 

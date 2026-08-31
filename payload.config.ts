@@ -4,6 +4,7 @@ import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
+import { s3Storage } from "@payloadcms/storage-s3";
 import { validateEnv } from "@/lib/env";
 
 import { Users } from "./collections/Users";
@@ -41,6 +42,31 @@ export default buildConfig({
   },
   editor: lexicalEditor(),
   collections: [Users, Media, Publications, Events, Programs, YplFellows, RoundtableSeries, TeamMembers, ContactSubmissions],
+  plugins: [
+    s3Storage({
+      // Only activate when R2 credentials are configured (skipped in local dev)
+      enabled: Boolean(process.env.R2_BUCKET),
+      collections: {
+        media: {
+          disablePayloadAccessControl: true,
+          generateFileURL: ({ filename, prefix }) => {
+            const key = prefix ? `${prefix}/${filename}` : filename;
+            return `${process.env.R2_PUBLIC_URL}/${key}`;
+          },
+        },
+      },
+      bucket: process.env.R2_BUCKET || "",
+      config: {
+        credentials: {
+          accessKeyId: process.env.R2_ACCESS_KEY_ID || "",
+          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "",
+        },
+        region: "auto",
+        endpoint: process.env.R2_ENDPOINT || "",
+        forcePathStyle: true,
+      },
+    }),
+  ],
   secret: process.env.PAYLOAD_SECRET || "dev-only-insecure-secret-change-me",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),

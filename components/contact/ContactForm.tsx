@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, type CSSProperties, type FormEvent } from "react";
+import { useState, useCallback, type CSSProperties, type FormEvent } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { InteractiveHoverButton } from "@/components/ui/InteractiveHoverButton";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 
 const SUBJECTS = [
   { value: "general", label: "General Inquiry" },
@@ -35,6 +36,15 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
+
+  const handleTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+  }, []);
+
+  const handleTurnstileExpire = useCallback(() => {
+    setTurnstileToken("");
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -50,7 +60,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, subject, message }),
+        body: JSON.stringify({ name, email, subject, message, turnstileToken }),
       });
       const data = await res.json().catch(() => ({}));
 
@@ -105,14 +115,14 @@ export default function ContactForm() {
       style={{
         background: "#fff",
         borderRadius: 12,
-        padding: "2.5rem",
+        padding: "clamp(1.25rem, 4vw, 2.5rem)",
         boxShadow: "0 2px 12px rgba(0,0,0,.08)",
         display: "flex",
         flexDirection: "column",
         gap: "1.25rem",
       }}
     >
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+      <div className="contact-form-inner" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
         <label style={labelStyle}>
           <span style={labelTextStyle}>Name *</span>
           <input
@@ -175,6 +185,12 @@ export default function ContactForm() {
           <AlertCircle size={16} /> {errorMsg}
         </div>
       )}
+
+      <TurnstileWidget
+        onVerify={handleTurnstileVerify}
+        onExpire={handleTurnstileExpire}
+        onError={handleTurnstileExpire}
+      />
 
       <div>
         <InteractiveHoverButton variant="navy" type="submit" disabled={status === "submitting"}>

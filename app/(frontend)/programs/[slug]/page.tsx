@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { getPrograms } from "@/lib/payload/queries";
@@ -159,8 +160,7 @@ export default async function ProgramPage({ params }: { params: Promise<Params> 
             <h2 style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--navy-dark)", marginBottom: "1.25rem" }}>Gallery</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "1rem" }}>
               {galleryPhotos.map((src) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={src} src={src} alt={program.name} style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10 }} />
+                <Image key={src} src={src} alt={program.name} width={600} height={200} style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10 }} />
               ))}
             </div>
           </div>

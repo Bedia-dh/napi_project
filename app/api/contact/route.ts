@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstileToken } from "@/lib/turnstile";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +56,18 @@ export async function POST(req: NextRequest) {
   const validationError = validate(body);
   if (validationError) {
     return NextResponse.json({ error: validationError }, { status: 400 });
+  }
+
+  // Verify Cloudflare Turnstile token (skipped if TURNSTILE_SECRET_KEY not set)
+  const turnstileResult = await verifyTurnstileToken(
+    (body as Record<string, unknown>).turnstileToken as string | undefined,
+    ip
+  );
+  if (!turnstileResult.success) {
+    return NextResponse.json(
+      { error: turnstileResult.error || "Bot verification failed." },
+      { status: 403 }
+    );
   }
 
   const name = body.name!.trim();

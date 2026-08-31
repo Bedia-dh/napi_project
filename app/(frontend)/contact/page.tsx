@@ -38,7 +38,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Header */}
-      <section style={{ background: "var(--navy-dark)", padding: "64px 80px 56px" }}>
+      <section style={{ background: "var(--navy-dark)", padding: "clamp(2.5rem, 5vw, 64px) var(--section-px) clamp(2rem, 4vw, 56px)" }}>
         <p
           style={{
             fontSize: "0.72rem",
@@ -70,8 +70,8 @@ export default function ContactPage() {
       </section>
 
       {/* Body */}
-      <section style={{ background: "var(--cream)", padding: "72px 80px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: "3rem", alignItems: "start" }}>
+      <section style={{ background: "var(--cream)", padding: "clamp(2.5rem, 5vw, 72px) var(--section-px)" }}>
+        <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: "3rem", alignItems: "start", maxWidth: 1100, margin: "0 auto" }}>
           {/* Details */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
             {details.map(({ Icon, label, value, href }) => (
