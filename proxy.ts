@@ -103,7 +103,7 @@ const AUTH_PATHS = [
 
 // ── Main middleware ─────────────────────────────────────────────────────────
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const ip = getClientIp(req);
 
@@ -183,8 +183,9 @@ export function middleware(req: NextRequest) {
 
       // Allow login/auth endpoints through (they're already rate-limited above)
       const isAuthPath = AUTH_PATHS.some((p) => pathname.startsWith(p));
+      const isSessionCheck = pathname === "/api/users/me";
 
-      if (!hasSession && !isAuthPath) {
+      if (!hasSession && !isAuthPath && !isSessionCheck) {
         return applySecurityHeaders(
           NextResponse.json(
             { error: "Not authorized." },
