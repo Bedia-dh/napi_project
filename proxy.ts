@@ -103,7 +103,7 @@ const AUTH_PATHS = [
 
 // ── Main middleware ─────────────────────────────────────────────────────────
 
-export function proxy(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const ip = getClientIp(req);
 
