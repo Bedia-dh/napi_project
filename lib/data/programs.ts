@@ -14,6 +14,7 @@ export const programs: Program[] = [
     ],
     color: "var(--ypl-color)",
     href: "/programs/ypl",
+    imageUrl: "https://napipolicy.org/wp-content/uploads/2021/01/Tripoli-Team-Aug-30-2013-1-980x779.jpg",
   },
   {
     id: "chill-chat",
@@ -28,6 +29,7 @@ export const programs: Program[] = [
     ],
     color: "var(--chill-color)",
     href: "/programs/chill-chat",
+    imageUrl: "https://napipolicy.org/wp-content/uploads/2024/02/379465073_640617284868838_1147682275153398996_n.jpg",
     objectives: [
       "Change representations and break the stigma and stereotypes.",
       "Evolve people in a democratic debate, by exchanging experiences and creating connections between different actors.",
@@ -67,6 +69,7 @@ export const programs: Program[] = [
     ],
     color: "var(--labs-color)",
     href: "/programs/mei-roundtables",
+    imageUrl: "https://napipolicy.org/wp-content/uploads/2023/02/MEI-400x250.jpg",
   },
   {
     id: "youth-voices",

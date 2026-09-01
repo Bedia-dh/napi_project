@@ -2,6 +2,17 @@ import type { CollectionConfig } from "payload";
 import { anyone, isAdmin, isLoggedIn } from "@/lib/payload/access";
 import { stripEmDash } from "@/lib/payload/sanitizeText";
 
+// Turns any text into a URL-safe slug: "Testc_Name" -> "testc-name".
+function slugify(value: string): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 // Unifies past events + planned/ongoing activities into one editable
 // collection. The homepage carousel and the /events page both pull from
 // here: the 2 most recent "Past" entries plus every "Planned" entry.
@@ -37,6 +48,29 @@ export const Events: CollectionConfig = {
       label: "Title",
     },
     {
+      name: "slug",
+      type: "text",
+      required: true,
+      unique: true,
+      label: "URL slug",
+      admin: {
+        position: "sidebar",
+        readOnly: true,
+        description:
+          "Generated automatically from the title. The event detail page lives at /events/<slug>.",
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value, data, operation }) => {
+            if (operation === "create" || !value || typeof value !== "string") {
+              return slugify(String(data?.title ?? ""));
+            }
+            return slugify(value);
+          },
+        ],
+      },
+    },
+    {
       name: "status",
       type: "select",
       required: true,
@@ -68,7 +102,7 @@ export const Events: CollectionConfig = {
       type: "text",
       label: "Date",
       admin: {
-        description: "For past events only, as free text, e.g. \"June 14–16, 2022\". Leave blank for planned activities.",
+        description: "For past events only, as free text, e.g. \"June 14-16, 2022\". Leave blank for planned activities.",
         condition: (_, siblingData) => siblingData?.status !== "planned",
       },
     },
@@ -86,13 +120,31 @@ export const Events: CollectionConfig = {
       type: "textarea",
       required: true,
       label: "Description",
-      admin: { description: "1–3 sentences. This is the main text shown on the event card." },
+      admin: { description: "1-3 sentences. This is the main text shown on the event card." },
+    },
+    {
+      name: "body",
+      type: "textarea",
+      label: "Full content",
+      admin: {
+        description: "The full event write-up shown on the individual event page. Supports multiple paragraphs.",
+        condition: (_, siblingData) => siblingData?.status !== "planned",
+      },
     },
     {
       name: "location",
       type: "text",
       label: "Location",
       admin: {
+        condition: (_, siblingData) => siblingData?.status !== "planned",
+      },
+    },
+    {
+      name: "partners",
+      type: "text",
+      label: "Partners / Co-organizers",
+      admin: {
+        description: "Comma-separated list of partner organizations.",
         condition: (_, siblingData) => siblingData?.status !== "planned",
       },
     },
@@ -118,7 +170,15 @@ export const Events: CollectionConfig = {
       name: "image",
       type: "upload",
       relationTo: "media",
-      label: "Photo",
+      label: "Photo (uploaded)",
+    },
+    {
+      name: "imageUrl",
+      type: "text",
+      label: "Photo URL (external)",
+      admin: {
+        description: "If the event photo is hosted externally (e.g. on the old napipolicy.org site), paste the full URL here. Used only when no photo is uploaded above.",
+      },
     },
   ],
 };

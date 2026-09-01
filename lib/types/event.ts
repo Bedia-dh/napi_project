@@ -2,13 +2,16 @@ export type EventType = "webinar" | "workshop" | "conference" | "chill-chat";
 
 export interface NapiEvent {
   id: string;
+  slug: string;
   title: string;
   type: EventType;
-  date: string; // display string — not always full ISO, some past events only have partial dates
+  date: string; // display string -- not always full ISO, some past events only have partial dates
   time?: string;
   location?: string;
   audience?: string;
   description: string;
+  body?: string; // full event write-up for the detail page
+  partners?: string; // comma-separated partner organizations
   registrationUrl?: string;
   sourceUrl?: string;
   imageUrl?: string;

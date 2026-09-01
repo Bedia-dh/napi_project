@@ -9,7 +9,7 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://napipolicy.
 export const SITE_NAME = "NAPI – North Africa Policy Initiative";
 export const SITE_DESCRIPTION =
   "Independent think tank empowering young North Africans through evidence-based policy research, dialogue, and leadership.";
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/media/napi_hero_placeholder.png`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/media/napi_hero.png`;
 
 /** Reusable twitter card defaults (summary_large_image everywhere). */
 export const twitterDefaults = {

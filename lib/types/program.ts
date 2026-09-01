@@ -8,6 +8,8 @@ export interface Program {
   stats: { label: string; value: string }[];
   color: string; // CSS variable or hex
   href: string;
+  /** Thumbnail image for the program card on the homepage. */
+  imageUrl?: string;
   /** Bulleted objectives list on the program's page (Chill-Chat, Youth Voices). */
   objectives?: string[];
   /** Topic chips on the program's page (Chill-Chat). */

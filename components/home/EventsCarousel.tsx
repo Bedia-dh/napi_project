@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { pastEvents, plannedActivities } from "@/lib/data/events";
 
 const typeColors: Record<string, string> = {
   "chill-chat": "var(--chill-color)",
@@ -11,33 +12,40 @@ const typeColors: Record<string, string> = {
   webinar: "var(--voices-color)",
 };
 
-interface EventHighlight {
+interface CarouselEvent {
   id: string;
   title: string;
   type: string;
   summary: string;
   status: "past" | "next";
+  slug?: string;
+  imageUrl?: string;
 }
+
+// Build highlights from static data: last 3 past events + all planned
+const eventHighlights: CarouselEvent[] = [
+  ...pastEvents.slice(-8).map((e) => ({
+    id: e.id,
+    title: e.title,
+    type: e.type,
+    summary: e.description,
+    status: "past" as const,
+    slug: e.slug,
+    imageUrl: e.imageUrl,
+  })),
+  ...plannedActivities.map((a) => ({
+    id: a.id,
+    title: a.title,
+    type: "workshop" as const,
+    summary: a.description,
+    status: "next" as const,
+  })),
+];
 
 export default function EventsCarousel() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(false);
-  const [eventHighlights, setEventHighlights] = useState<EventHighlight[]>([]);
-
-  useEffect(() => {
-    fetch("/api/events")
-      .then((res) => res.json())
-      .then((data: { docs: Array<{ id: string; status: "past" | "planned"; title: string; type: string; description: string }> }) => {
-        const past = data.docs.filter((d) => d.status === "past").slice(-2);
-        const planned = data.docs.filter((d) => d.status === "planned");
-        setEventHighlights([
-          ...past.map((e) => ({ id: e.id, title: e.title, type: e.type, summary: e.description, status: "past" as const })),
-          ...planned.map((e) => ({ id: e.id, title: e.title, type: e.type, summary: e.description, status: "next" as const })),
-        ]);
-      })
-      .catch(() => setEventHighlights([]));
-  }, []);
 
   const updateArrows = () => {
     const c = carouselRef.current;
@@ -57,8 +65,7 @@ export default function EventsCarousel() {
       c.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", updateArrows);
     };
-
-  }, [eventHighlights.length]);
+  }, []);
 
   const scroll = (dir: number) => {
     const c = carouselRef.current;
@@ -71,13 +78,36 @@ export default function EventsCarousel() {
   };
 
   return (
-    <section style={{ background: "var(--cream)", padding: `96px var(--section-px)` }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
+    <section style={{ background: "var(--cream)", padding: "96px 80px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          marginBottom: "2rem",
+        }}
+      >
         <div>
-          <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
+          <p
+            style={{
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              color: "var(--orange)",
+              marginBottom: "0.75rem",
+            }}
+          >
             Events
           </p>
-          <h2 style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)", fontWeight: 800, color: "#000000", letterSpacing: "-0.02em" }}>
+          <h2
+            style={{
+              fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)",
+              fontWeight: 800,
+              color: "#000000",
+              letterSpacing: "-0.02em",
+            }}
+          >
             Where We&apos;ve Been, What&apos;s Next
           </h2>
         </div>
@@ -120,7 +150,11 @@ export default function EventsCarousel() {
                     transition: "opacity .15s",
                   }}
                 >
-                  {dir === -1 ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+                  {dir === -1 ? (
+                    <ChevronLeft size={18} />
+                  ) : (
+                    <ChevronRight size={18} />
+                  )}
                 </button>
               );
             })}
@@ -140,75 +174,156 @@ export default function EventsCarousel() {
           width: "100%",
         }}
       >
-        {eventHighlights.map((evt) => (
-          <div
-            key={evt.id}
-            data-card
-            style={{
-              flexShrink: 0,
-              width: "clamp(280px, 26vw, 370px)",
-              scrollSnapAlign: "start",
-              background: "#fff",
-              borderRadius: 12,
-              overflow: "hidden",
-              boxShadow: "0 4px 18px rgba(33,77,144,0.1)",
-              display: "flex",
-              flexDirection: "column",
-              minHeight: 380,
-            }}
-          >
+        {eventHighlights.map((evt) => {
+          const card = (
             <div
+              key={evt.id}
+              data-card
               style={{
-                height: 140,
                 flexShrink: 0,
-                background: "var(--navy-mid)",
-                backgroundImage: "url(/media/map.png)",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                width: "clamp(280px, 26vw, 370px)",
+                scrollSnapAlign: "start",
+                background: "#fff",
+                borderRadius: 12,
+                overflow: "hidden",
+                boxShadow: "0 4px 18px rgba(33,77,144,0.1)",
                 display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "space-between",
-                padding: "0.9rem 1.1rem",
+                flexDirection: "column",
+                minHeight: 380,
+                transition: "transform 0.2s, box-shadow 0.2s",
+                cursor: evt.slug ? "pointer" : "default",
+              }}
+              onMouseEnter={(ev) => {
+                if (evt.slug) {
+                  ev.currentTarget.style.transform = "translateY(-3px)";
+                  ev.currentTarget.style.boxShadow =
+                    "0 8px 28px rgba(33,77,144,0.18)";
+                }
+              }}
+              onMouseLeave={(ev) => {
+                ev.currentTarget.style.transform = "none";
+                ev.currentTarget.style.boxShadow =
+                  "0 4px 18px rgba(33,77,144,0.1)";
               }}
             >
-              <span
+              {/* Card top: event image or gradient fallback */}
+              <div
                 style={{
-                  background: typeColors[evt.type] ?? "var(--navy)",
-                  color: "#fff",
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  padding: "3px 8px",
-                  borderRadius: 3,
+                  height: 160,
+                  flexShrink: 0,
+                  background: evt.imageUrl
+                    ? `url(${evt.imageUrl}) center/cover no-repeat`
+                    : "linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%)",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "space-between",
+                  padding: "0.9rem 1.1rem",
+                  position: "relative",
                 }}
               >
-                {evt.type.replace("-", " ")}
-              </span>
-              <span
-                style={{
-                  color: "#fff",
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  opacity: 0.7,
-                }}
-              >
-                {evt.status === "past" ? "Past" : "Next Up"}
-              </span>
-            </div>
+                {/* Dark overlay for text readability on images */}
+                {evt.imageUrl && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 100%)",
+                    }}
+                  />
+                )}
+                <span
+                  style={{
+                    position: "relative",
+                    background: typeColors[evt.type] ?? "var(--navy)",
+                    color: "#fff",
+                    fontSize: "0.65rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    padding: "3px 8px",
+                    borderRadius: 3,
+                  }}
+                >
+                  {evt.type.replace("-", " ")}
+                </span>
+                <span
+                  style={{
+                    position: "relative",
+                    color: "#fff",
+                    fontSize: "0.65rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    opacity: 0.85,
+                  }}
+                >
+                  {evt.status === "past" ? "Past" : "Next Up"}
+                </span>
+              </div>
 
-            <div style={{ padding: "1.75rem", flex: 1, display: "flex", flexDirection: "column" }}>
-              <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#000", lineHeight: 1.4, marginBottom: "0.75rem" }}>
-                {evt.title}
-              </h3>
-              <p style={{ fontSize: "0.9rem", color: "var(--gray-mid)", lineHeight: 1.7 }}>
-                {evt.summary}
-              </p>
+              {/* Card body */}
+              <div
+                style={{
+                  padding: "1.75rem",
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <h3
+                  style={{
+                    fontSize: "1.05rem",
+                    fontWeight: 700,
+                    color: "var(--navy)",
+                    lineHeight: 1.4,
+                    marginBottom: "0.75rem",
+                  }}
+                >
+                  {evt.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.88rem",
+                    color: "var(--gray-mid)",
+                    lineHeight: 1.7,
+                    flex: 1,
+                  }}
+                >
+                  {evt.summary}
+                </p>
+                {evt.slug && (
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 5,
+                      fontSize: "0.82rem",
+                      color: "var(--orange)",
+                      fontWeight: 600,
+                      marginTop: 12,
+                    }}
+                  >
+                    Read more <ArrowRight size={14} />
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+
+          if (evt.slug) {
+            return (
+              <Link
+                key={evt.id}
+                href={`/events/${evt.slug}`}
+                style={{ textDecoration: "none", color: "inherit", flexShrink: 0 }}
+              >
+                {card}
+              </Link>
+            );
+          }
+          return card;
+        })}
       </div>
     </section>
   );

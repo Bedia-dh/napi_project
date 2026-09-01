@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { navLinks, languages } from "@/lib/constants/navigation";
 import { Search, ChevronDown, Globe, Menu, X } from "lucide-react";
+import { InteractiveHoverButton } from "@/components/ui/InteractiveHoverButton";
 
 interface NavbarProps {
   onSearchOpen: () => void;
@@ -47,6 +48,7 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
   return (
     <>
       <nav
+        className="nav-bar"
         style={{
           background: "var(--navy-dark)",
           borderBottom: "1px solid rgba(255,255,255,.07)",
@@ -54,9 +56,9 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
           top: 0,
           zIndex: 200,
           height: 76,
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "auto 1fr auto",
           alignItems: "center",
-          justifyContent: "space-between",
           padding: "0 var(--section-px)",
           boxShadow: "0 2px 16px rgba(0,0,0,.2)",
         }}
@@ -197,22 +199,9 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
             <Search size={19} />
           </button>
 
-          <Link
-            href="/contact"
-            style={{
-              color: "#fff",
-              fontWeight: 700,
-              textDecoration: "none",
-              fontSize: "0.95rem",
-              padding: "11px 22px",
-              border: "1.5px solid rgba(255,255,255,.3)",
-              borderRadius: 6,
-              transition: "all .2s",
-              marginLeft: 6,
-            }}
-          >
+          <InteractiveHoverButton href="/contact" variant="orangeOnDark">
             Get Involved
-          </Link>
+          </InteractiveHoverButton>
         </div>
 
         {/* Mobile: search + hamburger */}

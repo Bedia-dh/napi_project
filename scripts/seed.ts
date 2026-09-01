@@ -78,13 +78,18 @@ async function run() {
     ],
     (e: ((typeof pastEvents)[number] | (typeof plannedActivities)[number]) & { status: "past" | "planned" }) => ({
       title: e.title,
+      slug: "slug" in e ? e.slug : undefined,
       status: e.status,
       type: "type" in e ? e.type : "workshop",
       date: "date" in e ? e.date : undefined,
       program: "program" in e ? e.program : undefined,
       description: e.description,
+      body: "body" in e ? e.body : undefined,
+      location: "location" in e ? e.location : undefined,
+      partners: "partners" in e ? e.partners : undefined,
       registrationUrl: "registrationUrl" in e ? e.registrationUrl : undefined,
       sourceUrl: "sourceUrl" in e ? e.sourceUrl : undefined,
+      imageUrl: "imageUrl" in e ? e.imageUrl : undefined,
     })
   );
 

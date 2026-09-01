@@ -61,6 +61,7 @@ export async function getPrograms(): Promise<{ programs: Program[]; source: Data
       stats: (d.stats as { label: string; value: string }[] | undefined) ?? [],
       color: String(d.color ?? "var(--navy)"),
       href: `/programs/${d.slug}`,
+      imageUrl: uploadUrl(d.image) || (d.imageUrl as string | undefined) || undefined,
       objectives: ((d.objectives as { text?: string }[] | undefined) ?? [])
         .map((o) => String(o.text ?? ""))
         .filter(Boolean),
