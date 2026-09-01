@@ -22,7 +22,7 @@ export default function EventsList() {
   return (
     <div style={{ background: "var(--cream)", padding: "0 0 96px" }}>
       {/* Header */}
-      <div style={{ background: "var(--navy-dark)", padding: "72px 80px 56px", color: "#fff" }}>
+      <div style={{ background: "var(--navy-dark)", padding: "72px var(--section-px) 56px", color: "#fff" }}>
         <p
           style={{
             fontSize: "0.72rem",
@@ -58,7 +58,7 @@ export default function EventsList() {
         </p>
       </div>
 
-      <div style={{ padding: "56px 80px 0" }}>
+      <div style={{ padding: "56px var(--section-px) 0" }}>
         {/* Ongoing & Upcoming */}
         {/* <section style={{ marginBottom: 56 }}>
           <h2

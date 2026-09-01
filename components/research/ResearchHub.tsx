@@ -141,7 +141,7 @@ export default function ResearchHub() {
           zIndex: 150,
           background: "#fff",
           borderBottom: "1px solid #e8e8e8",
-          padding: "14px 80px",
+          padding: "14px var(--section-px)",
           display: "flex",
           alignItems: "center",
           gap: 14,
@@ -226,7 +226,7 @@ export default function ResearchHub() {
           display: "grid",
           gridTemplateColumns: "260px 1fr",
           gap: 32,
-          padding: "40px 80px",
+          padding: "40px var(--section-px)",
           alignItems: "start",
           background: "var(--navy)",
         }}

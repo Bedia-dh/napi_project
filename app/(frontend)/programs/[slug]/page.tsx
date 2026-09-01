@@ -84,7 +84,7 @@ export default async function ProgramPage({ params }: { params: Promise<Params> 
   return (
     <>
       {/* Header — same layout as the flagship program pages */}
-      <section style={{ background: "var(--navy-dark)", padding: "64px 80px 56px" }}>
+      <section style={{ background: "var(--navy-dark)", padding: "64px var(--section-px) 56px" }}>
         <Link
           href="/programs"
           style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", color: "rgba(255,255,255,0.6)", fontSize: "0.82rem", fontWeight: 600, marginBottom: "1.75rem" }}
@@ -119,7 +119,7 @@ export default async function ProgramPage({ params }: { params: Promise<Params> 
       </section>
 
       {/* Body — only renders the sections the editor filled in */}
-      <section style={{ padding: "56px 80px", maxWidth: 960 }}>
+      <section style={{ padding: "56px var(--section-px)", maxWidth: 960 }}>
         {objectives.length > 0 && (
           <div style={{ marginBottom: "3rem" }}>
             <h2 style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--navy-dark)", marginBottom: "1.25rem" }}>Objectives</h2>

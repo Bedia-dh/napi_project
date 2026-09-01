@@ -70,7 +70,7 @@ export default async function EventDetailPage({
           <div
             style={{
               position: "relative",
-              padding: "48px 80px 56px",
+              padding: "48px var(--section-px) 56px",
               maxWidth: 900,
             }}
           >
@@ -152,7 +152,7 @@ export default async function EventDetailPage({
           style={{
             maxWidth: 820,
             margin: "0 auto",
-            padding: "48px 80px 72px",
+            padding: "48px var(--section-px) 72px",
           }}
         >
           {/* Event image (full) */}

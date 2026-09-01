@@ -40,7 +40,7 @@ const values: {
 
 export default function CoreValues() {
   return (
-    <section style={{ background: "var(--navy)", padding: "72px 80px" }}>
+    <section style={{ background: "var(--navy)", padding: "72px var(--section-px)" }}>
       <div style={{ marginBottom: "2.5rem", textAlign: "center" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
           What We Stand For

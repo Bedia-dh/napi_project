@@ -364,3 +364,38 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Events carousel header: row → stack on mobile */
+@media (max-width: 640px) {
+  .events-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
+
+/* Program tiles: image+body side-by-side → stacked on small screens */
+@media (max-width: 560px) {
+  .programs-grid .program-tile {
+    grid-template-columns: 1fr !important;
+  }
+
+  .programs-grid .program-tile img {
+    max-height: 180px;
+  }
+}
+
+/* Hero play button: smaller on mobile */
+@media (max-width: 900px) {
+  .hero-grid {
+    gap: 2rem !important;
+    padding-top: 48px !important;
+    padding-bottom: 40px !important;
+  }
+}
+
+/* Contact page form: reduce vertical padding on mobile */
+@media (max-width: 640px) {
+  .contact-grid {
+    gap: 2rem !important;
+  }
+}

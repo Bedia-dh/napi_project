@@ -2,7 +2,7 @@ export default function MissionVision() {
   return (
     <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       {/* Mission — navy */}
-      <div style={{ background: "var(--navy)", padding: "56px 80px" }}>
+      <div style={{ background: "var(--navy)", padding: "56px var(--section-px)" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "1rem" }}>
           Our Mission
         </p>
@@ -17,7 +17,7 @@ export default function MissionVision() {
       </div>
 
       {/* Vision — cream */}
-      <div style={{ background: "var(--cream)", padding: "56px 80px" }}>
+      <div style={{ background: "var(--cream)", padding: "56px var(--section-px)" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "1rem" }}>
           Our Vision
         </p>

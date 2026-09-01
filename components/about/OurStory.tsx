@@ -2,7 +2,7 @@ export default function OurStory() {
   return (
     <>
       {/* Story text — navy */}
-      <section style={{ background: "var(--navy)", padding: "72px 80px" }}>
+      <section style={{ background: "var(--navy)", padding: "72px var(--section-px)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
           <div>
             <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "1rem" }}>
@@ -72,7 +72,7 @@ export default function OurStory() {
       </section>
 
       {/* Stats — cream */}
-      <section style={{ background: "var(--cream)", padding: "3rem 80px" }}>
+      <section style={{ background: "var(--cream)", padding: "3rem var(--section-px)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem", textAlign: "center" }}>
           {[
             { value: "85+", label: "Publications" },

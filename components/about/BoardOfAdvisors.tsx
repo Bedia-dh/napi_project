@@ -9,7 +9,7 @@ export default function BoardOfAdvisors({ members }: BoardOfAdvisorsProps) {
   if (members.length === 0) return null;
 
   return (
-    <section style={{ background: "var(--cream)", padding: "72px 80px" }}>
+    <section style={{ background: "var(--cream)", padding: "72px var(--section-px)" }}>
       <div style={{ marginBottom: "2rem" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
           Governance

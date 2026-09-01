@@ -30,7 +30,7 @@ export default async function MeiRoundtablesPage() {
   return (
     <>
       {/* Header */}
-      <section style={{ background: "var(--navy-dark)", padding: "64px 80px 56px" }}>
+      <section style={{ background: "var(--navy-dark)", padding: "64px var(--section-px) 56px" }}>
         <Link
           href="/programs"
           style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", color: "rgba(255,255,255,0.6)", fontSize: "0.82rem", fontWeight: 600, marginBottom: "1.75rem" }}
@@ -60,7 +60,7 @@ export default async function MeiRoundtablesPage() {
       </section>
 
       {/* Series by country */}
-      <section style={{ background: "var(--cream)", padding: "72px 80px" }}>
+      <section style={{ background: "var(--cream)", padding: "72px var(--section-px)" }}>
         {process.env.NODE_ENV !== "production" && source === "static-fallback" && (
           <div style={{ marginBottom: "2rem", background: "#fff", border: "1px dashed var(--orange)", borderRadius: 8, padding: "8px 14px", fontSize: "0.78rem", color: "var(--gray-mid)" }}>
             Dev note: serving roundtables from the static dataset - connect DATABASE_URI to query MongoDB via Payload instead.
@@ -116,7 +116,7 @@ export default async function MeiRoundtablesPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: "#fff", borderTop: "3px solid var(--orange)", padding: "56px 80px", textAlign: "center" }}>
+      <section style={{ background: "#fff", borderTop: "3px solid var(--orange)", padding: "56px var(--section-px)", textAlign: "center" }}>
         <h2 style={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--navy)", marginBottom: "0.75rem" }}>
           Follow the conversation
         </h2>

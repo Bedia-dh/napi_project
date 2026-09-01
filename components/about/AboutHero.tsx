@@ -10,7 +10,7 @@ export default function AboutHero() {
     <section
       style={{
         background: "linear-gradient(140deg,#f0f5ff 0%,#e8f0fd 55%,#f5f7ff 100%)",
-        padding: "72px 80px 56px",
+        padding: "72px var(--section-px) 56px",
         position: "relative",
         overflow: "hidden",
       }}

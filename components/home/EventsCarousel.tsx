@@ -78,13 +78,16 @@ export default function EventsCarousel() {
   };
 
   return (
-    <section style={{ background: "var(--cream)", padding: "96px 80px" }}>
+    <section style={{ background: "var(--cream)", padding: "96px var(--section-px)" }}>
       <div
+        className="events-header"
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-end",
           marginBottom: "2rem",
+          gap: "1rem",
+          flexWrap: "wrap",
         }}
       >
         <div>

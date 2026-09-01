@@ -59,7 +59,7 @@ export default async function ChillChatPage() {
   return (
     <>
       {/* Header */}
-      <section style={{ background: "var(--navy-dark)", padding: "64px 80px 56px" }}>
+      <section style={{ background: "var(--navy-dark)", padding: "64px var(--section-px) 56px" }}>
         <Link
           href="/programs"
           style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", color: "rgba(255,255,255,0.6)", fontSize: "0.82rem", fontWeight: 600, marginBottom: "1.75rem" }}
@@ -95,7 +95,7 @@ export default async function ChillChatPage() {
       </section>
 
       {/* Objectives + Topics */}
-      <section style={{ background: "var(--cream)", padding: "72px 80px" }}>
+      <section style={{ background: "var(--cream)", padding: "72px var(--section-px)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem" }}>
           <div>
             <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
@@ -157,7 +157,7 @@ export default async function ChillChatPage() {
       </section>
 
       {/* Related — a real NAPI-MEI Roundtable, not a Chill-Chat recording itself */}
-      <section style={{ background: "#fff", padding: "56px 80px" }}>
+      <section style={{ background: "#fff", padding: "56px var(--section-px)" }}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
           Related Youth Dialogue
         </p>
@@ -174,7 +174,7 @@ export default async function ChillChatPage() {
       </section>
 
       {/* CTA — lead a session */}
-      <section style={{ background: "var(--cream)", borderTop: "3px solid var(--orange)", padding: "56px 80px", textAlign: "center" }}>
+      <section style={{ background: "var(--cream)", borderTop: "3px solid var(--orange)", padding: "56px var(--section-px)", textAlign: "center" }}>
         <h2 style={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--navy)", marginBottom: "0.75rem" }}>
           Want to lead a session?
         </h2>

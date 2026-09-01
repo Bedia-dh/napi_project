@@ -47,7 +47,7 @@ export default async function YouthVoicesPage() {
   return (
     <>
       {/* Header */}
-      <section style={{ background: "var(--navy-dark)", padding: "64px 80px 56px" }}>
+      <section style={{ background: "var(--navy-dark)", padding: "64px var(--section-px) 56px" }}>
         <Link
           href="/programs"
           style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", color: "rgba(255,255,255,0.6)", fontSize: "0.82rem", fontWeight: 600, marginBottom: "1.75rem" }}
@@ -78,7 +78,7 @@ export default async function YouthVoicesPage() {
       </section>
 
       {/* Offerings */}
-      <section style={{ background: "var(--cream)", padding: "72px 80px" }}>
+      <section style={{ background: "var(--cream)", padding: "72px var(--section-px)" }}>
         <div style={{ marginBottom: "2.5rem" }}>
           <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
             What the Program Offers
@@ -134,7 +134,7 @@ export default async function YouthVoicesPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: "#fff", borderTop: "3px solid var(--orange)", padding: "56px 80px", textAlign: "center" }}>
+      <section style={{ background: "#fff", borderTop: "3px solid var(--orange)", padding: "56px var(--section-px)", textAlign: "center" }}>
         <h2 style={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--navy)", marginBottom: "0.75rem" }}>
           Have something to say?
         </h2>

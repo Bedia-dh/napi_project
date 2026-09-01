@@ -7,7 +7,7 @@ export default function CTABand() {
       style={{
         background: "#fff",
         borderTop: "3px solid var(--orange)",
-        padding: "60px 80px",
+        padding: "60px var(--section-px)",
         textAlign: "center",
       }}
     >
