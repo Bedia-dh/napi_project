@@ -15,9 +15,10 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
   const [activeLang, setActiveLang] = useState("en");
   const [langOpen, setLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const langRef = useRef<HTMLDivElement>(null);
+  const dropdownTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  // Close the language dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (langRef.current && !langRef.current.contains(e.target as Node)) {
@@ -28,13 +29,11 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Close mobile menu on route change (resize past breakpoint)
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 900) setMobileOpen(false);
@@ -44,6 +43,15 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
   }, []);
 
   const activeLangObj = languages.find((l) => l.code === activeLang) ?? languages[0];
+
+  const handleDropdownEnter = (label: string) => {
+    clearTimeout(dropdownTimeout.current);
+    setOpenDropdown(label);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setOpenDropdown(null), 150);
+  };
 
   return (
     <>
@@ -83,7 +91,12 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
         {/* Desktop nav links */}
         <ul className="nav-links-desktop">
           {navLinks.map((link) => (
-            <li key={link.href}>
+            <li
+              key={link.href}
+              style={{ position: "relative" }}
+              onMouseEnter={() => link.children && handleDropdownEnter(link.label)}
+              onMouseLeave={() => link.children && handleDropdownLeave()}
+            >
               <Link
                 href={link.href}
                 style={{
@@ -92,19 +105,74 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
                   fontSize: "1rem",
                   fontWeight: 600,
                   transition: "color .2s",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
                 }}
-                onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#fff")}
-                onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.7)")}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#fff")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)")}
               >
                 {link.label}
+                {link.children && <ChevronDown size={14} style={{ opacity: 0.6 }} />}
               </Link>
+
+              {/* Dropdown */}
+              {link.children && openDropdown === link.label && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: 0,
+                    paddingTop: 8,
+                    zIndex: 300,
+                  }}
+                >
+                  <div
+                    style={{
+                      background: "var(--navy-mid)",
+                      border: "1px solid rgba(255,255,255,.12)",
+                      borderRadius: 8,
+                      overflow: "hidden",
+                      minWidth: 260,
+                      boxShadow: "0 8px 24px rgba(0,0,0,.4)",
+                    }}
+                  >
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={() => setOpenDropdown(null)}
+                        style={{
+                          display: "block",
+                          padding: "10px 16px",
+                          color: "rgba(255,255,255,.8)",
+                          fontSize: "0.88rem",
+                          fontWeight: 500,
+                          textDecoration: "none",
+                          transition: "background .15s, color .15s",
+                          borderBottom: "1px solid rgba(255,255,255,.06)",
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,.08)";
+                          (e.currentTarget as HTMLElement).style.color = "#fff";
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLElement).style.background = "transparent";
+                          (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,.8)";
+                        }}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
 
-        {/* Desktop right: language dropdown + search + Get Involved */}
+        {/* Desktop right */}
         <div className="nav-right-desktop">
-          {/* Language dropdown */}
           <div ref={langRef} style={{ position: "relative" }}>
             <button
               onClick={() => setLangOpen((v) => !v)}
@@ -127,10 +195,7 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
             >
               <Globe size={17} />
               {activeLangObj.label}
-              <ChevronDown
-                size={16}
-                style={{ transform: langOpen ? "rotate(180deg)" : "none", transition: "transform .15s" }}
-              />
+              <ChevronDown size={16} style={{ transform: langOpen ? "rotate(180deg)" : "none", transition: "transform .15s" }} />
             </button>
 
             {langOpen && (
@@ -154,10 +219,7 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
                     key={lang.code}
                     role="option"
                     aria-selected={activeLang === lang.code}
-                    onClick={() => {
-                      setActiveLang(lang.code);
-                      setLangOpen(false);
-                    }}
+                    onClick={() => { setActiveLang(lang.code); setLangOpen(false); }}
                     style={{
                       display: "block",
                       width: "100%",
@@ -178,7 +240,6 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
             )}
           </div>
 
-          {/* Search button */}
           <button
             onClick={onSearchOpen}
             aria-label="Search"
@@ -199,26 +260,17 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
             <Search size={19} />
           </button>
 
-          <InteractiveHoverButton href="/contact" variant="orangeOnDark">
+          <InteractiveHoverButton href="/get-involved" variant="orangeOnDark">
             Get Involved
           </InteractiveHoverButton>
         </div>
 
         {/* Mobile: search + hamburger */}
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <button
-            onClick={onSearchOpen}
-            aria-label="Search"
-            className="nav-hamburger"
-            style={{ color: "#fff" }}
-          >
+          <button onClick={onSearchOpen} aria-label="Search" className="nav-hamburger" style={{ color: "#fff" }}>
             <Search size={22} />
           </button>
-          <button
-            className="nav-hamburger"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
+          <button className="nav-hamburger" onClick={() => setMobileOpen((v) => !v)} aria-label={mobileOpen ? "Close menu" : "Open menu"}>
             {mobileOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
@@ -228,11 +280,27 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
       {mobileOpen && (
         <div className="nav-mobile-menu">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
-              {link.label}
-            </Link>
+            <div key={link.href}>
+              <Link href={link.href} onClick={() => setMobileOpen(false)}>
+                {link.label}
+              </Link>
+              {link.children && (
+                <div style={{ paddingLeft: "1rem", display: "flex", flexDirection: "column", gap: 4 }}>
+                  {link.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      onClick={() => setMobileOpen(false)}
+                      style={{ fontSize: "0.85rem", opacity: 0.8 }}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
-          <Link href="/contact" onClick={() => setMobileOpen(false)}>
+          <Link href="/get-involved" onClick={() => setMobileOpen(false)}>
             Get Involved
           </Link>
         </div>
