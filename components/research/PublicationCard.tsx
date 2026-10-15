@@ -1,4 +1,4 @@
-import { Download, Eye } from "lucide-react";
+import { Download, Eye, ExternalLink } from "lucide-react";
 import type { Publication } from "@/lib/types/publication";
 
 // One consistent, minimalist style for every publication type — kept
@@ -6,11 +6,14 @@ import type { Publication } from "@/lib/types/publication";
 // of colors. Program tags (orange) remain the only accent color.
 const NEUTRAL_BADGE = { bg: "rgba(33,77,144,0.06)", color: "var(--navy)" };
 
-const typeStyles: Record<string, { bg: string; color: string; label: string }> = {
-  brief:       { ...NEUTRAL_BADGE, label: "Policy Brief" },
-  paper:       { ...NEUTRAL_BADGE, label: "Research Paper" },
-  report:      { ...NEUTRAL_BADGE, label: "Report" },
-  proceedings: { ...NEUTRAL_BADGE, label: "Proceedings" },
+const typeLabels: Record<string, string> = {
+  "edited-volume": "Edited Volume",
+  "book-chapter": "Book Chapter",
+  "research-brief": "Research Brief",
+  "policy-briefing": "Policy Briefing",
+  "journal-article": "Journal Article",
+  "policy-paper": "Policy Paper",
+  "research-report": "Research Report",
 };
 
 interface PublicationCardProps {
@@ -18,8 +21,24 @@ interface PublicationCardProps {
   onPreview: (pub: Publication) => void;
 }
 
+function isExternalLink(url: string): boolean {
+  return url.startsWith("https://") && !url.includes("drive.google.com");
+}
+
+/** Resolve the best download URL for a publication. */
+function resolveDownloadUrl(url: string): string {
+  // Payload-served media — already a direct download URL
+  if (url.startsWith("/api/media/file/")) return url;
+  // Google Drive sharing link → direct download
+  const m = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+  if (m) return `https://drive.google.com/uc?export=download&id=${m[1]}`;
+  return url;
+}
+
 export default function PublicationCard({ pub, onPreview }: PublicationCardProps) {
-  const ts = typeStyles[pub.type];
+  const label = typeLabels[pub.type] ?? pub.type;
+  const external = isExternalLink(pub.pdfUrl);
+  const href = external ? pub.pdfUrl : resolveDownloadUrl(pub.pdfUrl);
 
   return (
     <div
@@ -53,12 +72,12 @@ export default function PublicationCard({ pub, onPreview }: PublicationCardProps
               borderRadius: 3,
               letterSpacing: "0.5px",
               textTransform: "uppercase",
-              background: ts.bg,
-              color: ts.color,
+              background: NEUTRAL_BADGE.bg,
+              color: NEUTRAL_BADGE.color,
               border: "1px solid rgba(33,77,144,0.12)",
             }}
           >
-            {ts.label}
+            {label}
           </span>
           {pub.program && (
             <span
@@ -80,23 +99,24 @@ export default function PublicationCard({ pub, onPreview }: PublicationCardProps
           {pub.title}
         </h3>
         <div style={{ fontSize: "0.78rem", color: "var(--gray-mid)", marginBottom: 10 }}>
-          {pub.authors.join(", ")} · {pub.year} · {pub.pages} pages
+          {pub.authors.join(", ")} · {pub.year}{pub.pages ? ` · ${pub.pages} pages` : ""}
         </div>
 
         {/* Language chips */}
         <div style={{ display: "flex", gap: 5 }}>
-          {(["en", "fr", "ar"] as const).map((lang) => {
+          {(["en", "fr", "ar", "it"] as const).map((lang) => {
             const avail = pub.languages.includes(lang);
+            if (!avail) return null;
             return (
               <span
                 key={lang}
                 style={{
                   fontSize: "0.7rem",
-                  border: `1px solid ${avail ? "var(--orange)" : "#ddd"}`,
+                  border: "1px solid var(--orange)",
                   borderRadius: 3,
                   padding: "2px 7px",
-                  color: avail ? "var(--orange)" : "var(--gray-mid)",
-                  background: avail ? "#fff8f5" : "transparent",
+                  color: "var(--orange)",
+                  background: "#fff8f5",
                   textTransform: "uppercase",
                 }}
               >
@@ -110,7 +130,9 @@ export default function PublicationCard({ pub, onPreview }: PublicationCardProps
       {/* Actions */}
       <div style={{ display: "flex", flexDirection: "column", gap: 8, flexShrink: 0, marginTop: 4 }}>
         <a
-          href={pub.pdfUrl}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             background: "var(--navy)",
             color: "#fff",
@@ -127,7 +149,7 @@ export default function PublicationCard({ pub, onPreview }: PublicationCardProps
             textDecoration: "none",
           }}
         >
-          <Download size={13} /> Download
+          {external ? <><ExternalLink size={13} /> Read</> : <><Download size={13} /> Download</>}
         </a>
         <button
           onClick={() => onPreview(pub)}

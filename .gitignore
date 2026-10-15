@@ -45,3 +45,6 @@ next-env.d.ts
 seed-local.mjs 
 seed-mock.mjs 
 seed-rest.mjs 
+
+# Payload local media uploads (stored in MongoDB)
+media-uploads/
