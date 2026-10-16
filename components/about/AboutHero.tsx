@@ -1,9 +1,9 @@
 export default function AboutHero() {
   const stats = [
-    { value: "2017", label: "Founded" },
-    { value: "12", label: "Countries" },
-    { value: "200+", label: "Leaders" },
-    { value: "85+", label: "Publications" },
+    { value: "2019", label: "Founded" },
+    { value: "14", label: "Countries" },
+    { value: "1000+", label: "Direct Beneficiaries" },
+    { value: "40+", label: "Publications" },
   ];
 
   return (
@@ -65,8 +65,8 @@ export default function AboutHero() {
             marginBottom: 40,
           }}
         >
-          NAPI is an independent think tank dedicated to empowering young North Africans through
-          evidence-based research, policy dialogue, and hands-on training.
+          NAPI is an independent, non-profit, and non-partisan organization dedicated to empowering
+          youth through evidence-based research, policy dialogue, and hands-on training.
         </p>
         <div style={{ display: "flex", gap: 40 }}>
           {stats.map((s) => (

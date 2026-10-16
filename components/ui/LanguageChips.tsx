@@ -1,6 +1,6 @@
 import type { LanguageCode } from "@/lib/types/publication";
 
-const allLangs: LanguageCode[] = ["en", "fr", "ar"];
+const allLangs: LanguageCode[] = ["en", "fr", "ar", "it"];
 
 interface LanguageChipsProps {
   available: LanguageCode[];

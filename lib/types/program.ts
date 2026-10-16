@@ -1,4 +1,4 @@
-export type ProgramKey = "ypl" | "chill-chat" | "youth-voices" | "mei-roundtables";
+export type ProgramKey = "ypl" | "chill-chat" | "youth-voices" | "mei-roundtables" | "training-workshops" | "art4civics";
 
 export interface Program {
   id: ProgramKey;
@@ -26,6 +26,8 @@ export interface YplParticipant {
   bio: string;
   policyIssue: string;
   cohort: number;
+  /** Research theme tags for this fellow's policy paper. */
+  keywords?: string[];
   photoUrl?: string;
   paperUrl?: string;
   linkedin?: string;

@@ -9,6 +9,12 @@ const typeLabels: Record<string, string> = {
   conference: "Conference",
   workshop: "Workshop",
   webinar: "Webinar",
+  panel: "Panel Discussion",
+  media: "Media Appearance",
+  "policy-forum": "Policy Forum",
+  roundtable: "Youth Policy Roundtable",
+  "online-discussion": "Online Discussion",
+  "workshop-series": "Workshop Series",
 };
 
 const typeColors: Record<string, string> = {
@@ -16,6 +22,12 @@ const typeColors: Record<string, string> = {
   conference: "var(--navy)",
   workshop: "var(--labs-color)",
   webinar: "var(--voices-color)",
+  panel: "var(--navy)",
+  media: "var(--orange)",
+  "policy-forum": "var(--navy)",
+  roundtable: "#1a7a5c",
+  "online-discussion": "var(--voices-color)",
+  "workshop-series": "var(--labs-color)",
 };
 
 export default function EventsList() {

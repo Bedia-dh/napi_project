@@ -1,4 +1,14 @@
-export type EventType = "webinar" | "workshop" | "conference" | "chill-chat";
+export type EventType =
+  | "workshop"
+  | "webinar"
+  | "conference"
+  | "panel"
+  | "media"
+  | "policy-forum"
+  | "roundtable"
+  | "online-discussion"
+  | "workshop-series"
+  | "chill-chat";
 
 export interface NapiEvent {
   id: string;

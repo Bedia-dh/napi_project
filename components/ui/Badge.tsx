@@ -1,10 +1,13 @@
 import type { PublicationType } from "@/lib/types/publication";
 
 const typeLabels: Record<PublicationType, string> = {
-  brief: "Policy Brief",
-  paper: "Research Paper",
-  report: "Report",
-  proceedings: "Proceedings",
+  "edited-volume": "Edited Volume",
+  "book-chapter": "Book Chapter",
+  "research-brief": "Research Brief",
+  "policy-briefing": "Policy Briefing",
+  "journal-article": "Journal Article",
+  "policy-paper": "Policy Paper",
+  "research-report": "Research Report",
 };
 
 interface BadgeProps {
@@ -29,7 +32,7 @@ export default function Badge({ type }: BadgeProps) {
         borderRadius: 3,
       }}
     >
-      {typeLabels[type]}
+      {typeLabels[type] ?? type}
     </span>
   );
 }

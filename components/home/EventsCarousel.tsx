@@ -10,6 +10,12 @@ const typeColors: Record<string, string> = {
   conference: "var(--navy)",
   workshop: "var(--labs-color)",
   webinar: "var(--voices-color)",
+  panel: "var(--navy)",
+  media: "var(--orange)",
+  "policy-forum": "var(--navy)",
+  roundtable: "#1a7a5c",
+  "online-discussion": "var(--voices-color)",
+  "workshop-series": "var(--labs-color)",
 };
 
 interface CarouselEvent {

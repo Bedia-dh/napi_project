@@ -24,7 +24,7 @@ export default function ExecutiveTeam({ members }: ExecutiveTeamProps) {
         </h2>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.25rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "1.25rem" }}>
         {members.map((member) => (
           <div
             key={member.id}
@@ -65,24 +65,25 @@ export default function ExecutiveTeam({ members }: ExecutiveTeamProps) {
                   flexDirection: "column",
                   justifyContent: "center",
                   gap: "0.6rem",
+                  overflowY: "auto",
                 }}
               >
                 <h3 style={{ color: "#fff", fontWeight: 700, fontSize: "0.95rem" }}>{member.name}</h3>
                 <p style={{ color: "var(--orange)", fontSize: "0.78rem", fontWeight: 600 }}>{member.role}</p>
-                <p style={{ color: "rgba(0,0,0,.7)", fontSize: "0.78rem", lineHeight: 1.7 }}>{member.bio}</p>
+                <p style={{ color: "rgba(255,255,255,.85)", fontSize: "0.78rem", lineHeight: 1.7 }}>{member.bio}</p>
                 <div style={{ display: "flex", gap: "0.75rem", marginTop: "auto" }}>
                   {member.linkedin && (
-                    <a href={member.linkedin} style={{ color: "rgba(0,0,0,.6)" }}>
+                    <a href={member.linkedin} style={{ color: "rgba(255,255,255,.7)" }}>
                       <Link2 size={16} />
                     </a>
                   )}
                   {member.twitter && (
-                    <a href={member.twitter} style={{ color: "rgba(0,0,0,.6)" }}>
+                    <a href={member.twitter} style={{ color: "rgba(255,255,255,.7)" }}>
                       <MessageCircle size={16} />
                     </a>
                   )}
                   {member.email && (
-                    <a href={`mailto:${member.email}`} style={{ color: "rgba(0,0,0,.6)" }}>
+                    <a href={`mailto:${member.email}`} style={{ color: "rgba(255,255,255,.7)" }}>
                       <Mail size={16} />
                     </a>
                   )}

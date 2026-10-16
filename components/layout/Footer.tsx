@@ -5,20 +5,21 @@ const footerLinks = {
   Navigate: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Research Hub", href: "/research" },
+    { label: "Knowledge Hub", href: "/research" },
     { label: "Programs", href: "/programs" },
-    { label: "Get Involved", href: "/contact" },
+    { label: "Get Involved", href: "/get-involved" },
   ],
   Programs: [
-    { label: "Youth Policy Lab", href: "/programs/ypl" },
-    { label: "Chill Chat", href: "/programs/chill-chat" },
-    { label: "NAPI-MEI Roundtables", href: "/programs/mei-roundtables" },
-    { label: "Youth Voices", href: "/programs/youth-voices" },
+    { label: "Leadership", href: "/programs/ypl" },
+    { label: "Knowledge", href: "/programs/training-workshops" },
+    { label: "Awareness & Socialization", href: "/programs/chill-chat" },
+    { label: "Publishing", href: "/programs/youth-voices" },
+    { label: "Civic Values & Creativity", href: "/programs/art4civics" },
   ],
   Connect: [
-    { label: "Twitter / X", href: "#" },
-    { label: "LinkedIn", href: "#" },
-    { label: "YouTube", href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/north-african-policy-initiative/" },
+    { label: "Facebook", href: "https://www.facebook.com/NAPI-North-African-Policy-Initiative-100150241733526" },
+    { label: "Instagram", href: "https://www.instagram.com/napi_policy/" },
     { label: "Newsletter", href: "#newsletter" },
     { label: "Contact", href: "/contact" },
   ],
@@ -48,7 +49,10 @@ export default function Footer() {
             />
           </Link>
           <p style={{ color: "var(--gray-mid)", fontSize: "0.82rem", lineHeight: 1.6 }}>
-            Bridging research, advocacy, and youth leadership for a more equitable region.
+            North African Policy Initiative — We strengthen participatory governance in the
+            Mediterranean by promoting broad youth civic engagement, fostering societal and
+            organizational leadership, and developing critical thinking, cross-cultural dialogue,
+            and transnational cooperation.
           </p>
         </div>
 
@@ -72,6 +76,8 @@ export default function Footer() {
                 <Link
                   key={link.label}
                   href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   style={{ color: "var(--gray-mid)", fontSize: "0.82rem", textDecoration: "none", transition: "color .2s" }}
                   onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--orange)")}
                   onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--gray-mid)")}
@@ -95,7 +101,7 @@ export default function Footer() {
           fontSize: "0.8rem",
         }}
       >
-        <span suppressHydrationWarning>&copy; {new Date().getFullYear()} NAPI - North Africa Policy Institute</span>
+        <span suppressHydrationWarning>&copy; {new Date().getFullYear()} NAPI - North African Policy Initiative</span>
         <span style={{ display: "flex", gap: 6 }}>
           <Link href="/privacy-policy" style={{ color: "#bbb", textDecoration: "none" }}>
             Privacy Policy

@@ -101,7 +101,7 @@ async function notifyByEmail(data: ContactPayload) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
 
-  const to = process.env.CONTACT_NOTIFY_EMAIL || "contact@napipolicy.org";
+  const to = process.env.CONTACT_NOTIFY_EMAIL || "info@napipolicy.org";
   const from = process.env.CONTACT_FROM_EMAIL || "NAPI Website <onboarding@resend.dev>";
 
   const res = await fetch("https://api.resend.com/emails", {

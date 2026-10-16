@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { GraduationCap, Coffee, Users, PenLine, type LucideIcon } from "lucide-react";
+import { GraduationCap, Coffee, Users, PenLine, BookOpen, Palette, type LucideIcon } from "lucide-react";
 import { getPrograms } from "@/lib/payload/queries";
 
 const PROGRAM_ICONS: Record<string, LucideIcon> = {
   ypl: GraduationCap,
+  "training-workshops": BookOpen,
   "chill-chat": Coffee,
   "mei-roundtables": Users,
   "youth-voices": PenLine,
+  "art4civics": Palette,
 };
 
 export default async function ProgramsSection() {
@@ -18,9 +20,12 @@ export default async function ProgramsSection() {
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
           Our Programs
         </p>
-        <h2 style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em" }}>
-          How We Work
+        <h2 style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
+          What We Do
         </h2>
+        <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.7, maxWidth: 700 }}>
+          We pursue our mission by fostering youth Leadership; Knowledge; Awareness and socialization; Publishing; Civic values and creativity.
+        </p>
       </div>
 
       <div className="programs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem" }}>

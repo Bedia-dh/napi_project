@@ -63,7 +63,7 @@ export default async function YouthVoicesPage() {
         </h1>
         <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 660, marginBottom: "2rem" }}>
           {program?.description ??
-            "A project designed to support young people who want to write and publish on anything policy-relevant in the Mediterranean and North Africa. Submit an idea any time, with no obligation of a complete draft, and receive tailored support until it's published as a blogpost, op-ed, article, report, or academic piece."}
+            "Youth Voices is a flexible, low-intensity, and self-paced initiative that helps Mediterranean youth articulate, write, and publish their perspectives on policy-relevant issues. The program offers tailored guidance, peer-to-peer learning opportunities, feedback and advice from subject-matter experts, and a variety of tools to help youth break through the initial barriers of the writing and publishing process. Participants can choose to write in Arabic, English, or French and explore formats ranging from concise op-eds to comprehensive policy analyses or academic articles."}
         </p>
 
         {process.env.NODE_ENV !== "production" && source === "static-fallback" && (
@@ -73,8 +73,17 @@ export default async function YouthVoicesPage() {
         )}
 
         <InteractiveHoverButton href={FORM_URL} target="_blank" rel="noopener noreferrer" variant="orange">
-          Submit Your Work <ArrowUpRight size={16} />
+          Submit Your Proposal or Draft <ArrowUpRight size={16} />
         </InteractiveHoverButton>
+      </section>
+
+      {/* Program Description */}
+      <section style={{ background: "#fff", padding: "56px var(--section-px)" }}>
+        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+          <p style={{ fontSize: "1rem", color: "var(--navy)", lineHeight: 1.8 }}>
+            The program provides a rolling opportunity for participants to submit their writing proposal on a policy issue of their choice and indicate the type of publication they want to produce. This flexible, inclusive, and accessible program helps youth with all levels of experience confidently contribute to public discourse and it trains societies to value and nurture youth voices.
+          </p>
+        </div>
       </section>
 
       {/* Offerings */}

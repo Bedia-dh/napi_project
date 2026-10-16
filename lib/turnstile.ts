@@ -35,10 +35,14 @@ export async function verifyTurnstileToken(
 ): Promise<VerifyResult> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
 
-  // If Turnstile isn't configured, skip verification (dev/staging).
-  // In production, set TURNSTILE_SECRET_KEY to enforce bot protection.
+  // Not configured: skip in dev/staging, but refuse in production so a
+  // missing env var can never silently leave the form open to bots.
   if (!secret) {
-    console.warn("[turnstile] TURNSTILE_SECRET_KEY not set — skipping verification.");
+    if (process.env.NODE_ENV === "production") {
+      console.error("[turnstile] TURNSTILE_SECRET_KEY is not set in production — rejecting submission.");
+      return { success: false, error: "Bot verification is not configured. Please email us directly." };
+    }
+    console.warn("[turnstile] TURNSTILE_SECRET_KEY not set — skipping verification (non-production).");
     return { success: true };
   }
 

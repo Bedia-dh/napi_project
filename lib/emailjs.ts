@@ -81,7 +81,7 @@ export async function sendNewsletterSubscription(email: string) {
     templateId: NEWSLETTER_TEMPLATE_ID,
     templateParams: {
       subscriber_email: email,
-      to_email: "contact@napipolicy.org",
+      to_email: "info@napipolicy.org",
     },
   });
 }
@@ -104,7 +104,7 @@ export async function sendContactEmail(data: {
       from_email: data.email,
       subject: data.subject,
       message: data.message,
-      to_email: "contact@napipolicy.org",
+      to_email: "info@napipolicy.org",
     },
   });
 }

@@ -13,17 +13,17 @@ const pathways: {
     Icon: Handshake,
     title: "Partner With Us",
     description:
-      "Co-host a Chill Chat, sponsor a Policy Lab, or embed NAPI research in your programs.",
+      "Facilitate a Chill Chat, become a mentor / trainer, or bring NAPI's work into your programs.",
     cta: "Become a Partner",
-    href: "/contact",
+    href: "/get-involved",
   },
   {
     Icon: Heart,
     title: "Support Our Work",
     description:
-      "Help fund the next generation of North African policy leaders with a financial contribution.",
-    cta: "Donate",
-    href: "/contact",
+      "Support youth-led research, leadership, dialogue, and policy engagement across the Mediterranean.",
+    cta: "Get Involved",
+    href: "/get-involved",
   },
 ];
 
@@ -35,7 +35,7 @@ export default function GetInvolvedSection() {
           Get Involved
         </p>
         <h2 style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.25rem)", fontWeight: 800, color: "#000000", letterSpacing: "-0.02em" }}>
-          Join the initiative
+          Join the Initiative
         </h2>
       </div>
 

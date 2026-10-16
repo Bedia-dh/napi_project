@@ -19,7 +19,7 @@ export default function BoardOfAdvisors({ members }: BoardOfAdvisorsProps) {
         </h2>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1.25rem" }}>
         {members.map((member) => (
           <div key={member.id} style={{ background: "var(--navy)", borderRadius: 10, padding: "1.5rem" }}>
             <div
@@ -44,9 +44,11 @@ export default function BoardOfAdvisors({ members }: BoardOfAdvisorsProps) {
             <p style={{ color: "var(--orange)", fontSize: "0.78rem", fontWeight: 600, marginBottom: "0.25rem" }}>
               {member.role}
             </p>
-            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.75rem", lineHeight: 1.5 }}>
-              {member.organization}
-            </p>
+            {member.organization && (
+              <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.75rem", lineHeight: 1.5 }}>
+                {member.organization}
+              </p>
+            )}
           </div>
         ))}
       </div>

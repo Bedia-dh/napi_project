@@ -158,8 +158,8 @@ export default function TermsOfUsePage() {
           </p>
           <p style={body}>
             Authors may request the removal of their published work by contacting NAPI at{" "}
-            <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
-              contact@napipolicy.org
+            <a href="mailto:info@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
+              info@napipolicy.org
             </a>
             . NAPI will consider such requests and, where appropriate, remove the work from the NAPI
             website and/or other NAPI-controlled publication channels, subject to any applicable legal,
@@ -230,8 +230,8 @@ export default function TermsOfUsePage() {
           <h2 style={sectionTitle}>12. Contact Us</h2>
           <p style={body}>
             Questions about these Terms of Use can be sent to{" "}
-            <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
-              contact@napipolicy.org
+            <a href="mailto:info@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
+              info@napipolicy.org
             </a>
             .
           </p>

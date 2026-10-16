@@ -39,8 +39,10 @@ function parseParams(searchParams: URLSearchParams): QueryParams {
     lang: multi("lang"),
     year: multi("year"),
     sort: (searchParams.get("sort") as QueryParams["sort"]) ?? "recent",
-    page: Number(searchParams.get("page") ?? "1") || 1,
-    limit: Number(searchParams.get("limit") ?? "20") || 20,
+    // Clamp so a caller can't request the whole collection (or a negative
+    // page) in one response.
+    page: Math.min(Math.max(Math.floor(Number(searchParams.get("page") ?? "1")) || 1, 1), 1000),
+    limit: Math.min(Math.max(Math.floor(Number(searchParams.get("limit") ?? "20")) || 20, 1), 50),
   };
 }
 
@@ -109,11 +111,11 @@ export async function GET(req: NextRequest) {
         return v === value;
       }).length;
 
-    const themes = ["health-equity", "governance", "climate", "education", "gender", "economy"];
-    const types = ["brief", "paper", "report", "proceedings"];
+    const themes = ["health-equity", "governance", "climate", "education", "gender", "economy", "migration", "security"];
+    const types = ["edited-volume", "book-chapter", "research-brief", "policy-briefing", "journal-article", "policy-paper", "research-report"];
     const programs = ["ypl", "chill-chat", "youth-voices", "mei-roundtables"];
     const years = Array.from(new Set(pool.map((p) => String(p.year)))).sort((a, b) => Number(b) - Number(a));
-    const langs = ["en", "fr", "ar"];
+    const langs = ["en", "fr", "ar", "it"];
 
     return {
       theme: themes.map((v) => ({ value: v, count: count("theme", v) })),
@@ -175,7 +177,7 @@ export async function GET(req: NextRequest) {
       limit: params.limit,
     });
 
-    const allForFacets = await payload.find({ collection: "publications", limit: 0 });
+    const allForFacets = await payload.find({ collection: "publications", limit: 0, pagination: false, depth: 0 });
     const normalizedAll = (allForFacets.docs as Record<string, unknown>[]).map(normalizePayloadDoc);
 
     return NextResponse.json(

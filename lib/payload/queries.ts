@@ -20,7 +20,7 @@ import type { TeamMember, BoardMember } from "@/lib/types/team";
 import type { Publication } from "@/lib/types/publication";
 
 import { programs as staticPrograms } from "@/lib/data/programs";
-import { yplCohort2021 as staticYplCohort } from "@/lib/data/ypl";
+import { yplCohort2021, yplCohort2025 } from "@/lib/data/ypl";
 import { roundtableSeries as staticRoundtableSeries } from "@/lib/data/mei-roundtables";
 import { teamMembers as staticTeamMembers, boardMembers as staticBoardMembers } from "@/lib/data/team";
 import { publications as staticPublications } from "@/lib/data/publications";
@@ -53,7 +53,7 @@ export async function getPrograms(): Promise<{ programs: Program[]; source: Data
   try {
     const payload = await getPayload({ config });
     const result = await payload.find({ collection: "programs", limit: 100, sort: "name" });
-    const programs: Program[] = (result.docs as Record<string, unknown>[]).map((d) => ({
+    const cmsPrograms: Program[] = (result.docs as Record<string, unknown>[]).map((d) => ({
       id: d.slug as Program["id"],
       name: String(d.name ?? ""),
       tagline: String(d.tagline ?? ""),
@@ -61,7 +61,7 @@ export async function getPrograms(): Promise<{ programs: Program[]; source: Data
       stats: (d.stats as { label: string; value: string }[] | undefined) ?? [],
       color: String(d.color ?? "var(--navy)"),
       href: `/programs/${d.slug}`,
-      imageUrl: uploadUrl(d.image) || (d.imageUrl as string | undefined) || undefined,
+      imageUrl: uploadUrl(d.image) || (d.imageUrl as string | undefined) || staticPrograms.find((s) => s.id === d.slug)?.imageUrl || undefined,
       objectives: ((d.objectives as { text?: string }[] | undefined) ?? [])
         .map((o) => String(o.text ?? ""))
         .filter(Boolean),
@@ -75,7 +75,17 @@ export async function getPrograms(): Promise<{ programs: Program[]; source: Data
         .map((g) => uploadUrl(g.photo) || String(g.photoUrl ?? ""))
         .filter(Boolean),
     }));
-    return { programs, source: "payload" };
+
+    // Merge: CMS entries take precedence, but programs only in the static
+    // dataset are appended so every program appears even before it has been
+    // added to the CMS.
+    const cmsIds = new Set(cmsPrograms.map((p) => p.id));
+    const merged = [
+      ...cmsPrograms,
+      ...staticPrograms.filter((sp) => !cmsIds.has(sp.id)),
+    ];
+
+    return { programs: merged, source: cmsPrograms.length > 0 ? "payload" : "static-fallback" };
   } catch {
     return { programs: staticPrograms, source: "static-fallback" };
   }
@@ -96,7 +106,7 @@ export async function getYplFellows(): Promise<{ fellows: YplParticipant[]; sour
     }));
     return { fellows, source: "payload" };
   } catch {
-    return { fellows: staticYplCohort, source: "static-fallback" };
+    return { fellows: [...yplCohort2021, ...yplCohort2025], source: "static-fallback" };
   }
 }
 

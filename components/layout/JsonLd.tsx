@@ -24,7 +24,7 @@ export function OrganizationJsonLd() {
         },
         image: DEFAULT_OG_IMAGE,
         description: SITE_DESCRIPTION,
-        email: "contact@napipolicy.org",
+        email: "info@napipolicy.org",
         areaServed: [
           { "@type": "Place", name: "Libya" },
           { "@type": "Place", name: "Tunisia" },

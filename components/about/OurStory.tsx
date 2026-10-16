@@ -2,32 +2,32 @@ export default function OurStory() {
   return (
     <>
       {/* Story text — navy */}
-      <section style={{ background: "var(--navy)", padding: "72px var(--section-px)" }}>
+      <section id="our-story" style={{ background: "var(--navy)", padding: "72px var(--section-px)" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
           <div>
             <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "1rem" }}>
               Our Story
             </p>
             <h2 style={{ color: "#fff", fontSize: "clamp(1.5rem, 2.5vw, 2rem)", fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.2, marginBottom: "1.5rem" }}>
-              Founded in 2017 Out of Necessity
+              Founded in 2019 Out of Necessity
             </h2>
-            <p style={{ color: "rgba(0,0,0,0.7)", lineHeight: 1.8, marginBottom: "1.25rem", fontSize: "0.95rem" }}>
-              NAPI was born from a simple observation: young North Africans were producing brilliant
-              research, but had no platform to translate it into policy change. Founded in Rabat in
-              2017, we set out to bridge that gap.
+            <p style={{ color: "#fff", lineHeight: 1.8, marginBottom: "1.25rem", fontSize: "0.95rem" }}>
+              NAPI was born from a simple observation: Youth across the Mediterranean want to shape
+              their world—but many lack the knowledge or confidence to engage in civic and policy
+              spaces. We set out to bridge these gaps.
             </p>
-            <p style={{ color: "rgba(0,0,0,0.7)", lineHeight: 1.8, fontSize: "0.95rem" }}>
-              What started as a small fellowship of 12 researchers has grown into a regional network
-              spanning Morocco, Tunisia, Algeria, and beyond, with publications cited in government
-              reports and young alumni now shaping policy from within institutions.
+            <p style={{ color: "#fff", lineHeight: 1.8, fontSize: "0.95rem" }}>
+              What started as a small initiative to mentor young researchers has grown into a regional
+              network spanning Morocco, Tunisia, Libya, Italy, and beyond, with contributors worldwide,
+              and more than 30 partners across academia, public policy, and civil society.
             </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
             {[
               { value: "7", label: "Years of impact" },
-              { value: "50+", label: "YPL Fellows" },
-              { value: "3", label: "Languages" },
+              { value: "35+", label: "Policy Leaders" },
+              { value: "4", label: "Languages" },
             ].map((s) => (
               <div
                 key={s.label}
@@ -73,12 +73,14 @@ export default function OurStory() {
 
       {/* Stats — cream */}
       <section style={{ background: "var(--cream)", padding: "3rem var(--section-px)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2rem", textAlign: "center" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "2rem", textAlign: "center" }}>
           {[
-            { value: "85+", label: "Publications" },
-            { value: "200+", label: "Leaders Trained" },
-            { value: "12", label: "Countries" },
-            { value: "6", label: "Policy Issues" },
+            { value: "60+", label: "Policy Discussions" },
+            { value: "1000+", label: "Young Leaders Trained" },
+            { value: "40+", label: "Training Topics" },
+            { value: "14", label: "Countries" },
+            { value: "30+", label: "Partnerships" },
+            { value: "100+", label: "NGOs Evaluated" },
           ].map((s) => (
             <div key={s.label}>
               <strong style={{ display: "block", fontSize: "2.5rem", fontWeight: 800, color: "var(--orange)" }}>

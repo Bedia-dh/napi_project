@@ -41,6 +41,16 @@ export default buildConfig({
       providers: ["/components/payload/ThemeProvider#ThemeProvider"],
     },
   },
+  // Only our own site may make cookie-authenticated (admin) requests or
+  // cross-origin API calls in production. Dev keeps Payload's permissive default.
+  ...(process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SITE_URL
+    ? (() => {
+        const origins = [process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")];
+        return { csrf: origins, cors: origins };
+      })()
+    : {}),
+  // Reject abusively expensive GraphQL queries (deep nesting / huge alias fan-out).
+  graphQL: { maxComplexity: 500 },
   editor: lexicalEditor(),
   collections: [Users, Media, Publications, Events, Programs, YplFellows, RoundtableSeries, TeamMembers, ContactSubmissions],
   plugins: [

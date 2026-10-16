@@ -122,8 +122,8 @@ export default function PrivacyPolicyPage() {
           <p style={body}>
             If you have a concern about the publication of a photograph, video or other visual material
             on the website that identifies you, you may contact NAPI at{" "}
-            <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
-              contact@napipolicy.org
+            <a href="mailto:info@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
+              info@napipolicy.org
             </a>.
           </p>
           <p style={body}>
@@ -217,8 +217,8 @@ export default function PrivacyPolicyPage() {
             You may unsubscribe from our newsletter at any time using the link provided in any newsletter
             email. To exercise your rights or raise a question concerning the processing of your personal
             information through the website, you may contact us at{" "}
-            <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
-              contact@napipolicy.org
+            <a href="mailto:info@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
+              info@napipolicy.org
             </a>.
           </p>
 
@@ -251,8 +251,8 @@ export default function PrivacyPolicyPage() {
           <p style={body}>
             If you have questions about this Privacy Policy or want to exercise any of the rights available
             to you in relation to personal information processed through the website, contact us at{" "}
-            <a href="mailto:contact@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
-              contact@napipolicy.org
+            <a href="mailto:info@napipolicy.org" style={{ color: "var(--orange)", fontWeight: 600 }}>
+              info@napipolicy.org
             </a>. Our registered address is Via Gustavo Giovannoni, 92, Rome, Italy.
           </p>
         </div>

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Play, ArrowRight, X } from "lucide-react";
 import { getYouTubeId } from "@/lib/utils/youtube";
-import { Safari } from "@/components/ui/Safari";
 import { InteractiveHoverButton } from "@/components/ui/InteractiveHoverButton";
 
 const HERO_VIDEO_ID = getYouTubeId("https://www.youtube.com/watch?v=z9Emrap6c3k&t=1s");
@@ -69,7 +68,7 @@ export default function HeroSection() {
               textTransform: "uppercase",
             }}
           >
-            Independent Think Tank · North Africa
+            Independent · Non-Profit · Non-Partisan Organization
           </span>
         </div>
 
@@ -84,12 +83,12 @@ export default function HeroSection() {
             textWrap: "balance",
           }}
         >
-          Where{" "}
-          <em style={{ fontStyle: "normal", color: "var(--orange)" }}>Evidence</em>
+          From{" "}
+          <em style={{ fontStyle: "normal", color: "var(--orange)" }}>Youth Voices</em>
           <br />
-          Meets Youth
+          to Societal
           <br />
-          Leadership
+          Change
         </h1>
 
         <p
@@ -101,8 +100,9 @@ export default function HeroSection() {
             maxWidth: "480px",
           }}
         >
-          NAPI is an independent think tank empowering young North Africans to shape
-          evidence-based policy across the Maghreb and Arab world.
+          NAPI is an independent, non-profit, and non-partisan NGO at the intersection of
+          academia, public policy, and civil society to strengthen participatory governance
+          in the Mediterranean region.
         </p>
 
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
@@ -112,72 +112,51 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* RIGHT — Video player, framed in a Safari browser mockup */}
+      {/* RIGHT — Video player */}
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Safari url="napipolicy.org">
-          <div
-            onClick={() => setVideoOpen(true)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && setVideoOpen(true)}
-            style={{
-              background: "#fff",
-              aspectRatio: "16/10",
-              position: "relative",
-              overflow: "hidden",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
-          >
-            {/* Layer 2 — Hero image filling the Safari frame */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/media/napi_hero.png"
-                alt="NAPI — North Africa Policy Initiative"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
-            </div>
+        <div
+          onClick={() => setVideoOpen(true)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && setVideoOpen(true)}
+          style={{
+            aspectRatio: "16/10",
+            position: "relative",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            borderRadius: 12,
+            boxShadow: "0 8px 32px rgba(0,0,0,.15)",
+          }}
+        >
+          <div style={{ position: "absolute", inset: 0 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/media/napi_hero.png"
+              alt="NAPI — North Africa Policy Initiative"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            />
+          </div>
 
-            {/* Layer 3 — play button, fully opaque on top */}
+          <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
             <div
               style={{
-                position: "relative",
+                width: 72,
+                height: 72,
+                borderRadius: "50%",
+                background: "var(--orange)",
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
-                gap: "1rem",
+                justifyContent: "center",
+                boxShadow: "0 0 0 16px rgba(240,112,48,0.14)",
               }}
             >
-              <div
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: "50%",
-                  background: "var(--orange)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 0 0 16px rgba(240,112,48,0.14)",
-                }}
-              >
-                <Play size={28} color="#fff" fill="#fff" />
-              </div>
+              <Play size={28} color="#fff" fill="#fff" />
             </div>
           </div>
-        </Safari>
+        </div>
       </div>
 
       {/* Video lightbox */}

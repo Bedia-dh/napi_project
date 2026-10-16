@@ -17,10 +17,10 @@ export default function NewsletterSection() {
     >
       <div>
         <h2 style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", fontWeight: 800, color: "#000000" }}>
-          Stay ahead of the research.
+          Stay Connected and Informed
         </h2>
         <p style={{ color: "var(--gray-mid)", marginTop: "8px", fontSize: "0.9rem" }}>
-          Get new publications, policy briefs, and event invitations delivered to your inbox.
+          Get a regular news digest, relevant publications, policy insights, events, and opportunities to engage with NAPI delivered to your inbox.
         </p>
       </div>
       <div style={{ flexShrink: 0 }}>

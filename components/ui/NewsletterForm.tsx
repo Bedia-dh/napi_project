@@ -16,11 +16,12 @@ export default function NewsletterForm({ dark = false }: NewsletterFormProps) {
     e.preventDefault();
     if (!email) return;
 
-    // If EmailJS isn't configured yet, show success anyway — the email
-    // is captured in the UI and the team can configure the delivery later.
+    // Never claim success when nothing was sent -- the subscriber's email
+    // would be silently lost.
     if (!isEmailJSConfigured()) {
       console.warn("[Newsletter] EmailJS not configured — set NEXT_PUBLIC_EMAILJS_* env vars.");
-      setStatus("success");
+      setStatus("error");
+      setErrorMsg("Subscriptions are temporarily unavailable. Please email info@napipolicy.org.");
       return;
     }
 

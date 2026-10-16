@@ -12,6 +12,7 @@ export interface RoundtableSeries {
 
 // Real roundtable series with the Middle East Institute, sourced from
 // napipolicy.org/napi-mei-roundtables-north-african-youth-perspectives.
+// YouTube recording links extracted from the old website where available.
 export const roundtableSeries: RoundtableSeries[] = [
   {
     country: "Libya",
@@ -19,11 +20,11 @@ export const roundtableSeries: RoundtableSeries[] = [
     intro:
       "The first series, inviting engaged Libyan youth, including NAPI's Young Policy Leaders fellows and affiliates, to share their perspective on the key issues facing their country's future.",
     roundtables: [
-      { title: "Migration and Displacement in Libya: Converging Challenges and Pathways Forward", url: "https://www.mei.edu/events/mei-napi-youth-roundtable-migration-and-displacement-libya-converging-challenges-and" },
-      { title: "The Role of Libyan Youth in Promoting Social Cohesion", url: "https://www.mei.edu/events/role-libyan-youth-promoting-social-cohesion" },
-      { title: "Developing Libya's Economy: Challenges and Opportunities", url: "https://www.mei.edu/events/developing-libyas-economy-challenges-and-opportunities" },
-      { title: "Climate Change and Environmental Protection", url: "https://www.mei.edu/events/mei-napi-youth-roundtable-climate-change-and-environmental-protection" },
-      { title: "Challenges and Opportunities Facing Women in Libya", url: "https://www.mei.edu/events/mei-napi-youth-roundtable-challenges-and-opportunities-facing-women-libya" },
+      { title: "Migration and Displacement in Libya: Converging Challenges and Pathways Forward", url: "https://www.youtube.com/watch?v=GhwEn3KETxc" },
+      { title: "The Role of Libyan Youth in Promoting Social Cohesion", url: "https://www.youtube.com/watch?v=3WiKKd1741o" },
+      { title: "Developing Libya's Economy: Challenges and Opportunities", url: "https://www.youtube.com/watch?v=28vOSS28q4Y" },
+      { title: "Climate Change and Environmental Protection", url: "https://www.youtube.com/watch?v=Rg1Qxjs7ksY" },
+      { title: "Challenges and Opportunities Facing Women in Libya", url: "https://www.youtube.com/watch?v=39PAeZVpLrY" },
     ],
   },
   {
@@ -32,11 +33,11 @@ export const roundtableSeries: RoundtableSeries[] = [
     intro:
       "A six-part series examining Tunisian society, politics, and current affairs, bringing together young experts on Tunisian matters to suggest recommendations and public policies.",
     roundtables: [
-      { title: "Education in Tunisia: Current Challenges and Opportunities", url: "https://www.mei.edu/events/education-tunisia-current-challenges-and-opportunities" },
-      { title: "Tunisia's Economic Crisis: Possible Paths Forward?", url: "https://www.mei.edu/events/tunisias-economic-crisis-possible-paths-forward" },
-      { title: "The Environment in Tunisia: A Youth Perspective on Challenges & Opportunities", url: "https://www.mei.edu/events/mei-napi-roundtable-environment-tunisia-youth-perspective-challenges-opportunities" },
-      { title: "Local Governance in Tunisia", url: "https://www.mei.edu/events/napi-mei-youth-roundtable-local-governance-tunisia" },
-      { title: "Women's Rights in Tunisia", url: "https://www.youtube.com/live/lceKNWn5tJ4?feature=share" },
+      { title: "Education in Tunisia: Current Challenges and Opportunities", url: "https://www.youtube.com/watch?v=IqSXFNCRYTQ" },
+      { title: "Tunisia's Economic Crisis: Possible Paths Forward?", url: "https://www.youtube.com/watch?v=FD-dapSRvtY" },
+      { title: "The Environment in Tunisia: A Youth Perspective on Challenges & Opportunities", url: "https://www.youtube.com/watch?v=GDbr6h-zkV0" },
+      { title: "Local Governance in Tunisia", url: "https://www.youtube.com/watch?v=TlebM1chHFs" },
+      { title: "Women's Rights in Tunisia", url: "https://www.youtube.com/watch?v=lceKNWn5tJ4" },
     ],
   },
   {

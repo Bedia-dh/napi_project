@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GraduationCap, Coffee, Users, PenLine, type LucideIcon } from "lucide-react";
+import { GraduationCap, Coffee, Users, PenLine, BookOpen, Palette, type LucideIcon } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { getPrograms } from "@/lib/payload/queries";
 import { ogMeta } from "@/lib/seo";
@@ -8,20 +8,22 @@ import { ogMeta } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Explore NAPI's four flagship programs — Young Policy Leaders, Chill-Chat, MEI Roundtables, and Youth Voices — building the next generation of North African policy leaders.",
+    "Explore NAPI's five program pillars — Leadership, Knowledge, Awareness & Socialization, Publishing, and Civic Values & Creativity — building the next generation of Mediterranean policy leaders.",
   ...ogMeta({
     title: "Programs",
     description:
-      "Explore NAPI's four flagship programs building the next generation of North African policy leaders.",
+      "Five program pillars building the next generation of Mediterranean policy leaders.",
     path: "/programs",
   }),
 };
 
 const PROGRAM_ICONS: Record<string, LucideIcon> = {
   ypl: GraduationCap,
+  "training-workshops": BookOpen,
   "chill-chat": Coffee,
   "mei-roundtables": Users,
   "youth-voices": PenLine,
+  "art4civics": Palette,
 };
 
 export const revalidate = 300;
@@ -35,7 +37,7 @@ export default async function ProgramsPage() {
         <SectionHeader
           eyebrow="Our Programs"
           title="What We Do"
-          subtitle="Four programs building the next generation of North African policy leaders."
+          subtitle="Five program pillars to build the next generation of Mediterranean policy leaders."
         />
 
         {process.env.NODE_ENV !== "production" && source === "static-fallback" && (

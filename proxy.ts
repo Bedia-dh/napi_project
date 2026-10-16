@@ -81,17 +81,14 @@ function applySecurityHeaders(res: NextResponse): NextResponse {
 }
 
 // ── Sensitive Payload REST paths ─────────────────────────────────────────────
-// These are the collection slugs that should NOT be publicly accessible via
-// Payload's auto-generated REST API. Public-facing data is served through our
-// own custom API routes (/api/events, /api/publications, /api/search).
-const PROTECTED_API_SLUGS = [
-  "users",
-  "contact-submissions",
-  "media",
-  "team-members",
-  "ypl-fellows",
-  "roundtable-series",
-];
+// Collections that hold private data (staff accounts, visitor messages) and
+// must never be browsable by anonymous visitors. Public-content collections
+// (media, team-members, ypl-fellows, roundtable-series, ...) are deliberately
+// NOT listed: they are public on the website anyway (also readable through
+// GraphQL), and gating "media" here made every uploaded image/PDF 401 for
+// visitors. Real enforcement lives in each collection's `access` rules; this
+// list is only a cheap first layer.
+const PROTECTED_API_SLUGS = ["users", "contact-submissions"];
 
 /** Auth-related Payload REST paths that get rate-limited. */
 const AUTH_PATHS = [

@@ -6,7 +6,19 @@ import { isAdmin, isAdminOrSelf } from "@/lib/payload/access";
 // (passwords are never stored in plain text).
 export const Users: CollectionConfig = {
   slug: "users",
-  auth: true,
+  auth: {
+    // Session lifetime: 2 hours (Payload default), refreshed while in use.
+    tokenExpiration: 7200,
+    // Lock an account for 10 minutes after 5 failed logins (per-account
+    // brute-force protection that works regardless of client IP).
+    maxLoginAttempts: 5,
+    lockTime: 10 * 60 * 1000,
+    cookies: {
+      // Only send the session cookie over HTTPS in production.
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Lax",
+    },
+  },
   labels: {
     singular: "User",
     plural: "Users",

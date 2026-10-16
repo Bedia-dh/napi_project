@@ -1,12 +1,23 @@
-export type PublicationType = "brief" | "paper" | "report" | "proceedings";
-export type LanguageCode = "en" | "fr" | "ar";
+export type PublicationType =
+  | "edited-volume"
+  | "book-chapter"
+  | "research-brief"
+  | "policy-briefing"
+  | "journal-article"
+  | "policy-paper"
+  | "research-report";
+
+export type LanguageCode = "en" | "fr" | "ar" | "it";
+
 export type PolicyTheme =
   | "health-equity"
   | "governance"
   | "climate"
   | "education"
   | "gender"
-  | "economy";
+  | "economy"
+  | "migration"
+  | "security";
 
 export interface Publication {
   id: string;
@@ -16,11 +27,13 @@ export interface Publication {
   program: string | null;
   authors: string[];
   year: number;
-  pages: number;
+  pages?: number;
   languages: LanguageCode[];
   abstract: string;
   pdfUrl: string;
   featured?: boolean;
   /** Extra search terms editors attach in the CMS — synonyms, acronyms, topics not in the title/abstract. */
   keywords?: string[];
+  /** Semicolon-separated policy issues from the original spreadsheet */
+  policyIssue?: string;
 }

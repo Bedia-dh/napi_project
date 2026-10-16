@@ -1,9 +1,9 @@
 export default function ResearchHero() {
   const stats = [
-    { value: "85+", label: "Publications" },
-    { value: "6", label: "Policy Issues" },
-    { value: "3", label: "Languages" },
-    { value: "2017", label: "Since" },
+    { value: "60+", label: "Policy Discussions" },
+    { value: "35+", label: "Policy Papers" },
+    { value: "4", label: "Languages" },
+    { value: "2019", label: "Since" },
   ];
 
   return (

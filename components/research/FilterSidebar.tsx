@@ -37,13 +37,18 @@ const themeLabels: Record<string, string> = {
   education: "Education",
   gender: "Gender",
   economy: "Economy",
+  migration: "Migration",
+  security: "Security",
 };
 
 const typeLabels: Record<string, string> = {
-  brief: "Policy Brief",
-  paper: "Research Paper",
-  report: "Report",
-  proceedings: "Proceedings",
+  "edited-volume": "Edited Volume",
+  "book-chapter": "Book Chapter",
+  "research-brief": "Research Brief",
+  "policy-briefing": "Policy Briefing",
+  "journal-article": "Journal Article",
+  "policy-paper": "Policy Paper",
+  "research-report": "Research Report",
 };
 
 const programLabels: Record<string, string> = {

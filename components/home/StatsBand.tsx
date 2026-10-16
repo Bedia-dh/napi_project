@@ -3,10 +3,13 @@
 import { NumberTicker } from "@/components/ui/number-ticker";
 
 const stats = [
-  { value: 85, suffix: "+", label: "Publications" },
-  { value: 200, suffix: "+", label: "Young Leaders Trained" },
-  { value: 12, suffix: "", label: "Countries Reached" },
-  { value: 6, suffix: "", label: "Policy Issues" },
+  { value: 60, suffix: "+", label: "Policy Discussions" },
+  { value: 35, suffix: "+", label: "Policy Papers" },
+  { value: 1000, suffix: "+", label: "Young Leaders Trained" },
+  { value: 40, suffix: "+", label: "Training Topics" },
+  { value: 14, suffix: "", label: "Countries of Operation" },
+  { value: 30, suffix: "+", label: "Partnerships" },
+  { value: 100, suffix: "+", label: "CSOs Evaluated" },
 ];
 
 export default function StatsBand() {
@@ -16,7 +19,7 @@ export default function StatsBand() {
         className="stats-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
+          gridTemplateColumns: "repeat(7, 1fr)",
           gap: 1,
           background: "rgba(255,255,255,0.08)",
         }}
@@ -37,7 +40,7 @@ export default function StatsBand() {
               suffix={stat.suffix}
               style={{
                 display: "block",
-                fontSize: "clamp(2rem, 4vw, 2.75rem)",
+                fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
                 fontWeight: 800,
                 color: "#fff",
                 lineHeight: 1,
@@ -46,7 +49,7 @@ export default function StatsBand() {
             />
             <span
               style={{
-                fontSize: "0.78rem",
+                fontSize: "0.72rem",
                 color: "rgba(255,255,255,0.55)",
                 fontWeight: 500,
                 textTransform: "uppercase",
@@ -70,6 +73,16 @@ export default function StatsBand() {
         }
         .stat-cell:hover {
           background: var(--navy-mid) !important;
+        }
+        @media (max-width: 900px) {
+          .stats-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+          }
+        }
+        @media (max-width: 560px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
         }
       `}</style>
     </section>

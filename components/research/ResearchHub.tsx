@@ -11,10 +11,13 @@ import { Search, SlidersHorizontal, Download, Eye, FileText, ChevronDown, X } fr
 type SortOption = "recent" | "az" | "za" | "oldest";
 
 const typeStylesFeat: Record<string, { bg: string; label: string }> = {
-  brief: { bg: "var(--orange)", label: "Featured - Policy Brief" },
-  paper: { bg: "var(--orange)", label: "Featured - Research Paper" },
-  report: { bg: "var(--orange)", label: "Featured - Report" },
-  proceedings: { bg: "var(--orange)", label: "Featured - Proceedings" },
+  "edited-volume": { bg: "var(--orange)", label: "Featured - Edited Volume" },
+  "book-chapter": { bg: "var(--orange)", label: "Featured - Book Chapter" },
+  "research-brief": { bg: "var(--orange)", label: "Featured - Research Brief" },
+  "policy-briefing": { bg: "var(--orange)", label: "Featured - Policy Briefing" },
+  "journal-article": { bg: "var(--orange)", label: "Featured - Journal Article" },
+  "policy-paper": { bg: "var(--orange)", label: "Featured - Policy Paper" },
+  "research-report": { bg: "var(--orange)", label: "Featured - Research Report" },
 };
 
 const PAGE_SIZE = 20;
@@ -300,10 +303,10 @@ export default function ResearchHub() {
                   {featured.title}
                 </h2>
                 <div style={{ color: "rgba(255,255,255,.5)", fontSize: "0.82rem", marginBottom: 18 }}>
-                  {featured.authors.join(", ")} · {featured.year} · {featured.pages} pages
+                  {featured.authors.join(", ")} · {featured.year}{featured.pages ? ` · ${featured.pages} pages` : ""}
                 </div>
                 <div style={{ display: "flex", gap: 6, marginBottom: 20 }}>
-                  {(["en", "fr", "ar"] as const).map((lang) => (
+                  {(["en", "fr", "ar", "it"] as const).filter((l) => featured.languages.includes(l)).map((lang) => (
                     <span
                       key={lang}
                       style={{

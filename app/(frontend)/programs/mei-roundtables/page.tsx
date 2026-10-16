@@ -6,7 +6,7 @@ import { getRoundtableSeries, getPrograms } from "@/lib/payload/queries";
 import { InteractiveHoverButton } from "@/components/ui/InteractiveHoverButton";
 
 export const metadata = {
-  title: "NAPI-MEI Roundtables - NAPI",
+  title: "Policy Roundtables - NAPI",
 };
 
 // See app/(frontend)/page.tsx for why this is set.
@@ -39,14 +39,14 @@ export default async function MeiRoundtablesPage() {
         </Link>
 
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
-          In Partnership with the Middle East Institute
+          Awareness & Socialization
         </p>
         <h1 style={{ fontSize: "clamp(1.8rem, 3.6vw, 2.75rem)", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", marginBottom: "1.25rem", maxWidth: 760 }}>
-          NAPI-MEI Roundtables: North African Youth Perspectives
+          Policy Roundtables
         </h1>
         <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 660, marginBottom: "2.5rem" }}>
           {program?.description ??
-            "With the Middle East Institute, NAPI has run roundtable series in Libya, Tunisia, and Morocco, an inclusive, participatory space for youth leaders to share their perspectives, insights, and recommendations on the policy issues facing their countries, from migration and social cohesion to the environment, gender, and education."}
+            "These are online expert roundtable discussions on policy issues during which youth experts on a key policy issue present information and analysis to help youth participants gain a better knowledge on the issue through the words of a peer."}
         </p>
 
         <div style={{ display: "flex", gap: "3rem" }}>
@@ -59,8 +59,32 @@ export default async function MeiRoundtablesPage() {
         </div>
       </section>
 
-      {/* Series by country */}
+      {/* About section */}
+      <section style={{ background: "#fff", padding: "56px var(--section-px)" }}>
+        <div style={{ maxWidth: 780, margin: "0 auto", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+          <p style={{ fontSize: "1rem", color: "var(--navy)", lineHeight: 1.8 }}>
+            These online discussions allow youth who are passionate and knowledgeable about a specific policy issue (e.g. environmental protection; gender equality; education; migration), to connect and discuss with like-minded youth and young experts from other cities and countries who share the same passion and interest. Knowledgeable young participants themselves can become speakers in successive roundtable discussions.
+          </p>
+          <p style={{ fontSize: "1rem", color: "var(--navy)", lineHeight: 1.8 }}>
+            This activity is particularly important for underprivileged youth who do not have the same chances of their peers to participate in conferences, workshops, capacity-building programs, research, internship, and work opportunities.
+          </p>
+          <p style={{ fontSize: "1rem", color: "var(--navy)", lineHeight: 1.8, fontWeight: 600 }}>
+            Youth-led expert roundtables demystify leadership, foster self-efficacy, and offer a roadmap for youth to become leaders themselves.
+          </p>
+        </div>
+      </section>
+
+      {/* NAPI-MEI Series heading */}
       <section style={{ background: "var(--cream)", padding: "72px var(--section-px)" }}>
+        <div style={{ marginBottom: "2.5rem" }}>
+          <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "var(--orange)", marginBottom: "0.75rem" }}>
+            In Partnership with the Middle East Institute
+          </p>
+          <h2 style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", fontWeight: 800, color: "var(--navy)", letterSpacing: "-0.02em" }}>
+            NAPI-MEI Policy Roundtables
+          </h2>
+        </div>
+
         {process.env.NODE_ENV !== "production" && source === "static-fallback" && (
           <div style={{ marginBottom: "2rem", background: "#fff", border: "1px dashed var(--orange)", borderRadius: 8, padding: "8px 14px", fontSize: "0.78rem", color: "var(--gray-mid)" }}>
             Dev note: serving roundtables from the static dataset - connect DATABASE_URI to query MongoDB via Payload instead.
@@ -71,7 +95,7 @@ export default async function MeiRoundtablesPage() {
           {roundtableSeries.map((series) => (
             <div key={series.country}>
               <div style={{ display: "flex", alignItems: "baseline", gap: "0.9rem", marginBottom: "0.75rem" }}>
-                <h2 style={{ fontSize: "1.4rem", fontWeight: 800, color: "var(--navy)" }}>{series.country}</h2>
+                <h3 style={{ fontSize: "1.4rem", fontWeight: 800, color: "var(--navy)" }}>{series.country}</h3>
                 <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--orange)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                   {series.period}
                 </span>
@@ -121,7 +145,7 @@ export default async function MeiRoundtablesPage() {
           Follow the conversation
         </h2>
         <p style={{ color: "var(--gray-mid)", fontSize: "0.95rem", marginBottom: "1.75rem", maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
-          New NAPI-MEI Roundtables are announced throughout the year. Watch past sessions on
+          New Policy Roundtables are announced throughout the year. Watch past sessions on
           YouTube or reach out to suggest a topic for a future roundtable.
         </p>
         <InteractiveHoverButton href="/contact" variant="orange">
