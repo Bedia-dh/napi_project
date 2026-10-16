@@ -173,7 +173,7 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
 
         {/* Desktop right */}
         <div className="nav-right-desktop">
-          <div ref={langRef} style={{ position: "relative" }}>
+          {/* <div ref={langRef} style={{ position: "relative" }}>
             <button
               onClick={() => setLangOpen((v) => !v)}
               aria-haspopup="listbox"
@@ -238,7 +238,7 @@ export default function Navbar({ onSearchOpen }: NavbarProps) {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
 
           <button
             onClick={onSearchOpen}
