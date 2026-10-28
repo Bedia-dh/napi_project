@@ -131,33 +131,33 @@ async function notifyByEmail(data: ContactPayload) {
   const label = subjectLabel[data.subject] || data.subject;
 
   await transporter.sendMail({
-    from: \`"NAPI Website" <\${user}>\`,
+    from: `"NAPI Website" <${user}>`,
     to,
     replyTo: data.email,
-    subject: \`[NAPI Contact] \${label} — \${data.name}\`,
+    subject: `[NAPI Contact] ${label} — ${data.name}`,
     text: [
       "New contact form submission",
       "",
-      \`Name:    \${data.name}\`,
-      \`Email:   \${data.email}\`,
-      \`Subject: \${label}\`,
+      `Name:    ${data.name}`,
+      `Email:   ${data.email}`,
+      `Subject: ${label}`,
       "",
       "Message:",
       data.message,
     ].join("\n"),
-    html: \`
+    html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px;">
         <h2 style="color: #1a2a3a; border-bottom: 2px solid #e8772e; padding-bottom: 8px;">
           New Contact Form Submission
         </h2>
         <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
-          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Name</td><td style="padding: 6px 0;">\${data.name}</td></tr>
-          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Email</td><td style="padding: 6px 0;"><a href="mailto:\${data.email}">\${data.email}</a></td></tr>
-          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Subject</td><td style="padding: 6px 0;">\${label}</td></tr>
+          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Name</td><td style="padding: 6px 0;">${data.name}</td></tr>
+          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Email</td><td style="padding: 6px 0;"><a href="mailto:${data.email}">${data.email}</a></td></tr>
+          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Subject</td><td style="padding: 6px 0;">${label}</td></tr>
         </table>
-        <div style="background: #f7f7f7; padding: 16px; border-radius: 8px; margin-top: 12px; white-space: pre-wrap;">\${data.message}</div>
+        <div style="background: #f7f7f7; padding: 16px; border-radius: 8px; margin-top: 12px; white-space: pre-wrap;">${data.message}</div>
         <p style="color: #999; font-size: 12px; margin-top: 24px;">Sent from the NAPI website contact form</p>
       </div>
-    \`,
+    `,
   });
 }
