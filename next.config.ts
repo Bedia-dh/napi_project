@@ -59,7 +59,7 @@ const nextConfig: NextConfig = {
       {
         // Old SiteGround webmail path → new webmail subdomain
         source: "/webmail/:path*",
-        destination: "https://webmail.napipolicy.org/:path*",
+        destination: "https://gfra1001.siteground.eu/webmail/mail/",
         permanent: true,
       },
     ];
