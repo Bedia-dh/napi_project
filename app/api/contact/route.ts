@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { rateLimit } from "@/lib/rate-limit";
+import nodemailer from "nodemailer";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 
 export const dynamic = "force-dynamic";
@@ -89,7 +90,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Optional email notification via Resend
+  // Send email notification via SMTP (SiteGround)
   notifyByEmail({ name, email, subject, message }).catch((err) => {
     console.error("[/api/contact] Email notification failed (submission was still saved):", err);
   });
@@ -98,28 +99,65 @@ export async function POST(req: NextRequest) {
 }
 
 async function notifyByEmail(data: ContactPayload) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return;
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT || "465");
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  // Skip email notification if SMTP is not configured
+  if (!host || !user || !pass) {
+    if (process.env.NODE_ENV === "production") {
+      console.warn("[/api/contact] SMTP not configured — skipping email notification.");
+    }
+    return;
+  }
 
   const to = process.env.CONTACT_NOTIFY_EMAIL || "info@napipolicy.org";
-  const from = process.env.CONTACT_FROM_EMAIL || "NAPI Website <onboarding@resend.dev>";
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to,
-      reply_to: data.email,
-      subject: `[NAPI Contact] ${data.subject} - ${data.name}`,
-      text: `From: ${data.name} <${data.email}>\nSubject: ${data.subject}\n\n${data.message}`,
-    }),
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass },
   });
 
-  if (!res.ok) {
-    throw new Error(`Resend API returned ${res.status}: ${await res.text()}`);
-  }
+  const subjectLabel: Record<string, string> = {
+    general: "General Inquiry",
+    partnership: "Partnership",
+    press: "Press / Media",
+    program: "Program Application",
+    other: "Other",
+  };
+  const label = subjectLabel[data.subject] || data.subject;
+
+  await transporter.sendMail({
+    from: \`"NAPI Website" <\${user}>\`,
+    to,
+    replyTo: data.email,
+    subject: \`[NAPI Contact] \${label} — \${data.name}\`,
+    text: [
+      "New contact form submission",
+      "",
+      \`Name:    \${data.name}\`,
+      \`Email:   \${data.email}\`,
+      \`Subject: \${label}\`,
+      "",
+      "Message:",
+      data.message,
+    ].join("\n"),
+    html: \`
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px;">
+        <h2 style="color: #1a2a3a; border-bottom: 2px solid #e8772e; padding-bottom: 8px;">
+          New Contact Form Submission
+        </h2>
+        <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Name</td><td style="padding: 6px 0;">\${data.name}</td></tr>
+          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Email</td><td style="padding: 6px 0;"><a href="mailto:\${data.email}">\${data.email}</a></td></tr>
+          <tr><td style="padding: 6px 12px 6px 0; color: #666; font-weight: 600;">Subject</td><td style="padding: 6px 0;">\${label}</td></tr>
+        </table>
+        <div style="background: #f7f7f7; padding: 16px; border-radius: 8px; margin-top: 12px; white-space: pre-wrap;">\${data.message}</div>
+        <p style="color: #999; font-size: 12px; margin-top: 24px;">Sent from the NAPI website contact form</p>
+      </div>
+    \`,
+  });
 }

@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https:",
               "font-src 'self' data:",
-              "connect-src 'self' https://api.emailjs.com https://challenges.cloudflare.com",
+              "connect-src 'self' https://challenges.cloudflare.com",
               "frame-src 'self' blob: https://www.youtube.com https://www.youtube-nocookie.com https://challenges.cloudflare.com https://docs.google.com",
               "object-src 'none'",
               "base-uri 'self'",
@@ -49,6 +49,18 @@ const nextConfig: NextConfig = {
         // Prevent search engines from indexing admin pages
         source: "/admin/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
+
+  // ── Redirects ───────────────────────────────────────────────────────────
+  async redirects() {
+    return [
+      {
+        // Old SiteGround webmail path → new webmail subdomain
+        source: "/webmail/:path*",
+        destination: "https://webmail.napipolicy.org/:path*",
+        permanent: true,
       },
     ];
   },
